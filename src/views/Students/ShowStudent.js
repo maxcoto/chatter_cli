@@ -42,7 +42,6 @@ class ShowStudent extends React.Component {
   }
 
   render() {
-    const { classes } = this.props
     const { student } = this.state
     if(!student) return null
     

@@ -1,7 +1,7 @@
 {
-  "name": "RTM",
+  "name": "Chatter Admin",
   "version": "0.0.1",
-  "description": "React App Template",
+  "description": "Chatter Admin",
   "private": false,
   "main": "dist/index.js",
   "dependencies": {
@@ -37,7 +37,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/maxiperezc/material-react.git"
+    "url": "git+https://github.com/maxiperezc/chatter-cli.git"
   },
   "keywords": [],
   "author": "Maxi <maxiperezc@gmail.com> (https://www.maxiperezcode.com/)",

@@ -18,6 +18,11 @@ import TeacherEdit from 'views/Teachers/TeacherEdit.js'
 import TeacherList from 'views/Teachers/TeacherList.js'
 import TeacherNew from 'views/Teachers/TeacherNew.js'
 import TeacherShow from 'views/Teachers/TeacherShow.js'
+// courses imports
+import CourseEdit from 'views/Courses/CourseEdit.js'
+import CourseList from 'views/Courses/CourseList.js'
+import CourseNew from 'views/Courses/CourseNew.js'
+import CourseShow from 'views/Courses/CourseShow.js'
 //[+add_includes+]
 
 const routes = [
@@ -36,7 +41,14 @@ const routes = [
   { path: '/teachers/:id/edit', component: TeacherEdit, layout: '', hidden: true },
   { path: '/teachers/:id',      component: TeacherShow, layout: '', hidden: true },
   { path: '/teachers',          component: TeacherList, layout: '', name: 'Teachers', icon: Dashboard },
+  
+  // courses routes
+  { path: '/courses/new',      component: CourseNew,  layout: '', hidden: true },
+  { path: '/courses/:id/edit', component: CourseEdit, layout: '', hidden: true },
+  { path: '/courses/:id',      component: CourseShow, layout: '', hidden: true },
+  { path: '/courses',          component: CourseList, layout: '', name: 'Courses', icon: Dashboard },
   //[+add_routes+]
+
 
 
 

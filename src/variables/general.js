@@ -65,6 +65,11 @@ const _status = [
   { id: "inactive", name: "inactive" }
 ]
 
+const _teacher_ids = [
+  { id: "Ryan Yeskee", name: "Ryan Yeskee" },
+  { id: "Cat Florio", name: "Cat Florio" }
+]
+
 const defaultStudent = {
   first_name: "",
   last_name: "",
@@ -80,10 +85,20 @@ const defaultStudent = {
 
 // default teacher export
 const defaultTeacher = {
-first_name: '',
-last_name: '',
-email: '',
-status: '',
+  first_name: '',
+  last_name: '',
+  email: '',
+  status: '',
+}
+// default course export
+const defaultCourse = {
+  name: '',
+  classroom_link: '',
+  meet_link: '',
+  event_id: '',
+  max_students: 0,
+  level: '',
+  teacher_id: '',
 }
 //[+add_default+]
 
@@ -99,5 +114,7 @@ module.exports = {
   statuses,
   defaultStudent,
   defaultTeacher,
+  defaultCourse,
+  _teacher_ids,
 //[+export_default+]
 };

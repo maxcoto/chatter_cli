@@ -1,8 +1,8 @@
 {
-  "name": "material-react",
+  "name": "chatter-admin",
   "homepage": "",
   "authors": ["maxi perez coto"],
-  "description": "{{MRT}}",
+  "description": "Chatter Admin",
   "main": "public/index.html",
   "keywords": [],
   "license": "MIT",

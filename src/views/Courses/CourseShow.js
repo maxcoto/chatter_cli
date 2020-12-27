@@ -9,25 +9,25 @@ import GridContainer from "components/Grid/GridContainer.js";
 import Card from "components/Card/Card.js";
 import CardAvatar from "components/Card/CardAvatar.js";
 import CardBody from "components/Card/CardBody.js";
-import TeacherFields from './TeacherFields.js'
+import CourseFields from './CourseFields.js'
 
 import avatar from "assets/img/faces/marc.jpg";
 
 const styles = {};
 
-class TeacherShow extends React.Component {  
+class CourseShow extends React.Component {  
   constructor(props) {
     super(props)
 
-    this.state = this.props.location.state || { teacher: null }
+    this.state = this.props.location.state || { course: null }
 
     API.configure(props.token)
   
-    if(!this.state.teacher){
+    if(!this.state.course){
       const id = this.props.location.pathname.split("/")[2]
-      API.get('teachers', id,
+      API.get('courses', id,
         function(response){
-          this.setState({ teacher: response })
+          this.setState({ course: response })
         }.bind(this),
         function(error){
           this.props.notifyError(error)
@@ -37,13 +37,13 @@ class TeacherShow extends React.Component {
   }
 
   onClick(){
-    const { id } = this.state.teacher
-    this.props.history.push('/teachers/' + id + '/edit', this.state);
+    const { id } = this.state.course
+    this.props.history.push('/courses/' + id + '/edit', this.state);
   }
 
   render() {
-    const { teacher } = this.state
-    if(!teacher) return null
+    const { course } = this.state
+    if(!course) return null
     
     return (
       <GridContainer>
@@ -55,7 +55,7 @@ class TeacherShow extends React.Component {
               </a>
             </CardAvatar>
             <CardBody profile>
-              <TeacherFields teacher={teacher} />
+              <CourseFields course={course} />
               <Button color="primary" onClick={this.onClick.bind(this)} >
                 Edit
               </Button>
@@ -67,4 +67,4 @@ class TeacherShow extends React.Component {
   }
 }
 
-export default withStyles(styles, { withTheme: true })(TeacherShow);
+export default withStyles(styles, { withTheme: true })(CourseShow);
