@@ -1,0 +1,18 @@
+{
+  "name": "material-react",
+  "homepage": "",
+  "authors": ["maxi perez coto"],
+  "description": "{{MRT}}",
+  "main": "public/index.html",
+  "keywords": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "build"
+  ],
+  "private": true
+}
