@@ -56,6 +56,18 @@ class Main extends React.Component {
         this.props.notifyError('Teachers could not be loaded')
       }.bind(this)
     )
+    
+    API.all('courses',
+      function(result){
+        this.props.setCourses(result)
+      }.bind(this),
+      function(error){
+        this.props.notifyError('Teachers could not be loaded')
+      }.bind(this)
+    )
+    
+    //[++]
+    // directly from reducers preloads
   }
 
   toggleMobile() { this.setState({ mobileOpen: !this.state.mobileOpen }) }

@@ -10,6 +10,7 @@ import CardBody from "components/Card/CardBody.js";
 
 export default class CourseForm extends React.Component {
 
+  //[++]
   teacherToSelect(list){
     return list.map(function(item){ return { id: item.id, name: item.first_name + ' ' + item.last_name } })
   }

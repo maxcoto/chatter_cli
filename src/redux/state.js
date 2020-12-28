@@ -7,6 +7,7 @@ const state = {
   },
   levels: [],
   teachers: [],
+	courses: [],
 	//[+add_state+]
 }
 

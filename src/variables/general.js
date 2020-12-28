@@ -23,7 +23,7 @@ function toSelect(list){
   return list.map(function(item){ return { id: item, name: item } })
 }
 
-const contactMethods = [
+const _contact_methods = [
   "email",
   "facebook message",
   "instagram message",
@@ -35,7 +35,7 @@ const contactMethods = [
   "whatsapp message"
 ]
 
-const leadSources = [
+const _lead_sources = [
   "Facebook",
   "Instagram",
   "Google",
@@ -44,7 +44,7 @@ const leadSources = [
   "Other (text)",
 ]
 
-const statuses = [
+const _statuses = [
   "contacted",
   "followed up",
   "scheduled trial class",
@@ -58,6 +58,18 @@ const statuses = [
 const _status = [
   "active",
   "inactive",
+]
+
+const _kind = [
+  "Group",
+  "Individual",
+]
+
+const _frecuency = [
+  "1 Month",
+  "3 Months",
+  "6 Months",
+  "Hours"
 ]
 
 const defaultStudent = {
@@ -95,33 +107,55 @@ const defaultCourse = {
 }
 // default level export
 const defaultLevel = {
-order: '',
-name: '',
+  order: '',
+  name: '',
 }
 
 // default history export
 const defaultHistory = {
-teacher: '',
-calendar_id: '',
-event_id: '',
-duration: '',
-started_at: '',
+  //[++] refs
+  teacher_id: 0,
+  teacher: {},
+  calendar_id: '',
+  event_id: '',
+  duration: '',
+  started_at: '',
+}
+// default price export
+const defaultPrice = {
+  level_id: 0,
+  level: {},
+  kind: '',
+  period: '',
+  frecuency: '',
+  amount: '',
+}
+// default schedule export
+const defaultSchedule = {
+  //[++] tabulation
+  course_id: 0,
+  course: {},
+  recurrent_at: '',
+  duration: '',
 }
 //[+add_default+]
 
 module.exports = {
-  // these 3 are used to create the tasks lists in TasksCard - Dashboard view
   bugs,
   website,
   server,
-  contactMethods: toSelect(contactMethods),
-  leadSources: toSelect(leadSources),
+  _contact_methods: toSelect(_contact_methods),
+  _lead_sources: toSelect(_lead_sources),
   _status: toSelect(_status),
-  statuses: toSelect(statuses),
+  _statuses: toSelect(_statuses),
+  _frecuency: toSelect(_frecuency),
+  _kind: toSelect(_kind),
   defaultStudent,
   defaultTeacher,
   defaultCourse,
   defaultLevel,
-defaultHistory,
+  defaultHistory,
+  defaultPrice,
+  defaultSchedule,
 //[+export_default+]
 };

@@ -7,7 +7,7 @@ import CustomInput from "components/CustomInput/CustomInput.js";
 import CustomSelect from "components/CustomSelect/CustomSelect.js";
 import CardBody from "components/Card/CardBody.js";
 
-import { statuses, leadSources, contactMethods } from 'variables/general'
+import { _statuses, _lead_sources, _contact_methods } from 'variables/general'
 
 
 export default class StudentForm extends React.Component {
@@ -81,7 +81,7 @@ export default class StudentForm extends React.Component {
               labelText="Contact Method"
               id="contact_method"
               formControlProps={{ fullWidth: true }}
-              values={ contactMethods }
+              values={ _contact_methods }
               onChange={onChange}
               inputProps={{
                 name: "contact_method",
@@ -94,7 +94,7 @@ export default class StudentForm extends React.Component {
               labelText="Lead Source"
               id="lead_source"
               formControlProps={{ fullWidth: true }}
-              values={ leadSources }
+              values={ _lead_sources }
               onChange={onChange}
               inputProps={{
                 name: "lead_source",
@@ -122,7 +122,7 @@ export default class StudentForm extends React.Component {
               labelText="Status"
               id="status"
               formControlProps={{ fullWidth: true }}
-              values={ statuses }
+              values={ _statuses }
               onChange={onChange}
               inputProps={{
                 name: "status",

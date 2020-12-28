@@ -6,6 +6,7 @@ import message from './message'
 import levels from './levels'
 import students from './students'
 import teachers from './teachers'
+import courses from './courses'
 //[+add_import+]
  
 const rootReducer = (history) => combineReducers({
@@ -15,6 +16,7 @@ const rootReducer = (history) => combineReducers({
   students,
   levels,
   teachers,
+	courses,
 	//[+add_reducer+]
 })
 export default rootReducer

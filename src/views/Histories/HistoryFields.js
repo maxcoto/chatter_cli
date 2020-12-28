@@ -11,7 +11,7 @@ class HistoryFields extends React.Component {
 
     return (
       <React.Fragment>
-        <h4 className={classes.cardTitle}>Teacher: {history.teacher}</h4>
+        <h4 className={classes.cardTitle}>Teacher: {history.teacher.first_name + ' ' + history.teacher.last_name}</h4>
 				<h4 className={classes.cardTitle}>Calendar Id: {history.calendar_id}</h4>
 				<h4 className={classes.cardTitle}>Event Id: {history.event_id}</h4>
 				<h4 className={classes.cardTitle}>Duration: {history.duration}</h4>
