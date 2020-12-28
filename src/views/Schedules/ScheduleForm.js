@@ -47,8 +47,9 @@ export default class ScheduleForm extends React.Component {
             <DatePicker
               labelText='Recurrent At'
               id='recurrent_at'
+              name='recurrent_at'
+              onChange={onChange}
               inputProps={{
-                onChange,
                 name: 'recurrent_at',
                 value: schedule.recurrent_at
               }}

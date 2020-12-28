@@ -9,6 +9,8 @@ export default function DatePicker(props) {
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
+    props.onChange({ target: { name: props.name, value: date.toString() } })
+    console.log("picker:", date);
   };
 
   return (

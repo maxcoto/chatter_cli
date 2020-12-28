@@ -20,6 +20,8 @@ export default class SubscriptionForm extends React.Component {
     const { subscription, onChange, students, courses } = this.props
     if(!subscription) return null
  
+    console.log("form:", subscription);
+ 
     return(
       <CardBody>
         
@@ -79,8 +81,9 @@ export default class SubscriptionForm extends React.Component {
             <DatePicker
               labelText='Start Date'
               id='start_date'
+              name='start_date'
+              onChange={onChange}
               inputProps={{
-                onChange,
                 name: 'start_date',
                 value: subscription.start_date
               }}
@@ -94,8 +97,9 @@ export default class SubscriptionForm extends React.Component {
             <DatePicker
               labelText='Renewal Date'
               id='renewal_date'
+              name='renewal_date'
+              onChange={onChange}
               inputProps={{
-                onChange,
                 name: 'renewal_date',
                 value: subscription.renewal_date
               }}

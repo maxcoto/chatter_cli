@@ -89,8 +89,9 @@ export default class HistoryForm extends React.Component {
             <DatePicker
               labelText='Started At'
               id='started_at'
+              name='started_at'
+              onChange={onChange}
               inputProps={{
-                onChange,
                 name: 'started_at',
                 value: history.started_at
               }}
