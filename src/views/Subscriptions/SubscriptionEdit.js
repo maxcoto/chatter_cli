@@ -90,7 +90,7 @@ class SubscriptionEdit extends React.Component {
   }
 
   render() {
-    const { classes, students, courses } = this.props
+    const { classes, students, courses, teachers } = this.props
     const { subscription } = this.state
     if(!subscription) return null
  
@@ -107,6 +107,7 @@ class SubscriptionEdit extends React.Component {
               subscription={subscription}
               students={students}
               courses={courses}
+              teachers={teachers}
               onChange={this.onChange}
             />
 

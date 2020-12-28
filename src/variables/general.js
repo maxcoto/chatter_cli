@@ -141,14 +141,18 @@ const defaultSchedule = {
 }
 // default subscription export
 const defaultSubscription = {
-student: '',
-course: '',
-kind: '',
-start_date: '',
-renewal_date: '',
-period: '',
-price: '',
-hours_left: '',
+  teacher: {},
+  teacher_id: 0,
+  student: {},
+  student_id: 0,
+  course: {},
+  course_id: 0,
+  kind: '',
+  start_date: '',
+  renewal_date: '',
+  period: '',
+  price: '',
+  hours_left: '',
 }
 //[+add_default+]
 

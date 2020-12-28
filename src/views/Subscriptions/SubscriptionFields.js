@@ -11,8 +11,8 @@ class SubscriptionFields extends React.Component {
 
     return (
       <React.Fragment>
-        <h4 className={classes.cardTitle}>Student: {subscription.student}</h4>
-				<h4 className={classes.cardTitle}>Course: {subscription.course}</h4>
+        <h4 className={classes.cardTitle}>Student: {subscription.student.first_name + " " + subscription.student.last_name}</h4>
+				<h4 className={classes.cardTitle}>Course: {subscription.course.name}</h4>
 				<h4 className={classes.cardTitle}>Kind: {subscription.kind}</h4>
 				<h4 className={classes.cardTitle}>Start Date: {subscription.start_date}</h4>
 				<h4 className={classes.cardTitle}>Renewal Date: {subscription.renewal_date}</h4>

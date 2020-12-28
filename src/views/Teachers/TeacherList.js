@@ -139,12 +139,11 @@ class TeacherList extends React.Component {
               </Button>
               <Table
                 tableHeaderColor="primary"
-                tableHead={['First Name', 'Last Name', 'Email', 'Status', 'Actions']}
+                tableHead={['Name', 'Email', 'Status', 'Actions']}
                 tableData={
                   teachers.map(teacher => {
                     return [
-                      teacher.first_name,
-											teacher.last_name,
+                      teacher.first_name + " " + teacher.last_name,
 											teacher.email,
 											teacher.status,
                       <div>

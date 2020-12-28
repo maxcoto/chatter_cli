@@ -7,25 +7,14 @@ import GridContainer from "components/Grid/GridContainer.js";
 import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
-import CardAvatar from "components/Card/CardAvatar.js";
-import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 import StudentForm from './StudentForm.js'
-import StudentFields from './StudentFields.js'
+import SubscriptionForm from '../Subscriptions/SubscriptionForm.js'
 
 import { withStyles } from "@material-ui/core/styles";
-import avatar from "assets/img/faces/marc.jpg";
-
-
+import { defaultSubscription } from 'variables/general'
 
 const styles = {
-  cardCategoryWhite: {
-    color: "rgba(255,255,255,.62)",
-    margin: "0",
-    fontSize: "14px",
-    marginTop: "0",
-    marginBottom: "0"
-  },
   cardTitleWhite: {
     color: "#FFFFFF",
     marginTop: "0px",
@@ -45,8 +34,10 @@ class EditStudent extends React.Component {
     this.onSuccess = this.onSuccess.bind(this)
     this.onFailure = this.onFailure.bind(this)
 
-    this.onClick = this.onClick.bind(this)
-    this.onChange = this.onChange.bind(this)
+    this.onUpdateStudent = this.onUpdateStudent.bind(this)
+    this.onUpdateSubscription = this.onUpdateSubscription.bind(this)
+    this.onChangeStudent = this.onChangeStudent.bind(this)
+    this.onChangeSubscription = this.onChangeSubscription.bind(this)
 
     this.state = this.props.location.state || { student: null }
 
@@ -68,7 +59,7 @@ class EditStudent extends React.Component {
   onSuccess(response){
     const { id } = response
     this.props.history.push('/students/' + id, this.state);
-    this.props.notifySuccess("Student updated successfully")
+    this.props.notifySuccess("Updated successfully")
   }
   
   onFailure(error){
@@ -76,13 +67,22 @@ class EditStudent extends React.Component {
     this.props.notifyError(error)
   }
   
-  onClick(){
-    API.update('students', this.state.student.id, this.state, this.onSuccess, this.onFailure)
+  onUpdateStudent(){
+    API.update('students', this.state.student.id, { student: this.state.student }, this.onSuccess, this.onFailure)
   }
   
-  onChange(event){
+  onUpdateSubscription(){
+    API.update('subscriptions', this.state.student.subscription.id, { subscription: this.state.student.subscription }, this.onSuccess, this.onFailure)
+  }
+  
+  onChangeStudent(event){
     const { name, value } = event.target
     this.setState({ student: {...this.state.student, [name]: value } });
+  }
+  
+  onChangeSubscription(event){
+    const { name, value } = event.target
+    this.setState({ student: {...this.state.student, subscription: { ...this.state.student.subscription, [name]: value } } });
   }
   
   show(student){
@@ -90,41 +90,50 @@ class EditStudent extends React.Component {
   }
 
   render() {
-    const { classes, levels } = this.props
+    const { classes, levels, courses, teachers } = this.props
     const { student } = this.state
     if(!student) return null
  
     return(
       <GridContainer>
-        <GridItem xs={12} sm={12} md={8}>
+        <GridItem xs={12} sm={12} md={6}>
           <Card>
             <CardHeader color="primary">
-              <h4 className={classes.cardTitleWhite}>Edit Student {student.id}</h4>
-              <p className={classes.cardCategoryWhite}>what should go here ?</p>
+              <h4 className={classes.cardTitleWhite}>Edit Student</h4>
             </CardHeader>
 
-            <StudentForm student={student} onChange={this.onChange} levels={levels} />
+            <StudentForm
+              student={student}
+              levels={levels}
+              onChange={this.onChangeStudent}
+            />
 
             <CardFooter>
-              <Button color="primary" onClick={this.onClick}>Update</Button>
+              <Button color="primary" onClick={this.onUpdateStudent}>Update</Button>
             </CardFooter>
           </Card>
         </GridItem>
-        <GridItem xs={12} sm={12} md={4}>
-          <Card profile>
-            <CardAvatar profile>
-              <a href="#pablo" onClick={e => e.preventDefault()}>
-                <img src={avatar} alt="..." />
-              </a>
-            </CardAvatar>
-            <CardBody profile>
-              <StudentFields student={student} />
-              <Button color="primary" onClick={this.show.bind(this, student)} >
-                Show
-              </Button>
-            </CardBody>
+        
+        <GridItem xs={12} sm={12} md={6}>
+          <Card>
+            <CardHeader color="primary">
+              <h4 className={classes.cardTitleWhite}>Edit Subscription</h4>
+            </CardHeader>
+
+            <SubscriptionForm
+              subscription={student.subscription || defaultSubscription}
+              student={student}
+              courses={courses}
+              teachers={teachers}
+              onChange={this.onChangeSubscription}
+            />
+
+            <CardFooter>
+              <Button color="primary" onClick={this.onUpdateSubscription}>Update</Button>
+            </CardFooter>
           </Card>
         </GridItem>
+        
       </GridContainer>
     )
   }

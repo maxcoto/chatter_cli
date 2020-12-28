@@ -48,6 +48,7 @@ export default function CustomSelect(props){
         classes={{ select: classes.select }}
         value={simpleSelect || ""}
         onChange={handleSimple}
+        disabled={props.disabled}
         inputProps={{
           id: props.id,
           value: props.inputProps.value || "",

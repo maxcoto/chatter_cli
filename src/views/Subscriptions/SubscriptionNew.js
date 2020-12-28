@@ -82,6 +82,7 @@ class SubscriptionNew extends React.Component {
               subscription={subscription}
               students={this.props.students}
               courses={this.props.courses}
+              teachers={this.props.teachers}
               onChange={this.onChange}
             />
 

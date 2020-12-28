@@ -18,18 +18,6 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import Button from "components/CustomButtons/Button.js";
 
 const styles = {
-  cardCategoryWhite: {
-    "&,& a,& a:hover,& a:focus": {
-      color: "rgba(255,255,255,.62)",
-      margin: "0",
-      fontSize: "14px",
-      marginTop: "0",
-      marginBottom: "0"
-    },
-    "& a,& a:hover,& a:focus": {
-      color: "#FFFFFF"
-    }
-  },
   cardTitleWhite: {
     color: "#FFFFFF",
     marginTop: "0px",
@@ -75,7 +63,7 @@ class CourseList extends React.Component {
       list = list.filter(function(item){
         return (
           item.name.toLowerCase().includes(lookup) || 
-					item.level.toLowerCase().includes(lookup)
+					item.level.name.toLowerCase().includes(lookup)
         )
       }) || []
     }
@@ -114,65 +102,126 @@ class CourseList extends React.Component {
     const { classes } = this.props
     const { courses } = this.state
 
+    const groups = courses.filter(function(c){ return c.max_students > 1 })
+    const individuals = courses.filter(function(c){ return c.max_students == 1 })
+
     return (
-      <GridContainer>
-        <GridItem xs={12} sm={12} md={12}>
-          <Card>
-            <CardHeader color="primary">
-              <div style={{ float: "left" }}>
-                <h4 className={classes.cardTitleWhite}>Courses</h4>
-                <p className={classes.cardCategoryWhite}>All</p>
-              </div>
-              
-              <div style={{ float: "right" }}>
-                <CustomInput
-                  labelText="Search"
-                  inputProps={{ onChange: this.search.bind(this) }}
-                  formControlProps={{ style: { margin: 0 }, fullWidth: true }}
+      <React.Fragment>
+        <GridContainer>
+          <GridItem xs={12} sm={12} md={12}>
+            <Card>
+              <CardHeader color="primary">
+                <div style={{ float: "left" }}>
+                  <h4 className={classes.cardTitleWhite}>Groups</h4>
+                </div>
+                
+                <div style={{ float: "right" }}>
+                  <CustomInput
+                    labelText="Search"
+                    inputProps={{ onChange: this.search.bind(this) }}
+                    formControlProps={{ style: { margin: 0 }, fullWidth: true }}
+                  />
+                </div>
+              </CardHeader>
+              <CardBody>
+                <Button color="warning" aria-label="add" justIcon round onClick={ this.new.bind(this)} >
+                  <AddIcon />
+                </Button>
+                <Table
+                  tableHeaderColor="primary"
+                  tableHead={['Name', 'Classroom Link', 'Meet Link', 'Event Id', 'Max Students', 'Level', 'Teacher', 'Actions']}
+                  tableData={
+                    groups.map(course => {
+                      return [
+                        course.name,
+  											course.classroom_link,
+  											course.meet_link,
+  											course.event_id,
+  											course.max_students,
+  											course.level.name,
+  											course.teacher.first_name + ' ' + course.teacher.last_name,
+                        <div>
+                          <Button color="info" aria-label="show" justIcon round
+                                  onClick={ this.show.bind(this, course)} >
+                            <ShowIcon />
+                          </Button>
+                          &nbsp;&nbsp;
+                          <Button color="primary" aria-label="edit" justIcon round
+                                  onClick={ this.edit.bind(this, course)} >
+                            <EditIcon />
+                          </Button>
+                          &nbsp;&nbsp;
+                          <Button color="danger" aria-label="delete" justIcon round
+                                  onClick={ this.delete.bind(this, course)} >
+                            <DeleteIcon />
+                          </Button>
+                        </div>
+                      ]}
+                    )
+                  }
                 />
-              </div>
-            </CardHeader>
-            <CardBody>
-              <Button color="warning" aria-label="add" justIcon round onClick={ this.new.bind(this)} >
-                <AddIcon />
-              </Button>
-              <Table
-                tableHeaderColor="primary"
-                tableHead={['Name', 'Classroom Link', 'Meet Link', 'Event Id', 'Max Students', 'Level', 'Teacher', 'Actions']}
-                tableData={
-                  courses.map(course => {
-                    return [
-                      course.name,
-											course.classroom_link,
-											course.meet_link,
-											course.event_id,
-											course.max_students,
-											course.level.name,
-											course.teacher.first_name + ' ' + course.teacher.last_name,
-                      <div>
-                        <Button color="info" aria-label="show" justIcon round
-                                onClick={ this.show.bind(this, course)} >
-                          <ShowIcon />
-                        </Button>
-                        &nbsp;&nbsp;
-                        <Button color="primary" aria-label="edit" justIcon round
-                                onClick={ this.edit.bind(this, course)} >
-                          <EditIcon />
-                        </Button>
-                        &nbsp;&nbsp;
-                        <Button color="danger" aria-label="delete" justIcon round
-                                onClick={ this.delete.bind(this, course)} >
-                          <DeleteIcon />
-                        </Button>
-                      </div>
-                    ]}
-                  )
-                }
-              />
-            </CardBody>
-          </Card>
-        </GridItem>
-      </GridContainer>
+              </CardBody>
+            </Card>
+          </GridItem>
+        </GridContainer>
+        
+        <GridContainer>
+          <GridItem xs={12} sm={12} md={12}>
+            <Card>
+              <CardHeader color="primary">
+                <div style={{ float: "left" }}>
+                  <h4 className={classes.cardTitleWhite}>Individuals</h4>
+                </div>
+                
+                <div style={{ float: "right" }}>
+                  <CustomInput
+                    labelText="Search"
+                    inputProps={{ onChange: this.search.bind(this) }}
+                    formControlProps={{ style: { margin: 0 }, fullWidth: true }}
+                  />
+                </div>
+              </CardHeader>
+              <CardBody>
+                <Button color="warning" aria-label="add" justIcon round onClick={ this.new.bind(this)} >
+                  <AddIcon />
+                </Button>
+                <Table
+                  tableHeaderColor="primary"
+                  tableHead={['Name', 'Classroom Link', 'Meet Link', 'Event Id', 'Level', 'Teacher', 'Actions']}
+                  tableData={
+                    individuals.map(course => {
+                      return [
+                        course.name,
+  											course.classroom_link,
+  											course.meet_link,
+  											course.event_id,
+  											course.level.name,
+  											course.teacher.first_name + ' ' + course.teacher.last_name,
+                        <div>
+                          <Button color="info" aria-label="show" justIcon round
+                                  onClick={ this.show.bind(this, course)} >
+                            <ShowIcon />
+                          </Button>
+                          &nbsp;&nbsp;
+                          <Button color="primary" aria-label="edit" justIcon round
+                                  onClick={ this.edit.bind(this, course)} >
+                            <EditIcon />
+                          </Button>
+                          &nbsp;&nbsp;
+                          <Button color="danger" aria-label="delete" justIcon round
+                                  onClick={ this.delete.bind(this, course)} >
+                            <DeleteIcon />
+                          </Button>
+                        </div>
+                      ]}
+                    )
+                  }
+                />
+              </CardBody>
+            </Card>
+          </GridItem>
+        </GridContainer>
+      </React.Fragment>
     );
   }
 }

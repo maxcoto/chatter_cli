@@ -26,7 +26,7 @@ export default class StudentForm extends React.Component {
     return(
       <CardBody>
         <GridContainer>
-          <GridItem xs={12} sm={12} md={4}>
+          <GridItem xs={12} sm={12} md={6}>
             <CustomInput
               labelText="First Name"
               id="first_name"
@@ -38,7 +38,7 @@ export default class StudentForm extends React.Component {
               }}
             />
           </GridItem>
-          <GridItem xs={12} sm={12} md={4}>
+          <GridItem xs={12} sm={12} md={6}>
             <CustomInput
               labelText="Last Name"
               id="last_name"
@@ -50,7 +50,9 @@ export default class StudentForm extends React.Component {
               }}
             />
           </GridItem>
-          <GridItem xs={12} sm={12} md={4}>
+        </GridContainer>
+        <GridContainer>
+          <GridItem xs={12} sm={12} md={6}>
             <CustomInput
               labelText="Email"
               id="email"
@@ -62,9 +64,7 @@ export default class StudentForm extends React.Component {
               }}
             />
           </GridItem>
-        </GridContainer>
-        <GridContainer>
-          <GridItem xs={12} sm={12} md={4}>
+          <GridItem xs={12} sm={12} md={6}>
             <CustomInput
               labelText="Phone"
               id="phone"
@@ -76,7 +76,9 @@ export default class StudentForm extends React.Component {
               }}
             />
           </GridItem>
-          <GridItem xs={12} sm={12} md={4}>
+        </GridContainer>
+        <GridContainer>
+          <GridItem xs={12} sm={12} md={6}>
             <CustomSelect
               labelText="Contact Method"
               id="contact_method"
@@ -89,7 +91,7 @@ export default class StudentForm extends React.Component {
               }}
             />
           </GridItem>
-          <GridItem xs={12} sm={12} md={4}>
+          <GridItem xs={12} sm={12} md={6}>
             <CustomSelect
               labelText="Lead Source"
               id="lead_source"
@@ -104,7 +106,7 @@ export default class StudentForm extends React.Component {
           </GridItem>
         </GridContainer>
         <GridContainer>
-          <GridItem xs={12} sm={12} md={4}>
+          <GridItem xs={12} sm={12} md={6}>
             <CustomSelect
               labelText="Level"
               id="level"
@@ -117,7 +119,7 @@ export default class StudentForm extends React.Component {
               }}
             />
           </GridItem>
-          <GridItem xs={12} sm={12} md={4}>
+          <GridItem xs={12} sm={12} md={6}>
             <CustomSelect
               labelText="Status"
               id="status"
