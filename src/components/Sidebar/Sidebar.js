@@ -72,11 +72,7 @@ export default function Sidebar(props) {
   );
   var brand = (
     <div className={classes.logo}>
-      <a
-        href="https://www.google.com/"
-        className={classNames(classes.logoLink)}
-        target="_blank"
-      >
+      <a href="/dashboard" className={classNames(classes.logoLink)}>
         <div className={classes.logoImage}>
           <img src={logo} alt="logo" className={classes.img} />
         </div>
