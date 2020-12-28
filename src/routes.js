@@ -66,7 +66,7 @@ const routes = [
   { path: '/teachers/new',      component: TeacherNew,  layout: '', hidden: true },
   { path: '/teachers/:id/edit', component: TeacherEdit, layout: '', hidden: true },
   { path: '/teachers/:id',      component: TeacherShow, layout: '', hidden: true },
-  { path: '/teachers',          component: TeacherList, layout: '', name: 'Teachers', icon: Dashboard },
+  { path: '/teachers',          component: TeacherList, layout: '', name: 'Teachers', icon: Person },
   
   // courses routes
   { path: '/courses/new',      component: CourseNew,  layout: '', hidden: true },
