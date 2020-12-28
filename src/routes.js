@@ -23,6 +23,17 @@ import CourseEdit from 'views/Courses/CourseEdit.js'
 import CourseList from 'views/Courses/CourseList.js'
 import CourseNew from 'views/Courses/CourseNew.js'
 import CourseShow from 'views/Courses/CourseShow.js'
+// levels imports
+import LevelEdit from 'views/Levels/LevelEdit.js'
+import LevelList from 'views/Levels/LevelList.js'
+import LevelNew from 'views/Levels/LevelNew.js'
+import LevelShow from 'views/Levels/LevelShow.js'
+
+// histories imports
+import HistoryEdit from 'views/Histories/HistoryEdit.js'
+import HistoryList from 'views/Histories/HistoryList.js'
+import HistoryNew from 'views/Histories/HistoryNew.js'
+import HistoryShow from 'views/Histories/HistoryShow.js'
 //[+add_includes+]
 
 const routes = [
@@ -47,9 +58,20 @@ const routes = [
   { path: '/courses/:id/edit', component: CourseEdit, layout: '', hidden: true },
   { path: '/courses/:id',      component: CourseShow, layout: '', hidden: true },
   { path: '/courses',          component: CourseList, layout: '', name: 'Courses', icon: Dashboard },
+  
+  // levels routes
+  { path: '/levels/new',      component: LevelNew,  layout: '', hidden: true },
+  { path: '/levels/:id/edit', component: LevelEdit, layout: '', hidden: true },
+  { path: '/levels/:id',      component: LevelShow, layout: '', hidden: true },
+  { path: '/levels',          component: LevelList, layout: '', name: 'Levels', icon: Dashboard },
+  
+  
+  // histories routes
+  { path: '/histories/new',      component: HistoryNew,  layout: '', hidden: true },
+  { path: '/histories/:id/edit', component: HistoryEdit, layout: '', hidden: true },
+  { path: '/histories/:id',      component: HistoryShow, layout: '', hidden: true },
+  { path: '/histories',          component: HistoryList, layout: '', name: 'Histories', icon: Dashboard },
   //[+add_routes+]
-
-
 
 
 ];

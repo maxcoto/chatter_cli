@@ -44,7 +44,7 @@ class Main extends React.Component {
         this.props.setLevels(result)
       }.bind(this),
       function(error){
-        this.notifyError('Levels could not be loaded')
+        this.props.notifyError('Levels could not be loaded')
       }.bind(this)
     )
     
@@ -53,7 +53,7 @@ class Main extends React.Component {
         this.props.setTeachers(result)
       }.bind(this),
       function(error){
-        this.notifyError('Teachers could not be loaded')
+        this.props.notifyError('Teachers could not be loaded')
       }.bind(this)
     )
   }

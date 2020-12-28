@@ -93,6 +93,20 @@ const defaultCourse = {
   teacher_id: 0,
   teacher: {},
 }
+// default level export
+const defaultLevel = {
+order: '',
+name: '',
+}
+
+// default history export
+const defaultHistory = {
+teacher: '',
+calendar_id: '',
+event_id: '',
+duration: '',
+started_at: '',
+}
 //[+add_default+]
 
 module.exports = {
@@ -107,5 +121,7 @@ module.exports = {
   defaultStudent,
   defaultTeacher,
   defaultCourse,
-  //[+export_default+]
+  defaultLevel,
+defaultHistory,
+//[+export_default+]
 };
