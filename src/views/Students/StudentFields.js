@@ -17,7 +17,7 @@ class StudentFields extends React.Component {
         <h4 className={classes.cardTitle}>Phone: {student.phone}</h4>
         <h4 className={classes.cardTitle}>Contact Method: {student.contact_method}</h4>
         <h4 className={classes.cardTitle}>Lead Source: {student.lead_source}</h4>
-        <h4 className={classes.cardTitle}>Level: {student.level}</h4>
+        <h4 className={classes.cardTitle}>Level: {student.level.name}</h4>
         <h4 className={classes.cardTitle}>Status: {student.status}</h4>
         <p className={classes.description}>Objectives: {student.objectives}</p>
         <p className={classes.description}>Notes: {student.notes}</p>

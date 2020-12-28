@@ -7,9 +7,10 @@ import Main from './layouts/Main'
 const mapStateToProps = state => {
   return {
     user: state.user,
-    students: state.students,
     message: state.message,
-    //{{expand}}
+    levels: state.levels,
+    teachers: state.teachers,
+		//[+add_reducer+]
   }
 }
 

@@ -7,12 +7,20 @@ import CustomInput from "components/CustomInput/CustomInput.js";
 import CustomSelect from "components/CustomSelect/CustomSelect.js";
 import CardBody from "components/Card/CardBody.js";
 
-import { statuses, levels, leadSources, contactMethods } from 'variables/general'
+import { statuses, leadSources, contactMethods } from 'variables/general'
 
 
 export default class StudentForm extends React.Component {
+  
+  //[++]
+  // what happens if there is something diff than name to be displayed ?
+  toSelect(list){
+    return list.map(function(item){ return { id: item.id, name: item.name } })
+  }
+  
   render() {
-    const { student, onChange } = this.props
+    const { student, onChange, levels } = this.props
+    //[++]
     if(!student) return null
  
     return(
@@ -101,11 +109,11 @@ export default class StudentForm extends React.Component {
               labelText="Level"
               id="level"
               formControlProps={{ fullWidth: true }}
-              values={ levels }
+              values={ this.toSelect(levels) }
               onChange={onChange}
               inputProps={{
-                name: "level",
-                value: student.level
+                name: "level_id",
+                value: student.level_id || ''
               }}
             />
           </GridItem>

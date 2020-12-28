@@ -6,7 +6,7 @@ import { Route, Switch, Redirect } from 'react-router'
 import routes from "routes.js";
 
 // API
-// import API from 'library/API'
+import API from 'library/API'
 // import Auth from './Auth.js'
 
 // scrollbar
@@ -37,6 +37,25 @@ class Main extends React.Component {
     this.toggleMobile = this.toggleMobile.bind(this)
     
     this.mainPanel = React.createRef();
+    
+    // preloads --------------------------------------------------------
+    API.all('levels',
+      function(result){
+        this.props.setLevels(result)
+      }.bind(this),
+      function(error){
+        this.notifyError('Levels could not be loaded')
+      }.bind(this)
+    )
+    
+    API.all('teachers',
+      function(result){
+        this.props.setTeachers(result)
+      }.bind(this),
+      function(error){
+        this.notifyError('Teachers could not be loaded')
+      }.bind(this)
+    )
   }
 
   toggleMobile() { this.setState({ mobileOpen: !this.state.mobileOpen }) }

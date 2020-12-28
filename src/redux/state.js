@@ -5,7 +5,9 @@ const state = {
     text: "",
     open: false
   },
-  //{{add_state}}
+  levels: [],
+  teachers: [],
+	//[+add_state+]
 }
 
 

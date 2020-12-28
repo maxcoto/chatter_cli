@@ -7,12 +7,16 @@ import CustomInput from "components/CustomInput/CustomInput.js";
 import CustomSelect from "components/CustomSelect/CustomSelect.js";
 import CardBody from "components/Card/CardBody.js";
 
-import { _teacher_ids } from 'variables/general'
-
 
 export default class CourseForm extends React.Component {
+
+  teacherToSelect(list){
+    return list.map(function(item){ return { id: item.id, name: item.first_name + ' ' + item.last_name } })
+  }
+  
   render() {
-    const { course, onChange } = this.props
+    const { course, onChange, levels, teachers } = this.props
+    //[++]
     if(!course) return null
  
     return(
@@ -80,18 +84,35 @@ export default class CourseForm extends React.Component {
             />
           </GridItem>
         </GridContainer>
-      
-
+        
         <GridContainer>
           <GridItem xs={12} sm={12} md={4}>
             <CustomInput
-              labelText='Level'
-              id='level'
+              labelText='Max Students'
+              id='max_students'
               formControlProps={{ fullWidth: true }}
               inputProps={{
                 onChange,
-                name: 'level',
-                value: course.level
+                name: 'max_students',
+                value: course.max_students,
+                type: 'number'
+              }}
+            />
+          </GridItem>
+        </GridContainer>
+
+
+        <GridContainer>
+          <GridItem xs={12} sm={12} md={4}>
+            <CustomSelect
+              labelText="Level"
+              id="level"
+              formControlProps={{ fullWidth: true }}
+              values={ levels }
+              onChange={onChange}
+              inputProps={{
+                name: "level_id",
+                value: course.level_id || ''
               }}
             />
           </GridItem>
@@ -101,14 +122,14 @@ export default class CourseForm extends React.Component {
         <GridContainer>
           <GridItem xs={12} sm={12} md={4}>
             <CustomSelect
-              labelText='Teacher Id'
-              id='teacher_id'
+              labelText="Teacher"
+              id="teacher"
               formControlProps={{ fullWidth: true }}
-              values={ _teacher_ids }
-              onChange={onChange}
+              values={ this.teacherToSelect(teachers) }
+              onChange={ onChange }
               inputProps={{
-                name: 'teacher_id',
-                value: course.teacher_id
+                name: "teacher_id",
+                value: course.teacher_id || ''
               }}
             />
           </GridItem>

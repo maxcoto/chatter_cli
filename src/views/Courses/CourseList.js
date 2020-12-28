@@ -138,7 +138,7 @@ class CourseList extends React.Component {
               </Button>
               <Table
                 tableHeaderColor="primary"
-                tableHead={['Name', 'Classroom Link', 'Meet Link', 'Event Id', 'Max Students', 'Level', 'Teacher Id', 'Actions']}
+                tableHead={['Name', 'Classroom Link', 'Meet Link', 'Event Id', 'Max Students', 'Level', 'Teacher', 'Actions']}
                 tableData={
                   courses.map(course => {
                     return [
@@ -147,8 +147,8 @@ class CourseList extends React.Component {
 											course.meet_link,
 											course.event_id,
 											course.max_students,
-											course.level,
-											course.teacher_id,
+											course.level.name,
+											course.teacher.first_name + ' ' + course.teacher.last_name,
                       <div>
                         <Button color="info" aria-label="show" justIcon round
                                 onClick={ this.show.bind(this, course)} >

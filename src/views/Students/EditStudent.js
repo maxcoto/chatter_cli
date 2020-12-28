@@ -90,7 +90,7 @@ class EditStudent extends React.Component {
   }
 
   render() {
-    const { classes } = this.props
+    const { classes, levels } = this.props
     const { student } = this.state
     if(!student) return null
  
@@ -103,7 +103,7 @@ class EditStudent extends React.Component {
               <p className={classes.cardCategoryWhite}>what should go here ?</p>
             </CardHeader>
 
-            <StudentForm student={student} onChange={this.onChange} />
+            <StudentForm student={student} onChange={this.onChange} levels={levels} />
 
             <CardFooter>
               <Button color="primary" onClick={this.onClick}>Update</Button>

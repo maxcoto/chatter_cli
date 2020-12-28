@@ -66,7 +66,8 @@ class CourseNew extends React.Component {
   }
 
   render() {
-    const { classes } = this.props
+    const { classes, levels, teachers } = this.props
+    //[++]
     const { course } = this.state
     if(!course) return null
  
@@ -78,7 +79,12 @@ class CourseNew extends React.Component {
               <h4 className={classes.cardTitleWhite}>New Course</h4>
             </CardHeader>
 
-            <CourseForm course={course} onChange={this.onChange} />
+            <CourseForm
+              course={course}
+              levels={levels}
+              teachers={teachers}
+              onChange={this.onChange}
+            />
 
             <CardFooter>
               <Button color="primary" onClick={this.onClick} >

@@ -146,7 +146,7 @@ class StudentList extends React.Component {
                       student.first_name + " " + student.last_name,
                       student.email,
                       student.phone,
-                      student.level,
+                      student.level.name,
                       student.status,
                       student.active.toString(),
                       <div>

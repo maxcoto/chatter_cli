@@ -19,55 +19,45 @@ var server = [
 ];
 
 
+function toSelect(list){
+  return list.map(function(item){ return { id: item, name: item } })
+}
+
 const contactMethods = [
-  { id: "email", name: "email" },
-  { id: "facebook message", name: "facebook message" },
-  { id: "instagram message", name: "instagram message" },
-  { id: "phone call", name: "phone call" },
-  { id: "prueba de inglés form", name: "prueba de inglés form" },
-  { id: "website - reserve class form", name: "website - reserve class form" },
-  { id: "website - consultation form", name: "website - consultation form" },
-  { id: "visit in person", name: "visit in person" },
-  { id: "whatsapp message", name: "whatsapp message" }
+  "email",
+  "facebook message",
+  "instagram message",
+  "phone call",
+  "prueba de inglés form",
+  "website - reserve class form",
+  "website - consultation form",
+  "visit in person",
+  "whatsapp message"
 ]
 
 const leadSources = [
-  { id: "Facebook", name: "Facebook" },
-  { id: "Instagram", name: "Instagram" },
-  { id: "Google", name: "Google" },
-  { id: "MercadoLibre", name: "MercadoLibre" },
-  { id: "Referral (text)", name: "Other (text)" },
-  { id: "Other (text)", name: "Other (text)" }
-]
-
-const levels = [
-  { id: "beginner", name: "beginner" },
-  { id: "elementary", name: "elementary" },
-  { id: "pre intermediate", name: "pre intermediate" },
-  { id: "intermediate", name: "intermediate" },
-  { id: "upper intermediate", name: "upper intermediate" },
-  { id: "advanced", name: "advanced" }
+  "Facebook",
+  "Instagram",
+  "Google",
+  "MercadoLibre",
+  "Referral (text)",
+  "Other (text)",
 ]
 
 const statuses = [
-  { id: "contacted", name: "contacted" },
-  { id: "followed up", name: "followed up" },
-  { id: "scheduled trial class", name: "scheduled trial class" },
-  { id: "attended trial class", name: "attended trial class" },
-  { id: "signed up", name: "signed up" },
-  { id: "not signed up", name: "not signed up" },
-  { id: "active", name: "active" },
-  { id: "inactive", name: "inactive" }
+  "contacted",
+  "followed up",
+  "scheduled trial class",
+  "attended trial class",
+  "signed up",
+  "not signed up",
+  "active",
+  "inactive",
 ]
 
 const _status = [
-  { id: "active", name: "active" },
-  { id: "inactive", name: "inactive" }
-]
-
-const _teacher_ids = [
-  { id: "Ryan Yeskee", name: "Ryan Yeskee" },
-  { id: "Cat Florio", name: "Cat Florio" }
+  "active",
+  "inactive",
 ]
 
 const defaultStudent = {
@@ -79,7 +69,8 @@ const defaultStudent = {
   lead_source: "",
   objectives: "",
   notes: "",
-  level: "",
+  level_id: 0,
+  level: {},
   status: ""
 }
 
@@ -97,8 +88,10 @@ const defaultCourse = {
   meet_link: '',
   event_id: '',
   max_students: 0,
-  level: '',
-  teacher_id: '',
+  level_id: 0,
+  level: {},
+  teacher_id: 0,
+  teacher: {},
 }
 //[+add_default+]
 
@@ -107,14 +100,12 @@ module.exports = {
   bugs,
   website,
   server,
-  contactMethods,
-  leadSources,
-  levels,
-  _status,
-  statuses,
+  contactMethods: toSelect(contactMethods),
+  leadSources: toSelect(leadSources),
+  _status: toSelect(_status),
+  statuses: toSelect(statuses),
   defaultStudent,
   defaultTeacher,
   defaultCourse,
-  _teacher_ids,
-//[+export_default+]
+  //[+export_default+]
 };
