@@ -87,7 +87,7 @@ export default class HistoryForm extends React.Component {
         <GridContainer>
           <GridItem xs={12} sm={12} md={4}>
             <DatePicker
-              label='Started At'
+              labelText='Started At'
               id='started_at'
               inputProps={{
                 onChange,

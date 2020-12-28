@@ -20,7 +20,7 @@ export default function DatePicker(props) {
         format="MM/dd/yyyy"
         margin="normal"
         id="date-picker-inline"
-        label={props.label}
+        label={props.labelText}
         value={selectedDate}
         onChange={handleDateChange}
         KeyboardButtonProps={{
