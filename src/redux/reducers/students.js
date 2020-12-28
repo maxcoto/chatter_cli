@@ -1,3 +1,4 @@
+
 const students = (state = [], action) => {
   switch (action.type) {
   case 'SET_STUDENTS':
@@ -6,5 +7,4 @@ const students = (state = [], action) => {
     return state
   }
 }
-
 export default students

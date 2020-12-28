@@ -44,6 +44,11 @@ import ScheduleEdit from 'views/Schedules/ScheduleEdit.js'
 import ScheduleList from 'views/Schedules/ScheduleList.js'
 import ScheduleNew from 'views/Schedules/ScheduleNew.js'
 import ScheduleShow from 'views/Schedules/ScheduleShow.js'
+// subscriptions imports
+import SubscriptionEdit from 'views/Subscriptions/SubscriptionEdit.js'
+import SubscriptionList from 'views/Subscriptions/SubscriptionList.js'
+import SubscriptionNew from 'views/Subscriptions/SubscriptionNew.js'
+import SubscriptionShow from 'views/Subscriptions/SubscriptionShow.js'
 //[+add_includes+]
 
 const routes = [
@@ -93,7 +98,14 @@ const routes = [
   { path: '/schedules/:id/edit', component: ScheduleEdit, layout: '', hidden: true },
   { path: '/schedules/:id',      component: ScheduleShow, layout: '', hidden: true },
   { path: '/schedules',          component: ScheduleList, layout: '', name: 'Schedules', icon: Dashboard },
+  
+  // subscriptions routes
+  { path: '/subscriptions/new',      component: SubscriptionNew,  layout: '', hidden: true },
+  { path: '/subscriptions/:id/edit', component: SubscriptionEdit, layout: '', hidden: true },
+  { path: '/subscriptions/:id',      component: SubscriptionShow, layout: '', hidden: true },
+  { path: '/subscriptions',          component: SubscriptionList, layout: '', name: 'Subscriptions', icon: Dashboard },
   //[+add_routes+]
+
 
 
 

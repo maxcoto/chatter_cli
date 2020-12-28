@@ -65,6 +65,7 @@ const _kind = [
   "Individual",
 ]
 
+//[++] add default
 const _frecuency = [
   "1 Month",
   "3 Months",
@@ -138,6 +139,17 @@ const defaultSchedule = {
   recurrent_at: '',
   duration: '',
 }
+// default subscription export
+const defaultSubscription = {
+student: '',
+course: '',
+kind: '',
+start_date: '',
+renewal_date: '',
+period: '',
+price: '',
+hours_left: '',
+}
 //[+add_default+]
 
 module.exports = {
@@ -157,5 +169,6 @@ module.exports = {
   defaultHistory,
   defaultPrice,
   defaultSchedule,
+  defaultSubscription,
 //[+export_default+]
 };

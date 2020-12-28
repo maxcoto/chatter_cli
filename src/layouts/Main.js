@@ -62,10 +62,18 @@ class Main extends React.Component {
         this.props.setCourses(result)
       }.bind(this),
       function(error){
-        this.props.notifyError('Teachers could not be loaded')
+        this.props.notifyError('Courses could not be loaded')
       }.bind(this)
     )
     
+    API.all('students',
+      function(result){
+        this.props.setStudents(result)
+      }.bind(this),
+      function(error){
+        this.props.notifyError('Students could not be loaded')
+      }.bind(this)
+    )
     //[++]
     // directly from reducers preloads
   }
