@@ -17,7 +17,7 @@ class CourseFields extends React.Component {
 				<h4 className={classes.cardTitle}>Event Id: {course.event_id}</h4>
 				<h4 className={classes.cardTitle}>Max Students: {course.max_students}</h4>
 				<h4 className={classes.cardTitle}>Level: {course.level.name}</h4>
-				<h4 className={classes.cardTitle}>Teacher Id: {course.teacher.name}</h4>
+				<h4 className={classes.cardTitle}>Teacher: {course.teacher.first_name + " " + course.teacher.last_name}</h4>
       </React.Fragment>
       
     )
