@@ -78,20 +78,20 @@ const routes = [
   { path: '/levels/new',      component: LevelNew,  layout: '', hidden: true },
   { path: '/levels/:id/edit', component: LevelEdit, layout: '', hidden: true },
   { path: '/levels/:id',      component: LevelShow, layout: '', hidden: true },
-  { path: '/levels',          component: LevelList, layout: '', name: 'Levels', icon: Dashboard },
+  { path: '/levels',          component: LevelList, layout: '', hidden: true },
   
   
   // histories routes
   { path: '/histories/new',      component: HistoryNew,  layout: '', hidden: true },
   { path: '/histories/:id/edit', component: HistoryEdit, layout: '', hidden: true },
   { path: '/histories/:id',      component: HistoryShow, layout: '', hidden: true },
-  { path: '/histories',          component: HistoryList, layout: '', name: 'Histories', icon: Dashboard },
+  { path: '/histories',          component: HistoryList, layout: '', hidden: true },
   
   // prices routes
   { path: '/prices/new',      component: PriceNew,  layout: '', hidden: true },
   { path: '/prices/:id/edit', component: PriceEdit, layout: '', hidden: true },
   { path: '/prices/:id',      component: PriceShow, layout: '', hidden: true },
-  { path: '/prices',          component: PriceList, layout: '', name: 'Prices', icon: Dashboard },
+  { path: '/prices',          component: PriceList, layout: '', hidden: true },
   
   // schedules routes
   { path: '/schedules/new',      component: ScheduleNew,  layout: '', hidden: true },

@@ -18,23 +18,18 @@ export default function Footer(props) {
         <div className={classes.left}>
           <List className={classes.list}>
             <ListItem className={classes.inlineBlock}>
-              <a href="#home" className={classes.block}>
-                Home
+              <a href="/prices" className={classes.block}>
+                Prices
               </a>
             </ListItem>
             <ListItem className={classes.inlineBlock}>
-              <a href="#company" className={classes.block}>
-                Company
+              <a href="/levels" className={classes.block}>
+                Levels
               </a>
             </ListItem>
             <ListItem className={classes.inlineBlock}>
-              <a href="#portfolio" className={classes.block}>
-                Portfolio
-              </a>
-            </ListItem>
-            <ListItem className={classes.inlineBlock}>
-              <a href="#blog" className={classes.block}>
-                Blog
+              <a href="/histories" className={classes.block}>
+                History
               </a>
             </ListItem>
           </List>
@@ -49,7 +44,7 @@ export default function Footer(props) {
             >
               Maxiland
             </a>
-            , made with love from Buenos Aires
+            , made with love for Chloe
           </span>
         </p>
       </div>

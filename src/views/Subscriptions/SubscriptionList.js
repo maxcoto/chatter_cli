@@ -76,8 +76,8 @@ class SubscriptionList extends React.Component {
         return (
           item.student.first_name.toLowerCase().includes(lookup) || 
           item.student.last_name.toLowerCase().includes(lookup) ||
-          item.student.email.toLowerCase().includes(lookup) ||
-          item.course.name.toLowerCase().includes(lookup)
+          item.course.name.toLowerCase().includes(lookup) ||
+          item.kind.toLowerCase().includes(lookup)
         )
       }) || []
     }
