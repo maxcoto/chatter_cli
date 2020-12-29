@@ -80,9 +80,9 @@ class EditStudent extends React.Component {
     this.setState({ student: {...this.state.student, [name]: value } });
   }
   
-  onChangeSubscription(event){
+  onChangeSubscription(event, callback = function(){} ){
     const { name, value } = event.target
-    this.setState({ student: {...this.state.student, subscription: { ...this.state.student.subscription, [name]: value } } });
+    this.setState({ student: {...this.state.student, subscription: { ...this.state.student.subscription, [name]: value } } }, callback);
   }
   
   show(student){

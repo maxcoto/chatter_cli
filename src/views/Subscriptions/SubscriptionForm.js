@@ -8,7 +8,7 @@ import CustomSelect from "components/CustomSelect/CustomSelect.js"
 import CardBody from "components/Card/CardBody.js"
 import DatePicker from "components/DatePicker/DatePicker.js"
 
-import { _kind } from 'variables/general'
+import { _kind, _group_periods, _individual_periods, } from 'variables/general'
 
 export default class SubscriptionForm extends React.Component {
 
@@ -16,13 +16,52 @@ export default class SubscriptionForm extends React.Component {
     return list.map(function(item){ return { id: item.id, name: item.first_name + ' ' + item.last_name } })
   }
 
+  onPeriodChange(event){
+    const { subscription: { kind }, onChange } = this.props
+    const self = this;
+    var callback = function(){};
+
+    if( kind === "Individual"){
+      const newEvent = { target: { name: "hours_left", value: event.target.value } }
+      callback = function(){ onChange(newEvent) };
+    }
+    
+    onChange(event, callback)
+  }
+  
+  onStartDateChange(event){
+    const { subscription: { kind, period }, onChange } = this.props
+    const self = this;
+    var callback = function(){};
+
+    if( kind === "Group"){
+      const newDate = new Date(event.target.value);
+      newDate.setDate(newDate.getDate() + period * 30);
+      const newEvent = { target: { name: "renewal_date", value: newDate.toString() } }
+      callback = function(){ onChange(newEvent) };
+    }
+    
+    if( kind === "Individual"){
+      const newDate = new Date(event.target.value);
+      newDate.setDate(newDate.getDate() + period * 30);
+      const newEvent = { target: { name: "renewal_date", value: newDate.toString() } }
+      callback = function(){ onChange(newEvent) };
+    }
+
+    onChange(event, callback)
+  }
+
   render() {
     const { subscription, onChange, courses, student, teachers } = this.props
     if(!subscription) return null
  
-     const filteredCourses = courses.filter(function(c){
+    const filteredCourses = courses.filter(function(c){
        return c.max_students > 1 && c.level_id === student.level_id
-     })
+    })
+
+    const filteredCoursesIds = filteredCourses.map(function(f){ return f.id })
+    const course_id = filteredCoursesIds.includes(course_id) ? subscription.course_id : ''
+    const periods = subscription.kind === "Group" ? _group_periods : _individual_periods
  
     console.log("form:", subscription);
  
@@ -53,7 +92,7 @@ export default class SubscriptionForm extends React.Component {
                 onChange={onChange}
                 inputProps={{
                   name: 'course_id',
-                  value: subscription.course_id || '',
+                  value: course_id,
                   disabled: true
                 }}
               />
@@ -70,8 +109,7 @@ export default class SubscriptionForm extends React.Component {
                 onChange={onChange}
                 inputProps={{
                   name: 'teacher_id',
-                  value: subscription.teacher_id || '',
-                  disabled: true
+                  value: subscription.teacher_id || ''
                 }}
               />
             </GridItem>
@@ -80,40 +118,41 @@ export default class SubscriptionForm extends React.Component {
       
         <GridContainer>
           <GridItem xs={12} sm={12} md={6}>
-            <CustomInput
+            <CustomSelect
               labelText='Period'
               id='period'
               formControlProps={{ fullWidth: true }}
+              values={ periods }
+              onChange={ this.onPeriodChange.bind(this) }
               inputProps={{
-                onChange,
                 name: 'period',
-                value: subscription.period,
-                type: 'number'
-              }}
-            />
-          </GridItem>
-        </GridContainer>
-
-        <GridContainer>
-          <GridItem xs={12} sm={12} md={6}>
-            <DatePicker
-              labelText='Start Date'
-              id='start_date'
-              name='start_date'
-              onChange={onChange}
-              inputProps={{
-                name: 'start_date',
-                value: subscription.start_date
+                value: subscription.period || '',
               }}
             />
           </GridItem>
           
           <GridItem xs={12} sm={12} md={6}>
             <DatePicker
+              labelText='Start Date'
+              id='start_date'
+              name='start_date'
+              onChange={ this.onStartDateChange.bind(this) }
+              inputProps={{
+                name: 'start_date',
+                value: subscription.start_date
+              }}
+            />
+          </GridItem>
+        </GridContainer>
+
+        <GridContainer>
+          <GridItem xs={12} sm={12} md={6} />
+          <GridItem xs={12} sm={12} md={6}>
+            <DatePicker
+              disabled={true}
               labelText='Renewal Date'
               id='renewal_date'
               name='renewal_date'
-              onChange={onChange}
               inputProps={{
                 name: 'renewal_date',
                 value: subscription.renewal_date
@@ -123,6 +162,7 @@ export default class SubscriptionForm extends React.Component {
         </GridContainer>
 
         <GridContainer>
+          <GridItem xs={12} sm={12} md={6} />
           <GridItem xs={12} sm={12} md={6}>
             <CustomInput
               labelText='Price'
@@ -132,24 +172,30 @@ export default class SubscriptionForm extends React.Component {
                 onChange,
                 name: 'price',
                 value: subscription.price,
-                type: 'number'
+                type: 'number',
+                disabled: true
               }}
             />
           </GridItem>
-          
-          <GridItem xs={12} sm={12} md={6}>
-            <CustomInput
-              labelText='Hours Left'
-              id='hours_left'
-              formControlProps={{ fullWidth: true }}
-              inputProps={{
-                onChange,
-                name: 'hours_left',
-                value: subscription.hours_left,
-                type: 'number'
-              }}
-            />
-          </GridItem>
+        </GridContainer>
+        <GridContainer>
+          <GridItem xs={12} sm={12} md={6} />
+          { subscription.kind === "Individual" &&
+            <GridItem xs={12} sm={12} md={6}>
+              <CustomInput
+                labelText='Hours Left'
+                id='hours_left'
+                formControlProps={{ fullWidth: true }}
+                inputProps={{
+                  onChange,
+                  name: 'hours_left',
+                  value: subscription.hours_left,
+                  type: 'number',
+                  disabled: true
+                }}
+              />
+            </GridItem>
+          }
         </GridContainer>
 
       </CardBody>

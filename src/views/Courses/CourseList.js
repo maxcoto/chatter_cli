@@ -103,7 +103,7 @@ class CourseList extends React.Component {
     const { courses } = this.state
 
     const groups = courses.filter(function(c){ return c.max_students > 1 })
-    const individuals = courses.filter(function(c){ return c.max_students == 1 })
+    const individuals = courses.filter(function(c){ return c.max_students === 1 })
 
     return (
       <React.Fragment>

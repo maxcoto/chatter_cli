@@ -14,17 +14,21 @@ export default function DatePicker(props) {
     console.log("picker:", date);
   };
 
+  const value = props.disabled ? new Date(props.inputProps.value) : selectedDate
+
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <KeyboardDatePicker
+        style={{ marginBottom: "0", marginTop: "26px" }}
+        disabled={props.disabled}
         fullWidth
         disableToolbar
         variant="inline"
         format="MM/dd/yyyy"
         margin="normal"
-        id="date-picker-inline"
+        id={props.id}
         label={props.labelText}
-        value={selectedDate}
+        value={value}
         onChange={handleDateChange}
         KeyboardButtonProps={{
           'aria-label': 'change date',

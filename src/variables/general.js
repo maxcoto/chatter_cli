@@ -65,6 +65,19 @@ const _kind = [
   "Individual",
 ]
 
+const _group_periods = [
+  { id: 1, name: "1 Month"  },
+  { id: 3, name: "3 Months" },
+  { id: 6, name: "6 Months" }
+]
+
+const _individual_periods = [
+  { id: 6,  name: "6 Hours"  },
+  { id: 8,  name: "8 Hours"  },
+  { id: 12, name: "12 Hours" },
+  { id: 16, name: "16 Hours" }
+]
+
 //[++] add default
 const _frecuency = [
   "1 Month",
@@ -150,9 +163,9 @@ const defaultSubscription = {
   kind: '',
   start_date: '',
   renewal_date: '',
-  period: '',
+  period: 0,
   price: '',
-  hours_left: '',
+  hours_left: 0,
 }
 //[+add_default+]
 
@@ -166,6 +179,8 @@ module.exports = {
   _statuses: toSelect(_statuses),
   _frecuency: toSelect(_frecuency),
   _kind: toSelect(_kind),
+  _group_periods,
+  _individual_periods,
   defaultStudent,
   defaultTeacher,
   defaultCourse,
