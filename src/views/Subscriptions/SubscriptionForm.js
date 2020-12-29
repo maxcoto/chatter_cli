@@ -12,10 +12,6 @@ import { _kind, _group_periods, _individual_periods, } from 'variables/general'
 
 export default class SubscriptionForm extends React.Component {
 
-  teacherToSelect(list){
-    return list.map(function(item){ return { id: item.id, name: item.first_name + ' ' + item.last_name } })
-  }
-
   render() {
     const { subscription, onChange, courses, student } = this.props
     if(!subscription) return null
@@ -24,15 +20,19 @@ export default class SubscriptionForm extends React.Component {
     const isIndividual = subscription.kind === "Individual"
 
     var periods = []
-    var filteredCourses = courses.filter(function(c){ return c.level_id === student.level_id })
+    var filteredCourses = []
     
     if(isGroup) {
       periods = _group_periods;
-      filteredCourses = filteredCourses.filter(function(c){ return c.max_students > 1 })
+      filteredCourses = courses.filter(function(c){
+        return c.max_students > 1 && c.level_id === student.level_id
+      })
     }
     if(isIndividual) {
       periods = _individual_periods;
-      filteredCourses = filteredCourses.filter(function(c){ return c.max_students === 1 })
+      filteredCourses = courses.filter(function(c){
+        return c.max_students === 1 && c.level_id === student.level_id
+      })
     }
  
     const filteredCoursesIds = filteredCourses.map(function(f){ return f.id })
@@ -80,7 +80,7 @@ export default class SubscriptionForm extends React.Component {
               id='period'
               formControlProps={{ fullWidth: true }}
               values={ periods }
-              onChange={ this.onChange }
+              onChange={ onChange }
               inputProps={{
                 name: 'period',
                 value: subscription.period || '',
@@ -93,7 +93,7 @@ export default class SubscriptionForm extends React.Component {
               labelText='Start Date'
               id='start_date'
               name='start_date'
-              onChange={ this.onChange }
+              onChange={ onChange }
               inputProps={{
                 name: 'start_date',
                 value: subscription.start_date

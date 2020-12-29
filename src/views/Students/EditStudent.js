@@ -74,7 +74,7 @@ class EditStudent extends React.Component {
   }
 
   render() {
-    const { classes, levels, courses, teachers } = this.props
+    const { classes, levels, courses, ...rest } = this.props
     const { student } = this.state
     if(!student) return null
  
@@ -101,7 +101,7 @@ class EditStudent extends React.Component {
         <SubscriptionEdit
           student={student}
           courses={courses}
-          teachers={teachers}
+          {...rest}
         />
         
       </GridContainer>

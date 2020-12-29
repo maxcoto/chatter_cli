@@ -43,7 +43,9 @@ class SubscriptionEdit extends React.Component {
     this.onClick = this.onClick.bind(this)
     this.onChange = this.onChange.bind(this)
 
-    this.state = this.props.student.subscription || { subscription: null }
+    var subscription = this.props.student.subscription || defaultSubscription
+    subscription.student_id = this.props.student.id
+    this.state = { subscription }
   }
 
   onSuccess(response){
@@ -79,11 +81,11 @@ class SubscriptionEdit extends React.Component {
       <GridItem xs={12} sm={12} md={6}>
         <Card>
           <CardHeader color="primary">
-            <h4 className={classes.cardTitleWhite}>Edit Subscription</h4>
+            <h4 className={classes.cardTitleWhite}>Subscription</h4>
           </CardHeader>
 
           <SubscriptionForm
-            subscription={subscription || defaultSubscription}
+            subscription={subscription}
             student={student}
             courses={courses}
             teachers={teachers}
@@ -91,7 +93,7 @@ class SubscriptionEdit extends React.Component {
           />
 
           <CardFooter>
-            <Button color="primary" onClick={this.onUpdateSubscription}>Save</Button>
+            <Button color="primary" onClick={this.onClick}>Save</Button>
           </CardFooter>
         </Card>
       </GridItem>
