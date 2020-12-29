@@ -52,13 +52,16 @@ export default function Sidebar(props) {
             key={key}
           >
             <ListItem button className={classes.itemLink + listItemClasses}>
-              {typeof prop.icon === "string" ? (
-                <Icon className={classNames(classes.itemIcon, whiteFontClasses)} >
-                  {prop.icon}
-                </Icon>
-              ) : (
-                <prop.icon className={classNames(classes.itemIcon, whiteFontClasses)} />
-              )}
+              { prop.icon && typeof prop.icon === "string" && (
+                  <Icon className={classNames(classes.itemIcon, whiteFontClasses)} >
+                    {prop.icon}
+                  </Icon>
+                )
+              }
+              { prop.icon && typeof prop.icon !== "string" && (
+                  <prop.icon className={classNames(classes.itemIcon, whiteFontClasses)} />
+                )
+              }
               <ListItemText
                 primary={prop.name}
                 className={classNames(classes.itemText, whiteFontClasses)}

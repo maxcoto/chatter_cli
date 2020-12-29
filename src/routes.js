@@ -1,8 +1,4 @@
 // @material-ui/icons
-import Dashboard from "@material-ui/icons/Dashboard";
-import AccountCircle from "@material-ui/icons/AccountCircle";
-import Person from "@material-ui/icons/Person";
-
 // views
 import DashboardPage from "views/Dashboard/Dashboard.js";
 import UserProfile from "views/UserProfile/UserProfile.js";
@@ -52,27 +48,27 @@ import SubscriptionShow from 'views/Subscriptions/SubscriptionShow.js'
 //[+add_includes+]
 
 const routes = [
-  { path: "/dashboard", component: DashboardPage, layout: "", name: "Dashboard", icon: Dashboard },
-  { path: "/user",      component: UserProfile,   layout: "", name: "Profile",   icon: AccountCircle,  bottom: true },
+  { path: "/dashboard", component: DashboardPage, layout: "", name: "Dashboard" },
+  { path: "/user",      component: UserProfile,   layout: "", name: "Profile",   bottom: true },
   
   // students routes
   { path: "/students/new",      component: NewStudent,  layout: "", hidden: true },
   { path: "/students/:id/edit", component: EditStudent, layout: "", hidden: true },
   { path: "/students/:id",      component: ShowStudent, layout: "", hidden: true },
-  { path: "/students",          component: StudentList, layout: "", name: "Students", icon: Person },
+  { path: "/students",          component: StudentList, layout: "", name: "Students" },
 
   
   // teachers routes
   { path: '/teachers/new',      component: TeacherNew,  layout: '', hidden: true },
   { path: '/teachers/:id/edit', component: TeacherEdit, layout: '', hidden: true },
   { path: '/teachers/:id',      component: TeacherShow, layout: '', hidden: true },
-  { path: '/teachers',          component: TeacherList, layout: '', name: 'Teachers', icon: Person },
+  { path: '/teachers',          component: TeacherList, layout: '', name: 'Teachers' },
   
   // courses routes
   { path: '/courses/new',      component: CourseNew,  layout: '', hidden: true },
   { path: '/courses/:id/edit', component: CourseEdit, layout: '', hidden: true },
   { path: '/courses/:id',      component: CourseShow, layout: '', hidden: true },
-  { path: '/courses',          component: CourseList, layout: '', name: 'Courses', icon: Dashboard },
+  { path: '/courses',          component: CourseList, layout: '', name: 'Courses' },
   
   // levels routes
   { path: '/levels/new',      component: LevelNew,  layout: '', hidden: true },
@@ -92,18 +88,7 @@ const routes = [
   { path: '/prices/:id/edit', component: PriceEdit, layout: '', hidden: true },
   { path: '/prices/:id',      component: PriceShow, layout: '', hidden: true },
   { path: '/prices',          component: PriceList, layout: '', hidden: true },
-  
-  // schedules routes
-  { path: '/schedules/new',      component: ScheduleNew,  layout: '', hidden: true },
-  { path: '/schedules/:id/edit', component: ScheduleEdit, layout: '', hidden: true },
-  { path: '/schedules/:id',      component: ScheduleShow, layout: '', hidden: true },
-  { path: '/schedules',          component: ScheduleList, layout: '', name: 'Schedules', icon: Dashboard },
-  
-  // subscriptions routes
-  { path: '/subscriptions/new',      component: SubscriptionNew,  layout: '', hidden: true },
-  { path: '/subscriptions/:id/edit', component: SubscriptionEdit, layout: '', hidden: true },
-  { path: '/subscriptions/:id',      component: SubscriptionShow, layout: '', hidden: true },
-  { path: '/subscriptions',          component: SubscriptionList, layout: '', name: 'Subscriptions', icon: Dashboard },
+
   //[+add_routes+]
 
 
