@@ -25,7 +25,6 @@ const styles = {
   }
 };
 
-
 class ScheduleNew extends React.Component {
   constructor(props) {
     super(props)
@@ -63,7 +62,12 @@ class ScheduleNew extends React.Component {
           {
             schedules.map((schedule, index) => {
               return (
-                <ScheduleForm key={index} index={index} schedule={schedule} onChange={this.onChange} course={course} />
+                <ScheduleForm
+                  key={index}
+                  index={index}
+                  schedule={schedule}
+                  onChange={this.onChange}
+                />
               )
             })
           }

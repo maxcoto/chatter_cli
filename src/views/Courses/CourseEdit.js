@@ -83,6 +83,8 @@ class CourseEdit extends React.Component {
     const { course } = this.state
     if(!course) return null
  
+    console.log(course);
+ 
     return(
       <GridContainer>
         <GridItem xs={12} sm={12} md={6}>
@@ -103,8 +105,8 @@ class CourseEdit extends React.Component {
             </CardFooter>
           </Card>
         </GridItem>
-        
-        <ScheduleEdit course={course} />
+
+        <ScheduleEdit schedules={course.schedules} onChange={this.onChange} />
         
       </GridContainer>
     )

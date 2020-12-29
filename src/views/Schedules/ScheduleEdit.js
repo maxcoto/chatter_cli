@@ -9,7 +9,10 @@ import CardHeader from "components/Card/CardHeader.js";
 import CardFooter from "components/Card/CardFooter.js";
 import ScheduleForm from './ScheduleForm.js'
 
+import AddIcon from "@material-ui/icons/Add";
+
 import { withStyles } from "@material-ui/core/styles";
+import { defaultSchedule } from 'variables/general'
 
 const styles = {
   cardTitleWhite: {
@@ -28,50 +31,54 @@ class ScheduleEdit extends React.Component {
   constructor(props) {
     super(props)
 
-    this.onSuccess = this.onSuccess.bind(this)
-    this.onFailure = this.onFailure.bind(this)
-
-    this.onClick = this.onClick.bind(this)
+    this.add = this.add.bind(this)
     this.onChange = this.onChange.bind(this)
 
-    this.state = this.props.course.schedule || { schedule: null }
+    this.state = { schedules: this.props.schedules || [defaultSchedule] }
   }
 
-  onSuccess(response){
-    this.setState({ schedule: response });
-    this.props.notifySuccess("Schedule updated successfully")
+  add(event){
+    this.setState({ schedules: [...this.state.schedules, defaultSchedule] })
   }
   
-  onFailure(error){
-    console.log(error);
-    this.props.notifyError(error)
-  }
-  
-  onClick(){
-    API.update('schedules', this.state.schedule.id, this.state, this.onSuccess, this.onFailure)
-  }
-  
-  onChange(event){
+  onChange(index, event){
     const { name, value } = event.target
-    this.setState({ schedule: {...this.state.schedule, [name]: value } });
+    let schedules = this.state.schedules
+    const schedule = {...schedules[index], [name]: value }
+    schedules[index] = schedule
+    this.setState({ schedules: schedules });
+    this.props.onChange({ target: { name: "schedules", value: schedules } })
   }
 
   render() {
     //[++] refs
-    const { classes, courses } = this.props
-    const { schedule } = this.state
+    const { classes, course } = this.props
+    const { schedules } = this.state
  
     return(
       <GridItem xs={12} sm={12} md={6}>
         <Card>
           <CardHeader color="primary">
-            <h4 className={classes.cardTitleWhite}>Edit Schedule</h4>
+            <h4 className={classes.cardTitleWhite}>Schedule</h4>
           </CardHeader>
 
-          <ScheduleForm schedule={schedule} onChange={this.onChange} courses={courses} />
+          {
+            schedules.map((schedule, index) => {
+              return (
+                <ScheduleForm
+                  key={index}
+                  index={index}
+                  schedule={schedule}
+                  onChange={this.onChange}
+                />
+              )
+            })
+          }
 
           <CardFooter>
-            <Button color="primary" onClick={this.onClick}>Save</Button>
+            <Button color="warning" aria-label="add" justIcon round onClick={ this.add.bind(this)} >
+              <AddIcon />
+            </Button>
           </CardFooter>
         </Card>
       </GridItem>

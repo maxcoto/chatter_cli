@@ -123,9 +123,7 @@ const defaultCourse = {
   event_id: '',
   max_students: 1,
   level_id: 0,
-  level: {},
   teacher_id: 0,
-  teacher: {},
 }
 // default level export
 const defaultLevel = {
@@ -161,11 +159,8 @@ const defaultSchedule = {
 }
 // default subscription export
 const defaultSubscription = {
-  teacher: {},
   teacher_id: 0,
-  student: {},
   student_id: 0,
-  course: {},
   course_id: 0,
   kind: '',
   start_date: '',
