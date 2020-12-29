@@ -12,6 +12,7 @@ import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 import CourseForm from './CourseForm.js'
 import CourseFields from './CourseFields.js'
+import ScheduleEdit from "../Schedules/ScheduleEdit.js"
 
 import { withStyles } from "@material-ui/core/styles";
 import avatar from "assets/img/faces/marc.jpg";
@@ -19,13 +20,6 @@ import avatar from "assets/img/faces/marc.jpg";
 
 
 const styles = {
-  cardCategoryWhite: {
-    color: "rgba(255,255,255,.62)",
-    margin: "0",
-    fontSize: "14px",
-    marginTop: "0",
-    marginBottom: "0"
-  },
   cardTitleWhite: {
     color: "#FFFFFF",
     marginTop: "0px",
@@ -97,11 +91,10 @@ class CourseEdit extends React.Component {
  
     return(
       <GridContainer>
-        <GridItem xs={12} sm={12} md={8}>
+        <GridItem xs={12} sm={12} md={6}>
           <Card>
             <CardHeader color="primary">
-              <h4 className={classes.cardTitleWhite}>Edit Course {course.id}</h4>
-              <p className={classes.cardCategoryWhite}>what should go here ?</p>
+              <h4 className={classes.cardTitleWhite}>Edit Course</h4>
             </CardHeader>
 
             <CourseForm
@@ -116,21 +109,9 @@ class CourseEdit extends React.Component {
             </CardFooter>
           </Card>
         </GridItem>
-        <GridItem xs={12} sm={12} md={4}>
-          <Card profile>
-            <CardAvatar profile>
-              <a href="#pablo" onClick={e => e.preventDefault()}>
-                <img src={avatar} alt="..." />
-              </a>
-            </CardAvatar>
-            <CardBody profile>
-              <CourseFields course={course} />
-              <Button color="primary" onClick={this.show.bind(this, course)} >
-                Show
-              </Button>
-            </CardBody>
-          </Card>
-        </GridItem>
+        
+        <ScheduleEdit course={course} />
+        
       </GridContainer>
     )
   }

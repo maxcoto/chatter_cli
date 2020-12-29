@@ -12,6 +12,7 @@ import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 import CourseForm from './CourseForm.js'
 import CourseFields from './CourseFields.js'
+import ScheduleNew from "../Schedules/ScheduleNew.js"
 
 import { withStyles } from "@material-ui/core/styles";
 import { defaultCourse } from 'variables/general'
@@ -73,7 +74,7 @@ class CourseNew extends React.Component {
  
     return(
       <GridContainer>
-        <GridItem xs={12} sm={12} md={8}>
+        <GridItem xs={12} sm={12} md={6}>
           <Card>
             <CardHeader color="primary">
               <h4 className={classes.cardTitleWhite}>New Course</h4>
@@ -93,18 +94,9 @@ class CourseNew extends React.Component {
             </CardFooter>
           </Card>
         </GridItem>
-        <GridItem xs={12} sm={12} md={4}>
-          <Card profile>
-            <CardAvatar profile>
-              <a href="#pablo" onClick={e => e.preventDefault()}>
-                <img src={avatar} alt="..." />
-              </a>
-            </CardAvatar>
-            <CardBody profile>
-              <CourseFields course={course} />
-            </CardBody>
-          </Card>
-        </GridItem>
+        
+        <ScheduleNew course={course} />
+        
       </GridContainer>
     )
   }

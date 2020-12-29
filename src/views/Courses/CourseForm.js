@@ -22,9 +22,8 @@ export default class CourseForm extends React.Component {
  
     return(
       <CardBody>
-        
         <GridContainer>
-          <GridItem xs={12} sm={12} md={4}>
+          <GridItem xs={12} sm={12} md={6}>
             <CustomInput
               labelText='Name'
               id='name'
@@ -36,11 +35,23 @@ export default class CourseForm extends React.Component {
               }}
             />
           </GridItem>
+          <GridItem xs={12} sm={12} md={6}>
+            <CustomInput
+              labelText='Max Students'
+              id='max_students'
+              formControlProps={{ fullWidth: true }}
+              inputProps={{
+                onChange,
+                name: 'max_students',
+                value: course.max_students,
+                type: 'number'
+              }}
+            />
+          </GridItem>
         </GridContainer>
-      
 
         <GridContainer>
-          <GridItem xs={12} sm={12} md={4}>
+          <GridItem xs={12} sm={12} md={12}>
             <CustomInput
               labelText='Classroom Link'
               id='classroom_link'
@@ -56,7 +67,7 @@ export default class CourseForm extends React.Component {
       
 
         <GridContainer>
-          <GridItem xs={12} sm={12} md={4}>
+          <GridItem xs={12} sm={12} md={12}>
             <CustomInput
               labelText='Meet Link'
               id='meet_link'
@@ -72,7 +83,7 @@ export default class CourseForm extends React.Component {
       
 
         <GridContainer>
-          <GridItem xs={12} sm={12} md={4}>
+          <GridItem xs={12} sm={12} md={12}>
             <CustomInput
               labelText='Event Id'
               id='event_id'
@@ -85,26 +96,9 @@ export default class CourseForm extends React.Component {
             />
           </GridItem>
         </GridContainer>
-        
-        <GridContainer>
-          <GridItem xs={12} sm={12} md={4}>
-            <CustomInput
-              labelText='Max Students'
-              id='max_students'
-              formControlProps={{ fullWidth: true }}
-              inputProps={{
-                onChange,
-                name: 'max_students',
-                value: course.max_students,
-                type: 'number'
-              }}
-            />
-          </GridItem>
-        </GridContainer>
-
 
         <GridContainer>
-          <GridItem xs={12} sm={12} md={4}>
+          <GridItem xs={12} sm={12} md={6}>
             <CustomSelect
               labelText="Level"
               id="level"
@@ -117,11 +111,7 @@ export default class CourseForm extends React.Component {
               }}
             />
           </GridItem>
-        </GridContainer>
-      
-
-        <GridContainer>
-          <GridItem xs={12} sm={12} md={4}>
+          <GridItem xs={12} sm={12} md={6}>
             <CustomSelect
               labelText="Teacher"
               id="teacher"

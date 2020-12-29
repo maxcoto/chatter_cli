@@ -23,7 +23,7 @@ export default class ScheduleForm extends React.Component {
     //if(!schedule) return null
  
     return(
-      <React.Fragment>
+      <CardBody>
         <GridContainer>
           <GridItem xs={12} sm={12} md={4}>
             <CustomSelect
@@ -64,7 +64,7 @@ export default class ScheduleForm extends React.Component {
             />
           </GridItem>
         </GridContainer>
-      </React.Fragment>
+      </CardBody>
     )
   }
 }

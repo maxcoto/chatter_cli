@@ -66,40 +66,26 @@ class ScheduleNew extends React.Component {
   }
 
   render() {
-    const { classes, courses } = this.props
+    const { classes, course } = this.props
     const { schedule } = this.state
     if(!schedule) return null
  
     return(
-      <GridContainer>
-        <GridItem xs={12} sm={12} md={8}>
-          <Card>
-            <CardHeader color="primary">
-              <h4 className={classes.cardTitleWhite}>New Schedule</h4>
-            </CardHeader>
+      <GridItem xs={12} sm={12} md={6}>
+        <Card>
+          <CardHeader color="primary">
+            <h4 className={classes.cardTitleWhite}>New Schedule</h4>
+          </CardHeader>
 
-            <ScheduleForm schedule={schedule} onChange={this.onChange} courses={courses} />
+          <ScheduleForm schedule={schedule} onChange={this.onChange} course={course} />
 
-            <CardFooter>
-              <Button color="primary" onClick={this.onClick} >
-                Create
-              </Button>
-            </CardFooter>
-          </Card>
-        </GridItem>
-        <GridItem xs={12} sm={12} md={4}>
-          <Card profile>
-            <CardAvatar profile>
-              <a href="#pablo" onClick={e => e.preventDefault()}>
-                <img src={avatar} alt="..." />
-              </a>
-            </CardAvatar>
-            <CardBody profile>
-              <ScheduleFields schedule={schedule} />
-            </CardBody>
-          </Card>
-        </GridItem>
-      </GridContainer>
+          <CardFooter>
+            <Button color="primary" onClick={this.onClick} >
+              Create
+            </Button>
+          </CardFooter>
+        </Card>
+      </GridItem>
     )
   }
 }

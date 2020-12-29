@@ -16,7 +16,7 @@ import SubscriptionFields from './SubscriptionFields.js'
 import { withStyles } from "@material-ui/core/styles";
 import avatar from "assets/img/faces/marc.jpg";
 
-
+import { defaultSubscription } from 'variables/general'
 
 const styles = {
   cardCategoryWhite: {
@@ -48,27 +48,12 @@ class SubscriptionEdit extends React.Component {
     this.onClick = this.onClick.bind(this)
     this.onChange = this.onChange.bind(this)
 
-    this.state = this.props.location.state || { subscription: null }
-
-    API.configure(props.token)
-  
-    if(!this.state.subscription){
-      const id = this.props.location.pathname.split("/")[2]
-      API.get('subscriptions', id,
-        function(response){
-          this.setState({ subscription: response })
-        }.bind(this),
-        function(error){
-          this.props.notifyError(error)
-        }.bind(this)
-      )
-    }
+    this.state = this.props.student.subscription || { subscription: null }
   }
 
   onSuccess(response){
     const { id } = response
-    this.props.history.push('/subscriptions/' + id, this.state);
-    this.props.notifySuccess("Subscription updated successfully")
+    this.props.notifySuccess("Subscription saved successfully")
   }
   
   onFailure(error){
@@ -77,61 +62,44 @@ class SubscriptionEdit extends React.Component {
   }
   
   onClick(){
-    API.update('subscriptions', this.state.subscription.id, this.state, this.onSuccess, this.onFailure)
+    if(this.state.subscription.id){
+      API.update('subscriptions', this.state.subscription.id, this.state, this.onSuccess, this.onFailure)  
+    } else {
+      API.create('subscriptions', this.state, this.onSuccess, this.onFailure)
+    }
+    
   }
   
   onChange(event){
     const { name, value } = event.target
     this.setState({ subscription: {...this.state.subscription, [name]: value } });
   }
-  
-  show(subscription){
-    this.props.history.push('/subscriptions/' + subscription.id, { subscription });
-  }
 
   render() {
-    const { classes, students, courses, teachers } = this.props
+    const { classes, student, courses, teachers } = this.props
     const { subscription } = this.state
-    if(!subscription) return null
+    //if(!subscription) return null
  
     return(
-      <GridContainer>
-        <GridItem xs={12} sm={12} md={8}>
-          <Card>
-            <CardHeader color="primary">
-              <h4 className={classes.cardTitleWhite}>Edit Subscription {subscription.id}</h4>
-              <p className={classes.cardCategoryWhite}>what should go here ?</p>
-            </CardHeader>
+      <GridItem xs={12} sm={12} md={6}>
+        <Card>
+          <CardHeader color="primary">
+            <h4 className={classes.cardTitleWhite}>Edit Subscription</h4>
+          </CardHeader>
 
-            <SubscriptionForm
-              subscription={subscription}
-              students={students}
-              courses={courses}
-              teachers={teachers}
-              onChange={this.onChange}
-            />
+          <SubscriptionForm
+            subscription={student.subscription || defaultSubscription}
+            student={student}
+            courses={courses}
+            teachers={teachers}
+            onChange={this.onChange}
+          />
 
-            <CardFooter>
-              <Button color="primary" onClick={this.onClick}>Update</Button>
-            </CardFooter>
-          </Card>
-        </GridItem>
-        <GridItem xs={12} sm={12} md={4}>
-          <Card profile>
-            <CardAvatar profile>
-              <a href="#pablo" onClick={e => e.preventDefault()}>
-                <img src={avatar} alt="..." />
-              </a>
-            </CardAvatar>
-            <CardBody profile>
-              <SubscriptionFields subscription={subscription} />
-              <Button color="primary" onClick={this.show.bind(this, subscription)} >
-                Show
-              </Button>
-            </CardBody>
-          </Card>
-        </GridItem>
-      </GridContainer>
+          <CardFooter>
+            <Button color="primary" onClick={this.onUpdateSubscription}>Save</Button>
+          </CardFooter>
+        </Card>
+      </GridItem>
     )
   }
 }

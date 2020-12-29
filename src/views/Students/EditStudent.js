@@ -9,10 +9,9 @@ import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardFooter from "components/Card/CardFooter.js";
 import StudentForm from './StudentForm.js'
-import SubscriptionForm from '../Subscriptions/SubscriptionForm.js'
+import SubscriptionEdit from '../Subscriptions/SubscriptionEdit.js'
 
 import { withStyles } from "@material-ui/core/styles";
-import { defaultSubscription } from 'variables/general'
 
 const styles = {
   cardTitleWhite: {
@@ -34,10 +33,8 @@ class EditStudent extends React.Component {
     this.onSuccess = this.onSuccess.bind(this)
     this.onFailure = this.onFailure.bind(this)
 
-    this.onUpdateStudent = this.onUpdateStudent.bind(this)
-    this.onUpdateSubscription = this.onUpdateSubscription.bind(this)
-    this.onChangeStudent = this.onChangeStudent.bind(this)
-    this.onChangeSubscription = this.onChangeSubscription.bind(this)
+    this.onClick = this.onClick.bind(this)
+    this.onChange = this.onChange.bind(this)
 
     this.state = this.props.location.state || { student: null }
 
@@ -67,26 +64,13 @@ class EditStudent extends React.Component {
     this.props.notifyError(error)
   }
   
-  onUpdateStudent(){
+  onClick(){
     API.update('students', this.state.student.id, { student: this.state.student }, this.onSuccess, this.onFailure)
   }
   
-  onUpdateSubscription(){
-    API.update('subscriptions', this.state.student.subscription.id, { subscription: this.state.student.subscription }, this.onSuccess, this.onFailure)
-  }
-  
-  onChangeStudent(event){
+  onChange(event){
     const { name, value } = event.target
     this.setState({ student: {...this.state.student, [name]: value } });
-  }
-  
-  onChangeSubscription(event, callback = function(){} ){
-    const { name, value } = event.target
-    this.setState({ student: {...this.state.student, subscription: { ...this.state.student.subscription, [name]: value } } }, callback);
-  }
-  
-  show(student){
-    this.props.history.push('/students/' + student.id, { student });
   }
 
   render() {
@@ -105,34 +89,20 @@ class EditStudent extends React.Component {
             <StudentForm
               student={student}
               levels={levels}
-              onChange={this.onChangeStudent}
+              onChange={this.onChange}
             />
 
             <CardFooter>
-              <Button color="primary" onClick={this.onUpdateStudent}>Update</Button>
+              <Button color="primary" onClick={this.onClick}>Update</Button>
             </CardFooter>
           </Card>
         </GridItem>
         
-        <GridItem xs={12} sm={12} md={6}>
-          <Card>
-            <CardHeader color="primary">
-              <h4 className={classes.cardTitleWhite}>Edit Subscription</h4>
-            </CardHeader>
-
-            <SubscriptionForm
-              subscription={student.subscription || defaultSubscription}
-              student={student}
-              courses={courses}
-              teachers={teachers}
-              onChange={this.onChangeSubscription}
-            />
-
-            <CardFooter>
-              <Button color="primary" onClick={this.onUpdateSubscription}>Update</Button>
-            </CardFooter>
-          </Card>
-        </GridItem>
+        <SubscriptionEdit
+          student={student}
+          courses={courses}
+          teachers={teachers}
+        />
         
       </GridContainer>
     )
