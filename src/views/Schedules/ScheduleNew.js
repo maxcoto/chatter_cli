@@ -1,21 +1,17 @@
 import React from 'react'
-import API from '../../library/API'
-
 // core components
 import GridItem from "components/Grid/GridItem.js";
-import GridContainer from "components/Grid/GridContainer.js";
 import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
-import CardAvatar from "components/Card/CardAvatar.js";
-import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 import ScheduleForm from './ScheduleForm.js'
-import ScheduleFields from './ScheduleFields.js'
+
+// icons
+import AddIcon from "@material-ui/icons/Add";
 
 import { withStyles } from "@material-ui/core/styles";
 import { defaultSchedule } from 'variables/general'
-import avatar from "assets/img/faces/marc.jpg";
 
 const styles = {
   cardTitleWhite: {
@@ -31,57 +27,50 @@ const styles = {
 
 
 class ScheduleNew extends React.Component {
-
   constructor(props) {
     super(props)
 
-    this.state = { schedule: defaultSchedule }
+    this.state = { schedules: [defaultSchedule] }
 
-    this.onSuccess = this.onSuccess.bind(this)
-    this.onFailure = this.onFailure.bind(this)
-
-    this.onClick = this.onClick.bind(this)
+    this.add = this.add.bind(this)
     this.onChange = this.onChange.bind(this)
-
-    API.configure(props.token)
   }
 
-  onSuccess(response){
-    const { id } = response
-    this.props.history.push('/schedules/' + id, { schedule: response} );
-    this.props.notifySuccess("Schedule created succesfully")
-  }
-  
-  onFailure(error){
-    this.props.notifyError(error)
-  }
-  
-  onClick(){
-    API.create('schedules', this.state, this.onSuccess, this.onFailure)
+  add(event){
+    this.setState({ schedules: [...this.state.schedules, defaultSchedule] })
   }
 
-  onChange(event){
+  onChange(index, event){
     const { name, value } = event.target
-    this.setState({ schedule: {...this.state.schedule, [name]: value } });
+    let schedules = this.state.schedules
+    const schedule = {...schedules[index], [name]: value }
+    schedules[index] = schedule
+    this.setState({ schedules: schedules });
+    this.props.onChange({ target: { name: "schedules", value: schedules } })
   }
 
   render() {
     const { classes, course } = this.props
-    const { schedule } = this.state
-    if(!schedule) return null
- 
+    const { schedules } = this.state
+
     return(
       <GridItem xs={12} sm={12} md={6}>
         <Card>
           <CardHeader color="primary">
-            <h4 className={classes.cardTitleWhite}>New Schedule</h4>
+            <h4 className={classes.cardTitleWhite}>Schedule</h4>
           </CardHeader>
 
-          <ScheduleForm schedule={schedule} onChange={this.onChange} course={course} />
+          {
+            schedules.map((schedule, index) => {
+              return (
+                <ScheduleForm key={index} index={index} schedule={schedule} onChange={this.onChange} course={course} />
+              )
+            })
+          }
 
           <CardFooter>
-            <Button color="primary" onClick={this.onClick} >
-              Create
+            <Button color="warning" aria-label="add" justIcon round onClick={ this.add.bind(this)} >
+              <AddIcon />
             </Button>
           </CardFooter>
         </Card>

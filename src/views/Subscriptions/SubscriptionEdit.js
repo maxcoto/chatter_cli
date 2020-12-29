@@ -3,18 +3,13 @@ import API from '../../library/API'
 
 // core components
 import GridItem from "components/Grid/GridItem.js";
-import GridContainer from "components/Grid/GridContainer.js";
 import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
-import CardAvatar from "components/Card/CardAvatar.js";
-import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 import SubscriptionForm from './SubscriptionForm.js'
-import SubscriptionFields from './SubscriptionFields.js'
 
 import { withStyles } from "@material-ui/core/styles";
-import avatar from "assets/img/faces/marc.jpg";
 
 import { defaultSubscription } from 'variables/general'
 
@@ -52,7 +47,7 @@ class SubscriptionEdit extends React.Component {
   }
 
   onSuccess(response){
-    const { id } = response
+    this.setState({ subscription: response });
     this.props.notifySuccess("Subscription saved successfully")
   }
   
@@ -88,7 +83,7 @@ class SubscriptionEdit extends React.Component {
           </CardHeader>
 
           <SubscriptionForm
-            subscription={student.subscription || defaultSubscription}
+            subscription={subscription || defaultSubscription}
             student={student}
             courses={courses}
             teachers={teachers}

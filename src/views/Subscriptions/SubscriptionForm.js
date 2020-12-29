@@ -7,7 +7,6 @@ import CustomInput from "components/CustomInput/CustomInput.js"
 import CustomSelect from "components/CustomSelect/CustomSelect.js"
 import CardBody from "components/Card/CardBody.js"
 import DatePicker from "components/DateTime/DatePicker.js"
-import ScheduleForm from "../Schedules/ScheduleForm.js"
 
 import { _kind, _group_periods, _individual_periods, } from 'variables/general'
 
@@ -18,7 +17,7 @@ export default class SubscriptionForm extends React.Component {
   }
 
   render() {
-    const { subscription, onChange, courses, student, teachers } = this.props
+    const { subscription, onChange, courses, student } = this.props
     if(!subscription) return null
  
     const isGroup = subscription.kind === "Group"
@@ -37,7 +36,7 @@ export default class SubscriptionForm extends React.Component {
     }
  
     const filteredCoursesIds = filteredCourses.map(function(f){ return f.id })
-    const course_id = filteredCoursesIds.includes(course_id) ? subscription.course_id : ''
+    const course_id = filteredCoursesIds.includes(subscription.course_id) ? subscription.course_id : ''
  
     console.log("form:", subscription);
  

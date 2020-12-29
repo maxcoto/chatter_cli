@@ -7,17 +7,11 @@ import GridContainer from "components/Grid/GridContainer.js";
 import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
-import CardAvatar from "components/Card/CardAvatar.js";
-import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 import CourseForm from './CourseForm.js'
-import CourseFields from './CourseFields.js'
 import ScheduleEdit from "../Schedules/ScheduleEdit.js"
 
 import { withStyles } from "@material-ui/core/styles";
-import avatar from "assets/img/faces/marc.jpg";
-
-
 
 const styles = {
   cardTitleWhite: {

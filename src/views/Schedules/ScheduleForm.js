@@ -13,14 +13,19 @@ import TimePicker from "components/DateTime/TimePicker.js"
 import { _days } from 'variables/general'
 
 export default class ScheduleForm extends React.Component {
-  courseToSelect(list){
-    return list.map(function(item){ return { id: item.id, name: item.name } })
+  constructor(props) {
+    super(props)
+
+    this.onChange = this.onChange.bind(this)
+  }
+  
+  onChange(event){
+    this.props.onChange(this.props.index, event)
   }
   
   render() {
     //[++]
-    const { schedule, onChange, courses } = this.props
-    //if(!schedule) return null
+    const { schedule } = this.props
  
     return(
       <CardBody>
@@ -31,10 +36,10 @@ export default class ScheduleForm extends React.Component {
               id='day'
               formControlProps={{ fullWidth: true }}
               values={ _days }
-              onChange={ onChange }
+              onChange={ this.onChange }
               inputProps={{
                 name: 'day',
-                //value: subscription.period || '',
+                value: schedule.day || '',
               }}
             />
           </GridItem>
@@ -43,10 +48,10 @@ export default class ScheduleForm extends React.Component {
               labelText='Recurrent At'
               id='recurrent_at'
               name='recurrent_at'
-              onChange={onChange}
+              onChange={ this.onChange }
               inputProps={{
                 name: 'recurrent_at',
-                //value: schedule.monday_at
+                value: schedule.recurrent_at
               }}
             />
           </GridItem>
@@ -56,9 +61,9 @@ export default class ScheduleForm extends React.Component {
               id='duration'
               formControlProps={{ fullWidth: true }}
               inputProps={{
-                onChange,
+                onChange: this.onChange,
                 name: 'duration',
-                //value: schedule.monday_duration,
+                value: schedule.duration,
                 type: 'number'
               }}
             />

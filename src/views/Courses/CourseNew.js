@@ -7,16 +7,12 @@ import GridContainer from "components/Grid/GridContainer.js";
 import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
-import CardAvatar from "components/Card/CardAvatar.js";
-import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 import CourseForm from './CourseForm.js'
-import CourseFields from './CourseFields.js'
 import ScheduleNew from "../Schedules/ScheduleNew.js"
 
 import { withStyles } from "@material-ui/core/styles";
 import { defaultCourse } from 'variables/general'
-import avatar from "assets/img/faces/marc.jpg";
 
 const styles = {
   cardTitleWhite: {
@@ -49,7 +45,7 @@ class CourseNew extends React.Component {
 
   onSuccess(response){
     const { id } = response
-    this.props.history.push('/courses/' + id, { course: response} );
+    this.props.history.push('/courses/' + id + '/edit', { course: response } );
     this.props.notifySuccess("Course created succesfully")
   }
   
@@ -70,7 +66,6 @@ class CourseNew extends React.Component {
     const { classes, levels, teachers } = this.props
     //[++]
     const { course } = this.state
-    if(!course) return null
  
     return(
       <GridContainer>
@@ -95,7 +90,7 @@ class CourseNew extends React.Component {
           </Card>
         </GridItem>
         
-        <ScheduleNew course={course} />
+        <ScheduleNew course={course} onChange={this.onChange} />
         
       </GridContainer>
     )

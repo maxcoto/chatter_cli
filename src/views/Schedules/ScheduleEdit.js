@@ -3,20 +3,13 @@ import API from '../../library/API'
 
 // core components
 import GridItem from "components/Grid/GridItem.js";
-import GridContainer from "components/Grid/GridContainer.js";
 import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
-import CardAvatar from "components/Card/CardAvatar.js";
-import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 import ScheduleForm from './ScheduleForm.js'
-import ScheduleFields from './ScheduleFields.js'
 
 import { withStyles } from "@material-ui/core/styles";
-import avatar from "assets/img/faces/marc.jpg";
-
-
 
 const styles = {
   cardTitleWhite: {
@@ -45,7 +38,7 @@ class ScheduleEdit extends React.Component {
   }
 
   onSuccess(response){
-    const { id } = response
+    this.setState({ schedule: response });
     this.props.notifySuccess("Schedule updated successfully")
   }
   

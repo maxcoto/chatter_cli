@@ -35,16 +35,7 @@ import PriceEdit from 'views/Prices/PriceEdit.js'
 import PriceList from 'views/Prices/PriceList.js'
 import PriceNew from 'views/Prices/PriceNew.js'
 import PriceShow from 'views/Prices/PriceShow.js'
-// schedules imports
-import ScheduleEdit from 'views/Schedules/ScheduleEdit.js'
-import ScheduleList from 'views/Schedules/ScheduleList.js'
-import ScheduleNew from 'views/Schedules/ScheduleNew.js'
-import ScheduleShow from 'views/Schedules/ScheduleShow.js'
-// subscriptions imports
-import SubscriptionEdit from 'views/Subscriptions/SubscriptionEdit.js'
-import SubscriptionList from 'views/Subscriptions/SubscriptionList.js'
-import SubscriptionNew from 'views/Subscriptions/SubscriptionNew.js'
-import SubscriptionShow from 'views/Subscriptions/SubscriptionShow.js'
+
 //[+add_includes+]
 
 const routes = [
