@@ -55,6 +55,14 @@ const _statuses = [
   "inactive",
 ]
 
+const _days = [
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday"
+]
+
 const _status = [
   "active",
   "inactive",
@@ -179,6 +187,7 @@ module.exports = {
   _statuses: toSelect(_statuses),
   _frecuency: toSelect(_frecuency),
   _kind: toSelect(_kind),
+  _days: toSelect(_days),
   _group_periods,
   _individual_periods,
   defaultStudent,
