@@ -18,18 +18,6 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import Button from "components/CustomButtons/Button.js";
 
 const styles = {
-  cardCategoryWhite: {
-    "&,& a,& a:hover,& a:focus": {
-      color: "rgba(255,255,255,.62)",
-      margin: "0",
-      fontSize: "14px",
-      marginTop: "0",
-      marginBottom: "0"
-    },
-    "& a,& a:hover,& a:focus": {
-      color: "#FFFFFF"
-    }
-  },
   cardTitleWhite: {
     color: "#FFFFFF",
     marginTop: "0px",
@@ -74,10 +62,8 @@ class PriceList extends React.Component {
     if(lookup !== ''){
       list = list.filter(function(item){
         return (
-          item.level.toLowerCase().includes(lookup) || 
-					item.kind.toLowerCase().includes(lookup) || 
-					item.frecuency.toLowerCase().includes(lookup) || 
-					item.amount.toLowerCase().includes(lookup)
+          item.level.name.toLowerCase().includes(lookup) ||
+					item.kind.toLowerCase().includes(lookup)
         )
       }) || []
     }
@@ -115,15 +101,17 @@ class PriceList extends React.Component {
   render() {
     const { classes } = this.props
     const { prices } = this.state
-
+    
+    const groupPrices = prices.filter(function(p){ return p.kind === "Group" })
+    const individualPrices = prices.filter(function(p){ return p.kind === "Individual" })
+    
     return (
       <GridContainer>
-        <GridItem xs={12} sm={12} md={12}>
+        <GridItem xs={12} sm={12} md={6}>
           <Card>
             <CardHeader color="primary">
               <div style={{ float: "left" }}>
-                <h4 className={classes.cardTitleWhite}>Prices</h4>
-                <p className={classes.cardCategoryWhite}>All</p>
+                <h4 className={classes.cardTitleWhite}>Group Prices</h4>
               </div>
               
               <div style={{ float: "right" }}>
@@ -140,14 +128,62 @@ class PriceList extends React.Component {
               </Button>
               <Table
                 tableHeaderColor="primary"
-                tableHead={['Level', 'Kind', 'Period', 'Frecuency', 'Amount', 'Actions']}
+                tableHead={['Level', 'Months', 'Amount', 'Actions']}
                 tableData={
-                  prices.map(price => {
+                  groupPrices.map(price => {
                     return [
-                      price.level,
-											price.kind,
+                      price.level.name,
 											price.period,
-											price.frecuency,
+											price.amount,
+                      <div>
+                        <Button color="info" aria-label="show" justIcon round
+                                onClick={ this.show.bind(this, price)} >
+                          <ShowIcon />
+                        </Button>
+                        &nbsp;&nbsp;
+                        <Button color="primary" aria-label="edit" justIcon round
+                                onClick={ this.edit.bind(this, price)} >
+                          <EditIcon />
+                        </Button>
+                        &nbsp;&nbsp;
+                        <Button color="danger" aria-label="delete" justIcon round
+                                onClick={ this.delete.bind(this, price)} >
+                          <DeleteIcon />
+                        </Button>
+                      </div>
+                    ]}
+                  )
+                }
+              />
+            </CardBody>
+          </Card>
+        </GridItem>
+        <GridItem xs={12} sm={12} md={6}>
+          <Card>
+            <CardHeader color="primary">
+              <div style={{ float: "left" }}>
+                <h4 className={classes.cardTitleWhite}>Individual Prices</h4>
+              </div>
+              
+              <div style={{ float: "right" }}>
+                <CustomInput
+                  labelText="Search"
+                  inputProps={{ onChange: this.search.bind(this) }}
+                  formControlProps={{ style: { margin: 0 }, fullWidth: true }}
+                />
+              </div>
+            </CardHeader>
+            <CardBody>
+              <Button color="warning" aria-label="add" justIcon round onClick={ this.new.bind(this)} >
+                <AddIcon />
+              </Button>
+              <Table
+                tableHeaderColor="primary"
+                tableHead={['Hours', 'Amount', 'Actions']}
+                tableData={
+                  individualPrices.map(price => {
+                    return [
+											price.period,
 											price.amount,
                       <div>
                         <Button color="info" aria-label="show" justIcon round

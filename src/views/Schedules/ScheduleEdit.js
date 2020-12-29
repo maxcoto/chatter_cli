@@ -1,5 +1,4 @@
 import React from "react";
-import API from '../../library/API'
 
 // core components
 import GridItem from "components/Grid/GridItem.js";
@@ -52,7 +51,7 @@ class ScheduleEdit extends React.Component {
 
   render() {
     //[++] refs
-    const { classes, course } = this.props
+    const { classes } = this.props
     const { schedules } = this.state
  
     return(

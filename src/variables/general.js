@@ -86,14 +86,6 @@ const _individual_periods = [
   { id: 16, name: "16 Hours" }
 ]
 
-//[++] add default
-const _frecuency = [
-  "1 Month",
-  "3 Months",
-  "6 Months",
-  "Hours"
-]
-
 const defaultStudent = {
   first_name: "",
   last_name: "",
@@ -144,11 +136,9 @@ const defaultHistory = {
 // default price export
 const defaultPrice = {
   level_id: 0,
-  level: {},
   kind: '',
-  period: '',
-  frecuency: '',
-  amount: '',
+  period: 0,
+  amount: 0,
 }
 // default schedule export
 const defaultSchedule = {
@@ -179,7 +169,6 @@ module.exports = {
   _lead_sources: toSelect(_lead_sources),
   _status: toSelect(_status),
   _statuses: toSelect(_statuses),
-  _frecuency: toSelect(_frecuency),
   _kind: toSelect(_kind),
   _days: toSelect(_days),
   _group_periods,

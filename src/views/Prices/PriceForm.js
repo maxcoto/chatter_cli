@@ -7,18 +7,30 @@ import CustomInput from "components/CustomInput/CustomInput.js";
 import CustomSelect from "components/CustomSelect/CustomSelect.js";
 import CardBody from "components/Card/CardBody.js";
 
-import { _kind, _frecuency } from 'variables/general'
+import { _kind, _group_periods, _individual_periods } from 'variables/general'
 
 export default class PriceForm extends React.Component {
   render() {
     const { price, onChange, levels } = this.props
     if(!price) return null
+    
+    
+    const isGroup = price.kind === "Group"
+    const isIndividual = price.kind === "Individual"
+    var periods = []
+    
+    if(isGroup) {
+      periods = _group_periods;
+    }
+    if(isIndividual) {
+      periods = _individual_periods;
+    }
  
     return(
       <CardBody>
         
         <GridContainer>
-          <GridItem xs={12} sm={12} md={4}>
+          <GridItem xs={12} sm={12} md={6}>
             <CustomSelect
               labelText='Level'
               id='level'
@@ -31,11 +43,7 @@ export default class PriceForm extends React.Component {
               }}
             />
           </GridItem>
-        </GridContainer>
-      
-
-        <GridContainer>
-          <GridItem xs={12} sm={12} md={4}>
+          <GridItem xs={12} sm={12} md={6}>
             <CustomSelect
               labelText='Kind'
               id='kind'
@@ -48,45 +56,24 @@ export default class PriceForm extends React.Component {
               }}
             />
           </GridItem>
-        </GridContainer>
-      
+        </GridContainer>  
 
         <GridContainer>
-          <GridItem xs={12} sm={12} md={4}>
-            <CustomInput
+          <GridItem xs={12} sm={12} md={6}>
+            <CustomSelect
               labelText='Period'
               id='period'
               formControlProps={{ fullWidth: true }}
+              values={ periods }
+              onChange={ onChange }
               inputProps={{
-                onChange,
                 name: 'period',
-                value: price.period,
-                type: 'number'
+                value: price.period || '',
               }}
             />
           </GridItem>
-        </GridContainer>
-      
 
-        <GridContainer>
-          <GridItem xs={12} sm={12} md={4}>
-            <CustomSelect
-              labelText='Frecuency'
-              id='frecuency'
-              formControlProps={{ fullWidth: true }}
-              values={ _frecuency }
-              onChange={onChange}
-              inputProps={{
-                name: 'frecuency',
-                value: price.frecuency
-              }}
-            />
-          </GridItem>
-        </GridContainer>
-      
-
-        <GridContainer>
-          <GridItem xs={12} sm={12} md={4}>
+          <GridItem xs={12} sm={12} md={6}>
             <CustomInput
               labelText='Amount'
               id='amount'

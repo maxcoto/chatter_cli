@@ -11,7 +11,6 @@ import CardAvatar from "components/Card/CardAvatar.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 import PriceForm from './PriceForm.js'
-import PriceFields from './PriceFields.js'
 
 import { withStyles } from "@material-ui/core/styles";
 import { defaultPrice } from 'variables/general'
@@ -85,18 +84,6 @@ class PriceNew extends React.Component {
                 Create
               </Button>
             </CardFooter>
-          </Card>
-        </GridItem>
-        <GridItem xs={12} sm={12} md={4}>
-          <Card profile>
-            <CardAvatar profile>
-              <a href="#pablo" onClick={e => e.preventDefault()}>
-                <img src={avatar} alt="..." />
-              </a>
-            </CardAvatar>
-            <CardBody profile>
-              <PriceFields price={price} />
-            </CardBody>
           </Card>
         </GridItem>
       </GridContainer>

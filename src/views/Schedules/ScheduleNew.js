@@ -49,7 +49,7 @@ class ScheduleNew extends React.Component {
   }
 
   render() {
-    const { classes, course } = this.props
+    const { classes } = this.props
     const { schedules } = this.state
 
     return(
