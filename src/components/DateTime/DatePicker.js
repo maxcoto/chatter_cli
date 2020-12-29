@@ -11,7 +11,7 @@ export default function DatePicker(props) {
   const handleDateChange = (date) => {
     setSelectedDate(date);
     props.onChange({ target: { name: props.name, value: date.toString() } })
-    console.log("picker:", date);
+    console.log("date picker:", date);
   };
 
   const value = props.disabled ? new Date(props.inputProps.value) : selectedDate
@@ -30,10 +30,20 @@ export default function DatePicker(props) {
         label={props.labelText}
         value={value}
         onChange={handleDateChange}
-        KeyboardButtonProps={{
-          'aria-label': 'change date',
-        }}
+        KeyboardButtonProps={{ 'aria-label': 'change date' }}
       />
     </MuiPickersUtilsProvider>
   );
 }
+
+// <KeyboardDatePicker
+//   margin="normal"
+//   id="date-picker-dialog"
+//   label="Date picker dialog"
+//   format="MM/dd/yyyy"
+//   value={selectedDate}
+//   onChange={handleDateChange}
+//   KeyboardButtonProps={{
+//     'aria-label': 'change date',
+//   }}
+// />

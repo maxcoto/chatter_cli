@@ -6,7 +6,7 @@ import GridContainer from "components/Grid/GridContainer.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
 import CustomSelect from "components/CustomSelect/CustomSelect.js";
 import CardBody from "components/Card/CardBody.js";
-import DatePicker from "components/DatePicker/DatePicker.js"
+import TimePicker from "components/DateTime/TimePicker.js"
 
 //[++]
 //[+import_constants+]
@@ -20,61 +20,151 @@ export default class ScheduleForm extends React.Component {
   render() {
     //[++]
     const { schedule, onChange, courses } = this.props
-    if(!schedule) return null
+    //if(!schedule) return null
  
     return(
-      <CardBody>
-        
+      <React.Fragment>
         <GridContainer>
-          <GridItem xs={12} sm={12} md={4}>
-            <CustomSelect
-              labelText='Course'
-              id='course'
-              formControlProps={{ fullWidth: true }}
-              values={ this.courseToSelect(courses) }
+          <GridItem xs={12} sm={12} md={6}>
+            <TimePicker
+              labelText='Monday At'
+              id='monday_at'
+              name='monday_at'
               onChange={onChange}
               inputProps={{
-                name: 'course_id',
-                value: schedule.course_id || ''
+                name: 'monday_at',
+                //value: schedule.monday_at
               }}
             />
           </GridItem>
-        </GridContainer>
-      
-
-        <GridContainer>
-          <GridItem xs={12} sm={12} md={4}>
-            <DatePicker
-              labelText='Recurrent At'
-              id='recurrent_at'
-              name='recurrent_at'
-              onChange={onChange}
-              inputProps={{
-                name: 'recurrent_at',
-                value: schedule.recurrent_at
-              }}
-            />
-          </GridItem>
-        </GridContainer>
-      
-
-        <GridContainer>
-          <GridItem xs={12} sm={12} md={4}>
+          <GridItem xs={12} sm={12} md={6}>
             <CustomInput
-              labelText='Duration'
-              id='duration'
+              labelText='Duration (hs)'
+              id='monday_duration'
               formControlProps={{ fullWidth: true }}
               inputProps={{
                 onChange,
-                name: 'duration',
-                value: schedule.duration,
+                name: 'monday_duration',
+                //value: schedule.monday_duration,
                 type: 'number'
               }}
             />
           </GridItem>
         </GridContainer>
-      
-      </CardBody>
+        
+        <GridContainer>
+          <GridItem xs={12} sm={12} md={6}>
+            <TimePicker
+              labelText='Tuesday At'
+              id='tuesday_at'
+              name='tuesday_at'
+              onChange={onChange}
+              inputProps={{
+                name: 'tuesday_at',
+                //value: schedule.tuesday_at
+              }}
+            />
+          </GridItem>
+          <GridItem xs={12} sm={12} md={6}>
+            <CustomInput
+              labelText='Duration (hs)'
+              id='tuesday_duration'
+              formControlProps={{ fullWidth: true }}
+              inputProps={{
+                onChange,
+                name: 'tuesday_duration',
+                //value: schedule.tuesday_duration,
+                type: 'number'
+              }}
+            />
+          </GridItem>
+        </GridContainer>
+        
+        <GridContainer>
+          <GridItem xs={12} sm={12} md={6}>
+            <TimePicker
+              labelText='Tuesday At'
+              id='tuesday_at'
+              name='tuesday_at'
+              onChange={onChange}
+              inputProps={{
+                name: 'tuesday_at',
+                //value: schedule.tuesday_at
+              }}
+            />
+          </GridItem>
+          <GridItem xs={12} sm={12} md={6}>
+            <CustomInput
+              labelText='Duration (hs)'
+              id='tuesday_duration'
+              formControlProps={{ fullWidth: true }}
+              inputProps={{
+                onChange,
+                name: 'tuesday_duration',
+                //value: schedule.tuesday_duration,
+                type: 'number'
+              }}
+            />
+          </GridItem>
+        </GridContainer>
+        
+        <GridContainer>
+          <GridItem xs={12} sm={12} md={6}>
+            <TimePicker
+              labelText='Tuesday At'
+              id='tuesday_at'
+              name='tuesday_at'
+              onChange={onChange}
+              inputProps={{
+                name: 'tuesday_at',
+                //value: schedule.tuesday_at
+              }}
+            />
+          </GridItem>
+          <GridItem xs={12} sm={12} md={6}>
+            <CustomInput
+              labelText='Duration (hs)'
+              id='tuesday_duration'
+              formControlProps={{ fullWidth: true }}
+              inputProps={{
+                onChange,
+                name: 'tuesday_duration',
+                //value: schedule.tuesday_duration,
+                type: 'number'
+              }}
+            />
+          </GridItem>
+        </GridContainer>
+        
+        <GridContainer>
+          <GridItem xs={12} sm={12} md={6}>
+            <TimePicker
+              labelText='Tuesday At'
+              id='tuesday_at'
+              name='tuesday_at'
+              onChange={onChange}
+              inputProps={{
+                name: 'tuesday_at',
+                //value: schedule.tuesday_at
+              }}
+            />
+          </GridItem>
+          <GridItem xs={12} sm={12} md={6}>
+            <CustomInput
+              labelText='Duration (hs)'
+              id='tuesday_duration'
+              formControlProps={{ fullWidth: true }}
+              inputProps={{
+                onChange,
+                name: 'tuesday_duration',
+                //value: schedule.tuesday_duration,
+                type: 'number'
+              }}
+            />
+          </GridItem>
+        </GridContainer>
+        
+      </React.Fragment>
     )
   }
 }
