@@ -15,6 +15,7 @@ class TeacherFields extends React.Component {
 				<h4 className={classes.cardTitle}>Last Name: {teacher.last_name}</h4>
 				<h4 className={classes.cardTitle}>Email: {teacher.email}</h4>
 				<h4 className={classes.cardTitle}>Status: {teacher.status}</h4>
+        <h4 className={classes.cardTitle}>Calendar ID: {teacher.calendar_id}</h4>
       </React.Fragment>
       
     )

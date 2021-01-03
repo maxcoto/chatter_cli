@@ -19,7 +19,7 @@ export default class TeacherForm extends React.Component {
       <CardBody>
         
         <GridContainer>
-          <GridItem xs={12} sm={12} md={4}>
+          <GridItem xs={12} sm={12} md={6}>
             <CustomInput
               labelText='First Name'
               id='first_name'
@@ -31,11 +31,7 @@ export default class TeacherForm extends React.Component {
               }}
             />
           </GridItem>
-        </GridContainer>
-      
-
-        <GridContainer>
-          <GridItem xs={12} sm={12} md={4}>
+          <GridItem xs={12} sm={12} md={6}>
             <CustomInput
               labelText='Last Name'
               id='last_name'
@@ -48,10 +44,9 @@ export default class TeacherForm extends React.Component {
             />
           </GridItem>
         </GridContainer>
-      
 
         <GridContainer>
-          <GridItem xs={12} sm={12} md={4}>
+          <GridItem xs={12} sm={12} md={6}>
             <CustomInput
               labelText='Email'
               id='email'
@@ -63,11 +58,8 @@ export default class TeacherForm extends React.Component {
               }}
             />
           </GridItem>
-        </GridContainer>
-      
-
-        <GridContainer>
-          <GridItem xs={12} sm={12} md={4}>
+          
+          <GridItem xs={12} sm={12} md={6}>
             <CustomSelect
               labelText='Status'
               id='status'
@@ -77,6 +69,22 @@ export default class TeacherForm extends React.Component {
               inputProps={{
                 name: 'status',
                 value: teacher.status
+              }}
+            />
+          </GridItem>
+        </GridContainer>
+      
+
+        <GridContainer>
+          <GridItem xs={12} sm={12} md={6}>
+            <CustomInput
+              labelText='Calendar ID'
+              id='calendar_id'
+              formControlProps={{ fullWidth: true }}
+              inputProps={{
+                onChange,
+                name: 'calendar_id',
+                value: teacher.calendar_id
               }}
             />
           </GridItem>
