@@ -4,14 +4,12 @@ import React from 'react'
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
-import CustomSelect from "components/CustomSelect/CustomSelect.js";
 import CardBody from "components/Card/CardBody.js";
 import TimePicker from "components/DateTime/TimePicker.js"
 import DatePicker from "components/DateTime/DatePicker.js"
 
 //[++]
 //[+import_constants+]
-import { _days } from 'variables/general'
 
 export default class ScheduleForm extends React.Component {
   constructor(props) {
@@ -71,22 +69,25 @@ export default class ScheduleForm extends React.Component {
             />
           </GridItem>
         </GridContainer>
-        <GridContainer>
-          <GridItem xs={12} sm={12} md={12}>
-            <CustomInput
-              labelText='Meeting Link'
-              id='meeting_link'
-              disabled='true'
-              formControlProps={{ fullWidth: true }}
-              inputProps={{
-                onChange: this.onChange,
-                name: 'meeting_link',
-                value: schedule.meet_link,
-                disabled: true
-              }}
-            />
-          </GridItem>
-        </GridContainer>
+
+        { schedule.meet_link &&
+          <GridContainer>
+            <GridItem xs={12} sm={12} md={12}>
+              <CustomInput
+                labelText='Meeting Link'
+                id='meeting_link'
+                disabled='true'
+                formControlProps={{ fullWidth: true }}
+                inputProps={{
+                  onChange: this.onChange,
+                  name: 'meeting_link',
+                  value: schedule.meet_link,
+                  disabled: true
+                }}
+              />
+            </GridItem>
+          </GridContainer>
+        }
       </CardBody>
     )
   }
