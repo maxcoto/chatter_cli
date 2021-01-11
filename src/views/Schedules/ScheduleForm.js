@@ -7,6 +7,7 @@ import CustomInput from "components/CustomInput/CustomInput.js";
 import CustomSelect from "components/CustomSelect/CustomSelect.js";
 import CardBody from "components/Card/CardBody.js";
 import TimePicker from "components/DateTime/TimePicker.js"
+import DatePicker from "components/DateTime/DatePicker.js"
 
 //[++]
 //[+import_constants+]
@@ -18,40 +19,41 @@ export default class ScheduleForm extends React.Component {
 
     this.onChange = this.onChange.bind(this)
   }
-  
+
   onChange(event){
     this.props.onChange(this.props.index, event)
   }
-  
+
   render() {
     //[++]
     const { schedule } = this.props
- 
+
+    const [schedule_date, schedule_time] = schedule.recurrent_at.split("T")
+
     return(
       <CardBody>
         <GridContainer>
           <GridItem xs={12} sm={12} md={4}>
-            <CustomSelect
-              labelText='Day'
-              id='day'
-              formControlProps={{ fullWidth: true }}
-              values={ _days }
-              onChange={ this.onChange }
+            <DatePicker
+              labelText='Date'
+              id='schedule_date'
+              name='schedule_date'
+              onChange={this.onChange}
               inputProps={{
-                name: 'day',
-                value: schedule.day || '',
+                name: 'schedule_date',
+                value: schedule_date
               }}
             />
           </GridItem>
           <GridItem xs={12} sm={12} md={4}>
             <TimePicker
-              labelText='Recurrent At'
-              id='recurrent_at'
-              name='recurrent_at'
+              labelText='Time'
+              id='schedule_time'
+              name='schedule_time'
               onChange={ this.onChange }
               inputProps={{
-                name: 'recurrent_at',
-                value: schedule.recurrent_at
+                name: 'schedule_time',
+                value: schedule_time
               }}
             />
           </GridItem>
@@ -69,9 +71,23 @@ export default class ScheduleForm extends React.Component {
             />
           </GridItem>
         </GridContainer>
+        <GridContainer>
+          <GridItem xs={12} sm={12} md={12}>
+            <CustomInput
+              labelText='Meeting Link'
+              id='meeting_link'
+              disabled='true'
+              formControlProps={{ fullWidth: true }}
+              inputProps={{
+                onChange: this.onChange,
+                name: 'meeting_link',
+                value: schedule.meet_link,
+                disabled: true
+              }}
+            />
+          </GridItem>
+        </GridContainer>
       </CardBody>
     )
   }
 }
-
-

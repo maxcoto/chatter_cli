@@ -7,14 +7,11 @@ import GridContainer from "components/Grid/GridContainer.js";
 import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
-import CardAvatar from "components/Card/CardAvatar.js";
-import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 import PriceForm from './PriceForm.js'
 
 import { withStyles } from "@material-ui/core/styles";
 import { defaultPrice } from 'variables/general'
-import avatar from "assets/img/faces/marc.jpg";
 
 const styles = {
   cardTitleWhite: {
@@ -50,11 +47,11 @@ class PriceNew extends React.Component {
     this.props.history.push('/prices/' + id, { price: response} );
     this.props.notifySuccess("Price created succesfully")
   }
-  
+
   onFailure(error){
     this.props.notifyError(error)
   }
-  
+
   onClick(){
     API.create('prices', this.state, this.onSuccess, this.onFailure)
   }
@@ -68,7 +65,7 @@ class PriceNew extends React.Component {
     const { classes, levels } = this.props
     const { price } = this.state
     if(!price) return null
- 
+
     return(
       <GridContainer>
         <GridItem xs={12} sm={12} md={8}>
@@ -92,4 +89,3 @@ class PriceNew extends React.Component {
 }
 
 export default withStyles(styles, { withTheme: true })(PriceNew);
-

@@ -14,12 +14,12 @@ export default class CourseForm extends React.Component {
   teacherToSelect(list){
     return list.map(function(item){ return { id: item.id, name: item.first_name + ' ' + item.last_name } })
   }
-  
+
   render() {
     const { course, onChange, levels, teachers } = this.props
     //[++]
     if(!course) return null
- 
+
     return(
       <CardBody>
         <GridContainer>
@@ -64,38 +64,6 @@ export default class CourseForm extends React.Component {
             />
           </GridItem>
         </GridContainer>
-      
-
-        <GridContainer>
-          <GridItem xs={12} sm={12} md={12}>
-            <CustomInput
-              labelText='Meet Link'
-              id='meet_link'
-              formControlProps={{ fullWidth: true }}
-              inputProps={{
-                onChange,
-                name: 'meet_link',
-                value: course.meet_link
-              }}
-            />
-          </GridItem>
-        </GridContainer>
-      
-
-        <GridContainer>
-          <GridItem xs={12} sm={12} md={12}>
-            <CustomInput
-              labelText='Event Id'
-              id='event_id'
-              formControlProps={{ fullWidth: true }}
-              inputProps={{
-                onChange,
-                name: 'event_id',
-                value: course.event_id
-              }}
-            />
-          </GridItem>
-        </GridContainer>
 
         <GridContainer>
           <GridItem xs={12} sm={12} md={6}>
@@ -125,10 +93,8 @@ export default class CourseForm extends React.Component {
             />
           </GridItem>
         </GridContainer>
-      
+
       </CardBody>
     )
   }
 }
-
-
