@@ -139,7 +139,6 @@ const defaultSchedule = {
 }
 // default subscription export
 const defaultSubscription = {
-  teacher_id: 0,
   student_id: 0,
   course_id: 0,
   kind: '',

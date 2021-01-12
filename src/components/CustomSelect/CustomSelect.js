@@ -67,6 +67,7 @@ export default function CustomSelect(props){
                 name={ value.name }
                 value={ value.id }
                 key={ index }
+                disabled={ value.disabled }
               >
                 { value.name }
               </MenuItem>

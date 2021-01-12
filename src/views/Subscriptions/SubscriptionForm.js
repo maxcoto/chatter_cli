@@ -15,13 +15,13 @@ export default class SubscriptionForm extends React.Component {
   render() {
     const { subscription, onChange, courses, student } = this.props
     if(!subscription) return null
- 
+
     const isGroup = subscription.kind === "Group"
     const isIndividual = subscription.kind === "Individual"
 
     var periods = []
     var filteredCourses = []
-    
+
     if(isGroup) {
       periods = _group_periods;
       filteredCourses = courses.filter(function(c){
@@ -34,12 +34,16 @@ export default class SubscriptionForm extends React.Component {
         return c.max_students === 1 && c.level_id === student.level_id
       })
     }
- 
+
+    filteredCourses = filteredCourses.map(function(c){
+      return { id: c.id, name: c.name, disabled: c.seats === 0 }
+    })
+
     const filteredCoursesIds = filteredCourses.map(function(f){ return f.id })
     const course_id = filteredCoursesIds.includes(subscription.course_id) ? subscription.course_id : ''
- 
+
     console.log("form:", subscription);
- 
+
     return(
       <CardBody>
         <GridContainer>
@@ -56,7 +60,7 @@ export default class SubscriptionForm extends React.Component {
               }}
             />
           </GridItem>
-          
+
           <GridItem xs={12} sm={12} md={6}>
             <CustomSelect
               labelText='Course'
@@ -66,13 +70,12 @@ export default class SubscriptionForm extends React.Component {
               onChange={onChange}
               inputProps={{
                 name: 'course_id',
-                value: course_id,
-                disabled: true
+                value: course_id
               }}
             />
           </GridItem>
         </GridContainer>
-      
+
         <GridContainer>
           <GridItem xs={12} sm={12} md={6}>
             <CustomSelect
@@ -87,7 +90,7 @@ export default class SubscriptionForm extends React.Component {
               }}
             />
           </GridItem>
-          
+
           <GridItem xs={12} sm={12} md={6}>
             <DatePicker
               labelText='Start Date'
@@ -164,5 +167,3 @@ export default class SubscriptionForm extends React.Component {
     )
   }
 }
-
-
