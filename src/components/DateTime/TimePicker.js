@@ -23,6 +23,7 @@ export default function TimePicker(props) {
           style={{ marginBottom: "0", marginTop: "26px" }}
           disabled={props.disabled}
           fullWidth
+          variant="inline"
           margin="normal"
           id={props.id}
           label={props.labelText}
@@ -34,4 +35,3 @@ export default function TimePicker(props) {
     </MuiPickersUtilsProvider>
   );
 }
-
