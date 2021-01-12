@@ -32,6 +32,7 @@ class ScheduleEdit extends React.Component {
 
     this.add = this.add.bind(this)
     this.onChange = this.onChange.bind(this)
+    this.onDelete = this.onDelete.bind(this)
 
     this.state = { schedules: this.props.schedules || [defaultSchedule] }
   }
@@ -39,7 +40,7 @@ class ScheduleEdit extends React.Component {
   add(event){
     this.setState({ schedules: [...this.state.schedules, defaultSchedule] })
   }
-  
+
   onChange(index, event){
     const { name, value } = event.target
     let schedules = this.state.schedules
@@ -49,11 +50,18 @@ class ScheduleEdit extends React.Component {
     this.props.onChange({ target: { name: "schedules", value: schedules } })
   }
 
+  onDelete(index) {
+    const schedules = this.state.schedules
+    const result = [...schedules.slice(0, index), ...schedules.slice(index + 1)];
+    this.setState({ schedules: result });
+    this.props.onChange({ target: { name: "schedules", value: result } })
+  }
+
   render() {
     //[++] refs
     const { classes } = this.props
     const { schedules } = this.state
- 
+
     return(
       <GridItem xs={12} sm={12} md={6}>
         <Card>
@@ -69,6 +77,7 @@ class ScheduleEdit extends React.Component {
                   index={index}
                   schedule={schedule}
                   onChange={this.onChange}
+                  onDelete={this.onDelete}
                 />
               )
             })
@@ -86,5 +95,3 @@ class ScheduleEdit extends React.Component {
 }
 
 export default withStyles(styles, { withTheme: true })(ScheduleEdit);
-
-

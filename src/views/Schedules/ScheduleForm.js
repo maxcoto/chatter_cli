@@ -7,6 +7,8 @@ import CustomInput from "components/CustomInput/CustomInput.js";
 import CardBody from "components/Card/CardBody.js";
 import TimePicker from "components/DateTime/TimePicker.js"
 import DatePicker from "components/DateTime/DatePicker.js"
+import DeleteIcon from "@material-ui/icons/Delete";
+import Button from "components/CustomButtons/Button.js";
 
 //[++]
 //[+import_constants+]
@@ -43,6 +45,10 @@ export default class ScheduleForm extends React.Component {
     this.props.onChange(this.props.index, { target: { name, value } })
   }
 
+  delete(){
+    this.props.onDelete(this.props.index)
+  }
+
   render() {
     //[++]
     const { schedule } = this.props
@@ -74,7 +80,7 @@ export default class ScheduleForm extends React.Component {
               }}
             />
           </GridItem>
-          <GridItem xs={12} sm={12} md={4}>
+          <GridItem xs={12} sm={12} md={3}>
             <CustomInput
               labelText='Duration (hs)'
               id='duration'
@@ -86,6 +92,11 @@ export default class ScheduleForm extends React.Component {
                 type: 'number'
               }}
             />
+          </GridItem>
+          <GridItem xs={12} sm={12} md={1}>
+            <Button style={{ marginTop: "27px" }} color="danger" aria-label="delete" justIcon round onClick={ this.delete.bind(this)} >
+              <DeleteIcon />
+            </Button>
           </GridItem>
         </GridContainer>
 

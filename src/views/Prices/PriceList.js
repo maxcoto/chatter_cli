@@ -41,7 +41,7 @@ class PriceList extends React.Component {
   constructor(props) {
     super(props)
     this.state = { prices: [], all: [] }
-    
+
     API.configure(props.token)
     API.all(
       'prices',
@@ -55,7 +55,7 @@ class PriceList extends React.Component {
       }.bind(this)
     )
   }
-  
+
   search(event){
     const lookup = event.target.value.trim().toLowerCase();
     var list = this.state.all
@@ -67,22 +67,22 @@ class PriceList extends React.Component {
         )
       }) || []
     }
-    
+
     this.setState({ ...this.state, prices: list })
   }
-  
+
   new(){
     this.props.history.push('/prices/new');
   }
-  
+
   show(price){
     this.props.history.push('/prices/' + price.id, { price });
   }
-  
+
   edit(price){
     this.props.history.push('/prices/' + price.id + '/edit', { price });
   }
-  
+
   delete(price){
     const self = this
     API.delete(
@@ -101,10 +101,10 @@ class PriceList extends React.Component {
   render() {
     const { classes } = this.props
     const { prices } = this.state
-    
+
     const groupPrices = prices.filter(function(p){ return p.kind === "Group" })
     const individualPrices = prices.filter(function(p){ return p.kind === "Individual" })
-    
+
     return (
       <GridContainer>
         <GridItem xs={12} sm={12} md={6}>
@@ -113,7 +113,7 @@ class PriceList extends React.Component {
               <div style={{ float: "left" }}>
                 <h4 className={classes.cardTitleWhite}>Group Prices</h4>
               </div>
-              
+
               <div style={{ float: "right" }}>
                 <CustomInput
                   labelText="Search"
@@ -164,7 +164,7 @@ class PriceList extends React.Component {
               <div style={{ float: "left" }}>
                 <h4 className={classes.cardTitleWhite}>Individual Prices</h4>
               </div>
-              
+
               <div style={{ float: "right" }}>
                 <CustomInput
                   labelText="Search"

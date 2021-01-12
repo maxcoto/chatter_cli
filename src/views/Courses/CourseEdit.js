@@ -39,7 +39,7 @@ class CourseEdit extends React.Component {
     this.state = this.props.location.state || { course: null }
 
     API.configure(props.token)
-  
+
     if(!this.state.course){
       const id = this.props.location.pathname.split("/")[2]
       API.get('courses', id,
@@ -58,21 +58,21 @@ class CourseEdit extends React.Component {
     this.props.history.push('/courses/' + id, this.state);
     this.props.notifySuccess("Course updated successfully")
   }
-  
+
   onFailure(error){
     console.log(error);
     this.props.notifyError(error)
   }
-  
+
   onClick(){
     API.update('courses', this.state.course.id, this.state, this.onSuccess, this.onFailure)
   }
-  
+
   onChange(event){
     const { name, value } = event.target
     this.setState({ course: {...this.state.course, [name]: value } });
   }
-  
+
   show(course){
     this.props.history.push('/courses/' + course.id, { course });
   }
@@ -82,9 +82,7 @@ class CourseEdit extends React.Component {
     //[++]
     const { course } = this.state
     if(!course) return null
- 
-    console.log(course);
- 
+
     return(
       <GridContainer>
         <GridItem xs={12} sm={12} md={6}>
@@ -107,12 +105,10 @@ class CourseEdit extends React.Component {
         </GridItem>
 
         <ScheduleEdit schedules={course.schedules} onChange={this.onChange} />
-        
+
       </GridContainer>
     )
   }
 }
 
 export default withStyles(styles, { withTheme: true })(CourseEdit);
-
-

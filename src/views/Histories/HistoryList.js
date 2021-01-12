@@ -53,7 +53,7 @@ class HistoryList extends React.Component {
   constructor(props) {
     super(props)
     this.state = { histories: [], all: [] }
-    
+
     API.configure(props.token)
     API.all(
       'histories',
@@ -67,7 +67,7 @@ class HistoryList extends React.Component {
       }.bind(this)
     )
   }
-  
+
   search(event){
     const lookup = event.target.value.trim().toLowerCase();
     var list = this.state.all
@@ -78,22 +78,22 @@ class HistoryList extends React.Component {
         )
       }) || []
     }
-    
+
     this.setState({ ...this.state, histories: list })
   }
-  
+
   new(){
     this.props.history.push('/histories/new');
   }
-  
+
   show(history){
     this.props.history.push('/histories/' + history.id, { history });
   }
-  
+
   edit(history){
     this.props.history.push('/histories/' + history.id + '/edit', { history });
   }
-  
+
   delete(history){
     const self = this
     API.delete(
@@ -122,7 +122,7 @@ class HistoryList extends React.Component {
                 <h4 className={classes.cardTitleWhite}>Histories</h4>
                 <p className={classes.cardCategoryWhite}>All</p>
               </div>
-              
+
               <div style={{ float: "right" }}>
                 <CustomInput
                   labelText="Search"
