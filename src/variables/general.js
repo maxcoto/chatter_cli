@@ -103,8 +103,6 @@ const defaultTeacher = {
 const defaultCourse = {
   name: '',
   classroom_link: '',
-  meet_link: '',
-  event_id: '',
   max_students: 1,
   level_id: 0,
   teacher_id: 0,
@@ -135,7 +133,6 @@ const defaultPrice = {
 // default schedule export
 const defaultSchedule = {
   //[++] tabulation
-  day: '',
   recurrent_at: '',
   duration: '',
 }

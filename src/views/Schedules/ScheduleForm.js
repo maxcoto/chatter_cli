@@ -47,8 +47,6 @@ export default class ScheduleForm extends React.Component {
     //[++]
     const { schedule } = this.props
 
-    const [schedule_date, schedule_time] = schedule.recurrent_at.split("T")
-
     return(
       <CardBody>
         <GridContainer>
@@ -60,7 +58,7 @@ export default class ScheduleForm extends React.Component {
               onChange={this.onChange}
               inputProps={{
                 name: 'schedule_date',
-                value: schedule_date
+                value: schedule.recurrent_at
               }}
             />
           </GridItem>
@@ -72,7 +70,7 @@ export default class ScheduleForm extends React.Component {
               onChange={ this.onChange }
               inputProps={{
                 name: 'schedule_time',
-                value: schedule_time
+                value: schedule.recurrent_at
               }}
             />
           </GridItem>

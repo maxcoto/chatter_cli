@@ -65,33 +65,39 @@ export default class CourseForm extends React.Component {
           </GridItem>
         </GridContainer>
 
+
         <GridContainer>
-          <GridItem xs={12} sm={12} md={6}>
-            <CustomSelect
-              labelText="Level"
-              id="level"
-              formControlProps={{ fullWidth: true }}
-              values={ levels }
-              onChange={onChange}
-              inputProps={{
-                name: "level_id",
-                value: course.level_id || ''
-              }}
-            />
-          </GridItem>
-          <GridItem xs={12} sm={12} md={6}>
-            <CustomSelect
-              labelText="Teacher"
-              id="teacher"
-              formControlProps={{ fullWidth: true }}
-              values={ this.teacherToSelect(teachers) }
-              onChange={ onChange }
-              inputProps={{
-                name: "teacher_id",
-                value: course.teacher_id || ''
-              }}
-            />
-          </GridItem>
+          { levels.length > 0 &&
+            <GridItem xs={12} sm={12} md={6}>
+              <CustomSelect
+                labelText="Level"
+                id="level"
+                formControlProps={{ fullWidth: true }}
+                values={ levels }
+                onChange={onChange}
+                inputProps={{
+                  name: "level_id",
+                  value: course.level_id || ''
+                }}
+              />
+            </GridItem>
+          }
+
+          { teachers.length > 0 &&
+            <GridItem xs={12} sm={12} md={6}>
+              <CustomSelect
+                labelText="Teacher"
+                id="teacher"
+                formControlProps={{ fullWidth: true }}
+                values={ this.teacherToSelect(teachers) }
+                onChange={ onChange }
+                inputProps={{
+                  name: "teacher_id",
+                  value: course.teacher_id || ''
+                }}
+              />
+            </GridItem>
+           }
         </GridContainer>
 
       </CardBody>
