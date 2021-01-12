@@ -19,7 +19,28 @@ export default class ScheduleForm extends React.Component {
   }
 
   onChange(event){
-    this.props.onChange(this.props.index, event)
+    const { schedule } = this.props
+    var [schedule_date, schedule_time] = schedule.recurrent_at.split("T")
+    var { name, value } = event.target
+
+    if(name === "schedule_date" || name === "schedule_time"){
+      const date = new Date(value)
+      window.test = date
+      if(name === "schedule_date"){
+        const year = date.getFullYear() + "-"
+        const month = date.getMonth() + 1 + "-"
+        const day = date.getDate()
+        schedule_date = year + month + day
+      }
+      if(name === "schedule_time"){
+        schedule_time = value.split("T")[1]
+      }
+      name = "recurrent_at"
+      value = schedule_date + "T" + schedule_time
+    }
+
+    console.log(name, value);
+    this.props.onChange(this.props.index, { target: { name, value } })
   }
 
   render() {
