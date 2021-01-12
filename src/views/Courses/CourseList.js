@@ -41,19 +41,20 @@ class CourseList extends React.Component {
   constructor(props) {
     super(props)
     this.state = { courses: [], all: [] }
+  }
 
-    API.configure(props.token)
-    API.all(
-      'courses',
-      function(data){
-        this.setState({ courses: data, all: data })
-        this.props.notifySuccess("Courses loaded !!")
-      }.bind(this),
-      function(error){
-        console.log(error)
-        this.props.notifyError("Courses not loaded :( => " + error)
-      }.bind(this)
-    )
+  componentDidUpdate(){
+    if(this.props.courses !== this.state.all){
+      const { courses } = this.props
+      this.setState({ courses, all: courses })
+    }
+  }
+
+  componentDidMount(){
+    if(this.props.courses !== this.state.all){
+      const { courses } = this.props
+      this.setState({ courses, all: courses })
+    }
   }
 
   search(event){
@@ -101,6 +102,8 @@ class CourseList extends React.Component {
   render() {
     const { classes } = this.props
     const { courses } = this.state
+
+
 
     const groups = courses.filter(function(c){ return c.max_students > 1 })
     const individuals = courses.filter(function(c){ return c.max_students === 1 })

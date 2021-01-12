@@ -70,19 +70,20 @@ class StudentList extends React.Component {
   constructor(props) {
     super(props)
     this.state = { students: [], all: [] }
+  }
 
-    API.configure(props.token)
-    API.all(
-      'students',
-      function(data){
-        this.setState({ students: data, all: data })
-        this.props.notifySuccess("Students loaded !!")
-      }.bind(this),
-      function(error){
-        console.log(error)
-        this.props.notifyError("Students not loaded :( => " + error)
-      }.bind(this)
-    )
+  componentDidMount(){
+    if(this.props.students !== this.state.all){
+      const { students } = this.props
+      this.setState({ students, all: students })
+    }
+  }
+
+  componentDidUpdate(){
+    if(this.props.students !== this.state.all){
+      const { students } = this.props
+      this.setState({ students, all: students })
+    }
   }
 
   search(event){

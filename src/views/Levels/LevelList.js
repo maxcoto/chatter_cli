@@ -53,21 +53,22 @@ class LevelList extends React.Component {
   constructor(props) {
     super(props)
     this.state = { levels: [], all: [] }
-    
-    API.configure(props.token)
-    API.all(
-      'levels',
-      function(data){
-        this.setState({ levels: data, all: data })
-        this.props.notifySuccess("Levels loaded !!")
-      }.bind(this),
-      function(error){
-        console.log(error)
-        this.props.notifyError("Levels not loaded :( => " + error)
-      }.bind(this)
-    )
   }
-  
+
+  componentDidMount(){
+    if(this.props.levels !== this.state.all){
+      const { levels } = this.props
+      this.setState({ levels, all: levels })
+    }
+  }
+
+  componentDidUpdate(){
+    if(this.props.levels !== this.state.all){
+      const { levels } = this.props
+      this.setState({ levels, all: levels })
+    }
+  }
+
   search(event){
     const lookup = event.target.value.trim().toLowerCase();
     var list = this.state.all
@@ -78,22 +79,22 @@ class LevelList extends React.Component {
         )
       }) || []
     }
-    
+
     this.setState({ ...this.state, levels: list })
   }
-  
+
   new(){
     this.props.history.push('/levels/new');
   }
-  
+
   show(level){
     this.props.history.push('/levels/' + level.id, { level });
   }
-  
+
   edit(level){
     this.props.history.push('/levels/' + level.id + '/edit', { level });
   }
-  
+
   delete(level){
     const self = this
     API.delete(
@@ -122,7 +123,7 @@ class LevelList extends React.Component {
                 <h4 className={classes.cardTitleWhite}>Levels</h4>
                 <p className={classes.cardCategoryWhite}>All</p>
               </div>
-              
+
               <div style={{ float: "right" }}>
                 <CustomInput
                   labelText="Search"

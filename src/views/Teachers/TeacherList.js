@@ -53,19 +53,20 @@ class TeacherList extends React.Component {
   constructor(props) {
     super(props)
     this.state = { teachers: [], all: [] }
+  }
 
-    API.configure(props.token)
-    API.all(
-      'teachers',
-      function(data){
-        this.setState({ teachers: data, all: data })
-        this.props.notifySuccess("Teachers loaded !!")
-      }.bind(this),
-      function(error){
-        console.log(error)
-        this.props.notifyError("Teachers not loaded :( => " + error)
-      }.bind(this)
-    )
+  componentDidMount(){
+    if(this.props.teachers !== this.state.all){
+      const { teachers } = this.props
+      this.setState({ teachers, all: teachers })
+    }
+  }
+
+  componentDidUpdate(){
+    if(this.props.teachers !== this.state.all){
+      const { teachers } = this.props
+      this.setState({ teachers, all: teachers })
+    }
   }
 
   search(event){
