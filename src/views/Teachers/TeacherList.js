@@ -53,7 +53,7 @@ class TeacherList extends React.Component {
   constructor(props) {
     super(props)
     this.state = { teachers: [], all: [] }
-    
+
     API.configure(props.token)
     API.all(
       'teachers',
@@ -67,35 +67,35 @@ class TeacherList extends React.Component {
       }.bind(this)
     )
   }
-  
+
   search(event){
     const lookup = event.target.value.trim().toLowerCase();
     var list = this.state.all
     if(lookup !== ''){
       list = list.filter(function(item){
         return (
-          item.first_name.toLowerCase().includes(lookup) || 
-					item.last_name.toLowerCase().includes(lookup) || 
+          item.first_name.toLowerCase().includes(lookup) ||
+					item.last_name.toLowerCase().includes(lookup) ||
 					item.email.toLowerCase().includes(lookup)
         )
       }) || []
     }
-    
+
     this.setState({ ...this.state, teachers: list })
   }
-  
+
   new(){
     this.props.history.push('/teachers/new');
   }
-  
+
   show(teacher){
     this.props.history.push('/teachers/' + teacher.id, { teacher });
   }
-  
+
   edit(teacher){
     this.props.history.push('/teachers/' + teacher.id + '/edit', { teacher });
   }
-  
+
   delete(teacher){
     const self = this
     API.delete(
@@ -124,7 +124,7 @@ class TeacherList extends React.Component {
                 <h4 className={classes.cardTitleWhite}>Teachers</h4>
                 <p className={classes.cardCategoryWhite}>All</p>
               </div>
-              
+
               <div style={{ float: "right" }}>
                 <CustomInput
                   labelText="Search"
@@ -139,13 +139,13 @@ class TeacherList extends React.Component {
               </Button>
               <Table
                 tableHeaderColor="primary"
-                tableHead={['Name', 'Email', 'Status', 'Actions']}
+                tableHead={['Name', 'Email', 'Active', 'Actions']}
                 tableData={
                   teachers.map(teacher => {
                     return [
                       teacher.first_name + " " + teacher.last_name,
 											teacher.email,
-											teacher.status,
+											teacher.active.toString(),
                       <div>
                         <Button color="info" aria-label="show" justIcon round
                                 onClick={ this.show.bind(this, teacher)} >

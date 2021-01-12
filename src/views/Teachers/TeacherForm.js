@@ -4,20 +4,29 @@ import React from 'react'
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
-import CustomSelect from "components/CustomSelect/CustomSelect.js";
+import CustomSwitch from "components/CustomSwitch/CustomSwitch.js";
 import CardBody from "components/Card/CardBody.js";
-
-import { _status } from 'variables/general'
 
 
 export default class TeacherForm extends React.Component {
   render() {
     const { teacher, onChange } = this.props
     if(!teacher) return null
- 
+
     return(
       <CardBody>
-        
+        <GridContainer>
+          <GridItem xs={12} sm={12} md={12}>
+            <CustomSwitch
+              label="Active"
+              id="active"
+              name="active"
+              formControlProps={{ fullWidth: true }}
+              onChange={onChange}
+              checked={teacher.active}
+            />
+          </GridItem>
+        </GridContainer>
         <GridContainer>
           <GridItem xs={12} sm={12} md={6}>
             <CustomInput
@@ -58,25 +67,11 @@ export default class TeacherForm extends React.Component {
               }}
             />
           </GridItem>
-          
-          <GridItem xs={12} sm={12} md={6}>
-            <CustomSelect
-              labelText='Status'
-              id='status'
-              formControlProps={{ fullWidth: true }}
-              values={ _status }
-              onChange={onChange}
-              inputProps={{
-                name: 'status',
-                value: teacher.status
-              }}
-            />
-          </GridItem>
         </GridContainer>
-      
+
 
         <GridContainer>
-          <GridItem xs={12} sm={12} md={6}>
+          <GridItem xs={12} sm={12} md={12}>
             <CustomInput
               labelText='Calendar ID'
               id='calendar_id'
@@ -89,10 +84,8 @@ export default class TeacherForm extends React.Component {
             />
           </GridItem>
         </GridContainer>
-      
+
       </CardBody>
     )
   }
 }
-
-

@@ -15,14 +15,14 @@ import avatar from "assets/img/faces/marc.jpg";
 
 const styles = {};
 
-class TeacherShow extends React.Component {  
+class TeacherShow extends React.Component {
   constructor(props) {
     super(props)
 
     this.state = this.props.location.state || { teacher: null }
 
     API.configure(props.token)
-  
+
     if(!this.state.teacher){
       const id = this.props.location.pathname.split("/")[2]
       API.get('teachers', id,
@@ -44,7 +44,7 @@ class TeacherShow extends React.Component {
   render() {
     const { teacher } = this.state
     if(!teacher) return null
-    
+
     return (
       <GridContainer>
         <GridItem xs={12} sm={12} md={6}>

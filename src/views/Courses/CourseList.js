@@ -41,7 +41,7 @@ class CourseList extends React.Component {
   constructor(props) {
     super(props)
     this.state = { courses: [], all: [] }
-    
+
     API.configure(props.token)
     API.all(
       'courses',
@@ -55,34 +55,34 @@ class CourseList extends React.Component {
       }.bind(this)
     )
   }
-  
+
   search(event){
     const lookup = event.target.value.trim().toLowerCase();
     var list = this.state.all
     if(lookup !== ''){
       list = list.filter(function(item){
         return (
-          item.name.toLowerCase().includes(lookup) || 
+          item.name.toLowerCase().includes(lookup) ||
 					item.level.name.toLowerCase().includes(lookup)
         )
       }) || []
     }
-    
+
     this.setState({ ...this.state, courses: list })
   }
-  
+
   new(){
     this.props.history.push('/courses/new');
   }
-  
+
   show(course){
     this.props.history.push('/courses/' + course.id, { course });
   }
-  
+
   edit(course){
     this.props.history.push('/courses/' + course.id + '/edit', { course });
   }
-  
+
   delete(course){
     const self = this
     API.delete(
@@ -114,7 +114,7 @@ class CourseList extends React.Component {
                 <div style={{ float: "left" }}>
                   <h4 className={classes.cardTitleWhite}>Groups</h4>
                 </div>
-                
+
                 <div style={{ float: "right" }}>
                   <CustomInput
                     labelText="Search"
@@ -129,14 +129,12 @@ class CourseList extends React.Component {
                 </Button>
                 <Table
                   tableHeaderColor="primary"
-                  tableHead={['Name', 'Classroom Link', 'Meet Link', 'Event Id', 'Max Students', 'Level', 'Teacher', 'Actions']}
+                  tableHead={['Name', 'Classroom Link', 'Max Students', 'Level', 'Teacher', 'Actions']}
                   tableData={
                     groups.map(course => {
                       return [
                         course.name,
   											course.classroom_link,
-  											course.meet_link,
-  											course.event_id,
   											course.max_students,
   											course.level.name,
   											course.teacher.first_name + ' ' + course.teacher.last_name,
@@ -164,7 +162,7 @@ class CourseList extends React.Component {
             </Card>
           </GridItem>
         </GridContainer>
-        
+
         <GridContainer>
           <GridItem xs={12} sm={12} md={12}>
             <Card>
@@ -172,7 +170,7 @@ class CourseList extends React.Component {
                 <div style={{ float: "left" }}>
                   <h4 className={classes.cardTitleWhite}>Individuals</h4>
                 </div>
-                
+
                 <div style={{ float: "right" }}>
                   <CustomInput
                     labelText="Search"
@@ -187,14 +185,12 @@ class CourseList extends React.Component {
                 </Button>
                 <Table
                   tableHeaderColor="primary"
-                  tableHead={['Name', 'Classroom Link', 'Meet Link', 'Event Id', 'Level', 'Teacher', 'Actions']}
+                  tableHead={['Name', 'Classroom Link', 'Level', 'Teacher', 'Actions']}
                   tableData={
                     individuals.map(course => {
                       return [
                         course.name,
   											course.classroom_link,
-  											course.meet_link,
-  											course.event_id,
   											course.level.name,
   											course.teacher.first_name + ' ' + course.teacher.last_name,
                         <div>
