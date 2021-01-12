@@ -24,7 +24,7 @@ export default function DatePicker(props) {
         fullWidth
         disableToolbar
         variant="inline"
-        format="MM/dd/yyyy"
+        format="yyyy/MM/dd"
         margin="normal"
         id={props.id}
         label={props.labelText}

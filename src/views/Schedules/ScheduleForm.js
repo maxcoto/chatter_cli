@@ -20,23 +20,23 @@ export default class ScheduleForm extends React.Component {
 
   onChange(event){
     const { schedule } = this.props
-    var [schedule_date, schedule_time] = schedule.recurrent_at.split("T")
+    const datetime = new Date(schedule.recurrent_at)
     var { name, value } = event.target
 
     if(name === "schedule_date" || name === "schedule_time"){
       const date = new Date(value)
       window.test = date
       if(name === "schedule_date"){
-        const year = date.getFullYear() + "-"
-        const month = date.getMonth() + 1 + "-"
-        const day = date.getDate()
-        schedule_date = year + month + day
+        datetime.setFullYear(date.getFullYear())
+        datetime.setMonth(date.getMonth())
+        datetime.setDate(date.getDate())
       }
       if(name === "schedule_time"){
-        schedule_time = value.split("T")[1]
+        datetime.setHours(date.getHours())
+        datetime.setMinutes(date.getMinutes())
       }
       name = "recurrent_at"
-      value = schedule_date + "T" + schedule_time
+      value = datetime.toString()
     }
 
     console.log(name, value);
