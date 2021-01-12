@@ -70,7 +70,7 @@ class StudentList extends React.Component {
   constructor(props) {
     super(props)
     this.state = { students: [], all: [] }
-    
+
     API.configure(props.token)
     API.all(
       'students',
@@ -84,35 +84,35 @@ class StudentList extends React.Component {
       }.bind(this)
     )
   }
-  
+
   search(event){
     const lookup = event.target.value.trim().toLowerCase();
     var list = this.state.all
     if(lookup !== ''){
       list = list.filter(function(item){
         return (
-          item.first_name.toLowerCase().includes(lookup) || 
+          item.first_name.toLowerCase().includes(lookup) ||
           item.last_name.toLowerCase().includes(lookup) ||
           item.email.toLowerCase().includes(lookup)
         )
       }) || []
     }
-    
+
     this.setState({ ...this.state, students: list })
   }
-  
+
   new(){
     this.props.history.push('/students/new');
   }
-  
+
   show(student){
     this.props.history.push('/students/' + student.id, { student });
   }
-  
+
   edit(student){
     this.props.history.push('/students/' + student.id + '/edit', { student });
   }
-  
+
   delete(student){
     const self = this
     API.delete(
@@ -132,9 +132,12 @@ class StudentList extends React.Component {
     const { classes } = this.props
     const { students } = this.state
 
+    const potentials = students.filter(function(s) { return s.active === false })
+    const active = students.filter(function(s) { return s.active === true })
+
     return (
       <React.Fragment>
-        
+
         <GridContainer>
           <GridItem xs={12} sm={6} md={3}>
             <Card>
@@ -211,16 +214,16 @@ class StudentList extends React.Component {
             </Card>
           </GridItem>
         </GridContainer>
-        
+
         <GridContainer>
           <GridItem xs={12} sm={12} md={12}>
             <Card>
               <CardHeader color="primary">
                 <div style={{ float: "left" }}>
-                  <h4 className={classes.cardTitleWhite}>Students</h4>
+                  <h4 className={classes.cardTitleWhite}>Potentials</h4>
                   <p className={classes.cardCategoryWhite}>All</p>
                 </div>
-                
+
                 <div style={{ float: "right" }}>
                   <CustomInput
                     labelText="Search"
@@ -235,16 +238,70 @@ class StudentList extends React.Component {
                 </Button>
                 <Table
                   tableHeaderColor="primary"
-                  tableHead={["Name", "Email", "Phone", "Level", "Status", "Active", "Actions"]}
+                  tableHead={["Name", "Email", "Phone", "Level", "Status", "Actions"]}
                   tableData={
-                    students.map(student => {
+                    potentials.map(student => {
                       return [
                         student.first_name + " " + student.last_name,
                         student.email,
                         student.phone,
                         student.level.name,
                         student.status,
-                        student.active.toString(),
+                        <div>
+                          <Button color="info" aria-label="show" justIcon round
+                                  onClick={ this.show.bind(this, student)} >
+                            <ShowIcon />
+                          </Button>
+                          &nbsp;&nbsp;
+                          <Button color="primary" aria-label="edit" justIcon round
+                                  onClick={ this.edit.bind(this, student)} >
+                            <EditIcon />
+                          </Button>
+                          &nbsp;&nbsp;
+                          <Button color="danger" aria-label="delete" justIcon round
+                                  onClick={ this.delete.bind(this, student)} >
+                            <DeleteIcon />
+                          </Button>
+                        </div>
+                      ]}
+                    )
+                  }
+                />
+              </CardBody>
+            </Card>
+          </GridItem>
+        </GridContainer>
+        <GridContainer>
+          <GridItem xs={12} sm={12} md={12}>
+            <Card>
+              <CardHeader color="primary">
+                <div style={{ float: "left" }}>
+                  <h4 className={classes.cardTitleWhite}>Students</h4>
+                  <p className={classes.cardCategoryWhite}>All</p>
+                </div>
+
+                <div style={{ float: "right" }}>
+                  <CustomInput
+                    labelText="Search"
+                    inputProps={{ onChange: this.search.bind(this) }}
+                    formControlProps={{ style: { margin: 0 }, fullWidth: true }}
+                  />
+                </div>
+              </CardHeader>
+              <CardBody>
+                <Button color="warning" aria-label="add" justIcon round onClick={ this.new.bind(this)} >
+                  <AddIcon />
+                </Button>
+                <Table
+                  tableHeaderColor="primary"
+                  tableHead={["Name", "Email", "Phone", "Level", "Actions"]}
+                  tableData={
+                    active.map(student => {
+                      return [
+                        student.first_name + " " + student.last_name,
+                        student.email,
+                        student.phone,
+                        student.level.name,
                         <div>
                           <Button color="info" aria-label="show" justIcon round
                                   onClick={ this.show.bind(this, student)} >

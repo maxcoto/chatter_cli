@@ -11,7 +11,6 @@ export default function TimePicker(props) {
   const handleTimeChange = (time) => {
     setSelectedTime(time);
     props.onChange({ target: { name: props.name, value: time.toString() } })
-    console.log("time picker:", time);
   };
 
   const value = props.disabled ? new Date(props.inputProps.value) : selectedTime

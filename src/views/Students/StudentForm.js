@@ -4,6 +4,7 @@ import React from 'react'
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
+import CustomSwitch from "components/CustomSwitch/CustomSwitch.js";
 import CustomSelect from "components/CustomSelect/CustomSelect.js";
 import CardBody from "components/Card/CardBody.js";
 
@@ -11,20 +12,32 @@ import { _statuses, _lead_sources, _contact_methods } from 'variables/general'
 
 
 export default class StudentForm extends React.Component {
-  
+
   //[++]
   // what happens if there is something diff than name to be displayed ?
   toSelect(list){
     return list.map(function(item){ return { id: item.id, name: item.name } })
   }
-  
+
   render() {
     const { student, onChange, levels } = this.props
     //[++]
     if(!student) return null
- 
+
     return(
       <CardBody>
+        <GridContainer>
+          <GridItem xs={12} sm={12} md={12}>
+            <CustomSwitch
+              label="Active"
+              id="active"
+              name="active"
+              formControlProps={{ fullWidth: true }}
+              onChange={onChange}
+              checked={student.active}
+            />
+          </GridItem>
+        </GridContainer>
         <GridContainer>
           <GridItem xs={12} sm={12} md={6}>
             <CustomInput
@@ -109,7 +122,7 @@ export default class StudentForm extends React.Component {
           <GridItem xs={12} sm={12} md={6}>
             <CustomSelect
               labelText="Level"
-              id="level"
+              id="level_id"
               formControlProps={{ fullWidth: true }}
               values={ this.toSelect(levels) }
               onChange={onChange}
@@ -133,6 +146,7 @@ export default class StudentForm extends React.Component {
             />
           </GridItem>
         </GridContainer>
+
         <GridContainer>
           <GridItem xs={12} sm={12} md={12}>
             <CustomInput
@@ -169,5 +183,3 @@ export default class StudentForm extends React.Component {
     )
   }
 }
-
-

@@ -89,7 +89,8 @@ const defaultStudent = {
   notes: "",
   level_id: 0,
   level: {},
-  status: ""
+  status: "",
+  active: false
 }
 
 // default teacher export

@@ -39,7 +39,7 @@ class EditStudent extends React.Component {
     this.state = this.props.location.state || { student: null }
 
     API.configure(props.token)
-  
+
     if(!this.state.student){
       const id = this.props.location.pathname.split("/")[2]
       API.get('students', id,
@@ -58,18 +58,19 @@ class EditStudent extends React.Component {
     this.props.history.push('/students/' + id, this.state);
     this.props.notifySuccess("Updated successfully")
   }
-  
+
   onFailure(error){
     console.log(error);
     this.props.notifyError(error)
   }
-  
+
   onClick(){
     API.update('students', this.state.student.id, { student: this.state.student }, this.onSuccess, this.onFailure)
   }
-  
+
   onChange(event){
     const { name, value } = event.target
+    console.log(name, value);
     this.setState({ student: {...this.state.student, [name]: value } });
   }
 
@@ -77,7 +78,7 @@ class EditStudent extends React.Component {
     const { classes, levels, courses, ...rest } = this.props
     const { student } = this.state
     if(!student) return null
- 
+
     return(
       <GridContainer>
         <GridItem xs={12} sm={12} md={6}>
@@ -97,18 +98,16 @@ class EditStudent extends React.Component {
             </CardFooter>
           </Card>
         </GridItem>
-        
+
         <SubscriptionEdit
           student={student}
           courses={courses}
           {...rest}
         />
-        
+
       </GridContainer>
     )
   }
 }
 
 export default withStyles(styles, { withTheme: true })(EditStudent);
-
-

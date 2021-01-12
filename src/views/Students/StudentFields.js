@@ -4,7 +4,7 @@ import { withStyles } from "@material-ui/core/styles";
 
 const styles = {};
 
-class StudentFields extends React.Component {  
+class StudentFields extends React.Component {
   render() {
     const { classes, student } = this.props
     if(!student) return null
@@ -19,10 +19,11 @@ class StudentFields extends React.Component {
         <h4 className={classes.cardTitle}>Lead Source: {student.lead_source}</h4>
         <h4 className={classes.cardTitle}>Level: {student.level.name}</h4>
         <h4 className={classes.cardTitle}>Status: {student.status}</h4>
+        <h4 className={classes.cardTitle}>Active: {student.active}</h4>
         <p className={classes.description}>Objectives: {student.objectives}</p>
         <p className={classes.description}>Notes: {student.notes}</p>
       </React.Fragment>
-      
+
     )
   }
 }
