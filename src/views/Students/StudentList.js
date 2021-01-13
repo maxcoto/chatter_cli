@@ -239,13 +239,12 @@ class StudentList extends React.Component {
                 </Button>
                 <Table
                   tableHeaderColor="primary"
-                  tableHead={["Name", "Email", "Phone", "Level", "Status", "Actions"]}
+                  tableHead={["Name", "Email", "Level", "Status", "Actions"]}
                   tableData={
                     potentials.map(student => {
                       return [
                         student.first_name + " " + student.last_name,
                         student.email,
-                        student.phone,
                         student.level.name,
                         student.status,
                         <div>
@@ -295,14 +294,14 @@ class StudentList extends React.Component {
                 </Button>
                 <Table
                   tableHeaderColor="primary"
-                  tableHead={["Name", "Email", "Phone", "Level", "Actions"]}
+                  tableHead={["Name", "Email", "Level", "Status", "Actions"]}
                   tableData={
                     active.map(student => {
                       return [
                         student.first_name + " " + student.last_name,
                         student.email,
-                        student.phone,
                         student.level.name,
+                        student.status,
                         <div>
                           <Button color="info" aria-label="show" justIcon round
                                   onClick={ this.show.bind(this, student)} >

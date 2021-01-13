@@ -23,7 +23,7 @@ export default class CourseForm extends React.Component {
     return(
       <CardBody>
         <GridContainer>
-          <GridItem xs={12} sm={12} md={6}>
+          <GridItem xs={12} sm={12} md={12}>
             <CustomInput
               labelText='Name'
               id='name'
@@ -35,9 +35,12 @@ export default class CourseForm extends React.Component {
               }}
             />
           </GridItem>
+        </GridContainer>
+
+        <GridContainer>
           <GridItem xs={12} sm={12} md={6}>
             <CustomInput
-              labelText='Max Students'
+              labelText='Capacity'
               id='max_students'
               formControlProps={{ fullWidth: true }}
               inputProps={{
@@ -45,6 +48,19 @@ export default class CourseForm extends React.Component {
                 name: 'max_students',
                 value: course.max_students,
                 type: 'number'
+              }}
+            />
+          </GridItem>
+          <GridItem xs={12} sm={12} md={6}>
+            <CustomInput
+              labelText='Seats'
+              id='seats'
+              formControlProps={{ fullWidth: true }}
+              inputProps={{
+                name: 'seats',
+                value: course.seats,
+                type: 'number',
+                disabled: true
               }}
             />
           </GridItem>
@@ -64,7 +80,6 @@ export default class CourseForm extends React.Component {
             />
           </GridItem>
         </GridContainer>
-
 
         <GridContainer>
           { levels.length > 0 &&
