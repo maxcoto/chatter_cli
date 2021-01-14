@@ -78,6 +78,17 @@ const _individual_periods = [
   { id: 16, name: "16 Hours" }
 ]
 
+// default stats export
+const defaultStats = {
+  current_active_students: 0,
+  new_students_this_week: 0,
+  dropped_students_this_week: 0,
+  hours_of_class_this_month: 0,
+  teacher_pay_due_this_month: 0
+}
+
+
+// default student export
 const defaultStudent = {
   first_name: "",
   last_name: "",
@@ -161,6 +172,7 @@ module.exports = {
   _kind: toSelect(_kind),
   _group_periods,
   _individual_periods,
+  defaultStats,
   defaultStudent,
   defaultTeacher,
   defaultCourse,

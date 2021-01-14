@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-// routes 
+// routes
 import { Route, Switch, Redirect } from 'react-router'
 import routes from "routes.js";
 
@@ -35,9 +35,9 @@ class Main extends React.Component {
 
     this.resizeFunction = this.resizeFunction.bind(this)
     this.toggleMobile = this.toggleMobile.bind(this)
-    
+
     this.mainPanel = React.createRef();
-    
+
     // preloads --------------------------------------------------------
     API.all('levels',
       function(result){
@@ -47,7 +47,7 @@ class Main extends React.Component {
         this.props.notifyError('Levels could not be loaded')
       }.bind(this)
     )
-    
+
     API.all('teachers',
       function(result){
         this.props.setTeachers(result)
@@ -56,7 +56,7 @@ class Main extends React.Component {
         this.props.notifyError('Teachers could not be loaded')
       }.bind(this)
     )
-    
+
     API.all('courses',
       function(result){
         this.props.setCourses(result)
@@ -65,7 +65,7 @@ class Main extends React.Component {
         this.props.notifyError('Courses could not be loaded')
       }.bind(this)
     )
-    
+
     API.all('students',
       function(result){
         this.props.setStudents(result)
@@ -74,6 +74,18 @@ class Main extends React.Component {
         this.props.notifyError('Students could not be loaded')
       }.bind(this)
     )
+
+    API.all('stats',
+      function(result){
+        this.props.setStats(result)
+        console.log(result)
+      }.bind(this),
+      function(error){
+        console.log(error)
+        this.props.notifyError('Stats could not be loaded')
+      }.bind(this)
+    )
+
     //[++]
     // directly from reducers preloads
   }
@@ -93,7 +105,7 @@ class Main extends React.Component {
     window.addEventListener('resize', this.resizeFunction)
   }
 
-  componentWillUnmount() { 
+  componentWillUnmount() {
     if (navigator.platform.indexOf("Win") > -1) {
       perfectScroll.destroy();
     }
@@ -125,11 +137,11 @@ class Main extends React.Component {
           text={message.text}
           onClose={closeNotify}
         />
-  
+
         <div className={classes.mainPanel} ref={this.mainPanel}>
           <div className={classes.content}>
             <div className={classes.container}>
-              
+
               <Switch>
                 {routes.map((prop, key) => {
                   const Component = prop.component
@@ -141,7 +153,7 @@ class Main extends React.Component {
                 })}
                 <Redirect from="/" to="/dashboard" />
               </Switch>
-              
+
             </div>
           </div>
 

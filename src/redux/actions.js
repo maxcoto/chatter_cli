@@ -9,4 +9,5 @@ export const setLevels = levels => { return { type: 'SET_LEVELS', levels } }
 export const setTeachers = teachers => { return { type: 'SET_TEACHERS', teachers } }
 export const setCourses = courses => { return { type: 'SET_COURSES', courses } }
 export const setStudents = students => { return { type: 'SET_STUDENTS', students } }
+export const setStats = stats => { return { type: 'SET_STATS', stats } }
 //[+add_action+]

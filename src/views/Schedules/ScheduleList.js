@@ -53,7 +53,7 @@ class ScheduleList extends React.Component {
   constructor(props) {
     super(props)
     this.state = { schedules: [], all: [] }
-    
+
     API.configure(props.token)
     API.all(
       'schedules',
@@ -67,7 +67,7 @@ class ScheduleList extends React.Component {
       }.bind(this)
     )
   }
-  
+
   search(event){
     const lookup = event.target.value.trim().toLowerCase();
     var list = this.state.all
@@ -78,22 +78,22 @@ class ScheduleList extends React.Component {
         )
       }) || []
     }
-    
+
     this.setState({ ...this.state, schedules: list })
   }
-  
+
   new(){
     this.props.history.push('/schedules/new');
   }
-  
+
   show(schedule){
     this.props.history.push('/schedules/' + schedule.id, { schedule });
   }
-  
+
   edit(schedule){
     this.props.history.push('/schedules/' + schedule.id + '/edit', { schedule });
   }
-  
+
   delete(schedule){
     const self = this
     API.delete(
@@ -122,7 +122,7 @@ class ScheduleList extends React.Component {
                 <h4 className={classes.cardTitleWhite}>Schedules</h4>
                 <p className={classes.cardCategoryWhite}>All</p>
               </div>
-              
+
               <div style={{ float: "right" }}>
                 <CustomInput
                   labelText="Search"
