@@ -17,21 +17,25 @@ import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Button from "components/CustomButtons/Button.js";
 
-const styles = {
-  cardTitleWhite: {
-    color: "#FFFFFF",
-    marginTop: "0px",
-    minHeight: "auto",
-    fontWeight: "300",
-    fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
-    marginBottom: "3px",
-    textDecoration: "none",
-    "& small": {
-      color: "#777",
-      fontSize: "65%",
-      fontWeight: "400",
-      lineHeight: "1"
-    }
+import CardFooter from "components/Card/CardFooter.js";
+import Icon from "@material-ui/core/Icon";
+import CardIcon from "components/Card/CardIcon.js";
+
+import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
+
+styles["cardTitleWhite"] = {
+  color: "#FFFFFF",
+  marginTop: "0px",
+  minHeight: "auto",
+  fontWeight: "300",
+  fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
+  marginBottom: "3px",
+  textDecoration: "none",
+  "& small": {
+    color: "#777",
+    fontSize: "65%",
+    fontWeight: "400",
+    lineHeight: "1"
   }
 };
 
@@ -103,13 +107,69 @@ class CourseList extends React.Component {
     const { classes } = this.props
     const { courses } = this.state
 
-
-
     const groups = courses.filter(function(c){ return c.max_students > 1 })
     const individuals = courses.filter(function(c){ return c.max_students === 1 })
 
+    const groupCount = groups.reduce(function(count, group){ return count + group.occupants }, 0)
+    const individualCount = individuals.reduce(function(count, individual){ return count + individual.occupants }, 0)
+
+    const totalCount = groupCount + individualCount
+
     return (
       <React.Fragment>
+
+        <GridContainer>
+          <GridItem xs={12} sm={6} md={4}>
+            <Card>
+              <CardHeader color="info" stats icon>
+                <CardIcon color="info">
+                  <Icon>group</Icon>
+                </CardIcon>
+                <p className={classes.cardCategory}>Groups</p>
+                <h3 className={classes.cardTitle}>{groups.length}</h3>
+              </CardHeader>
+              <CardFooter stats>
+                <div className={classes.stats}>
+                  <Icon>group</Icon> Amount
+                </div>
+              </CardFooter>
+            </Card>
+          </GridItem>
+          <GridItem xs={12} sm={6} md={4}>
+            <Card>
+              <CardHeader color="info" stats icon>
+                <CardIcon color="info">
+                  <Icon>person</Icon>
+                </CardIcon>
+                <p className={classes.cardCategory}>Individuals</p>
+                <h3 className={classes.cardTitle}>{individuals.length}</h3>
+              </CardHeader>
+              <CardFooter stats>
+                <div className={classes.stats}>
+                  <Icon>person</Icon> Amount
+                </div>
+              </CardFooter>
+            </Card>
+          </GridItem>
+          <GridItem xs={12} sm={6} md={4}>
+            <Card>
+              <CardHeader color="info" stats icon>
+                <CardIcon color="info">
+                  <Icon>accessibility_new</Icon>
+                </CardIcon>
+                <p className={classes.cardCategory}>Students in Groups vs Individuals</p>
+                <h3 className={classes.cardTitle}>{(groupCount/totalCount)*100}% vs {(individualCount/totalCount)*100}%</h3>
+              </CardHeader>
+              <CardFooter stats>
+                <div className={classes.stats}>
+                  <Icon>person</Icon> Amount
+                </div>
+              </CardFooter>
+            </Card>
+          </GridItem>
+        </GridContainer>
+
+
         <GridContainer>
           <GridItem xs={12} sm={12} md={12}>
             <Card>
@@ -132,13 +192,13 @@ class CourseList extends React.Component {
                 </Button>
                 <Table
                   tableHeaderColor="primary"
-                  tableHead={['Name', 'Level', 'Capacity', 'Seats', 'Teacher', 'Actions']}
+                  tableHead={['Name', 'Level', 'Occupants', 'Seats', 'Teacher', 'Actions']}
                   tableData={
                     groups.map(course => {
                       return [
                         course.name,
                         course.level.name,
-                        course.max_students,
+                        course.occupants,
                         course.seats,
   											course.teacher.first_name + ' ' + course.teacher.last_name,
                         <div>
@@ -188,13 +248,13 @@ class CourseList extends React.Component {
                 </Button>
                 <Table
                   tableHeaderColor="primary"
-                  tableHead={['Name', 'Level', 'Capacity', 'Seats', 'Teacher', 'Actions']}
+                  tableHead={['Name', 'Level', 'Occupants', 'Seats', 'Teacher', 'Actions']}
                   tableData={
                     individuals.map(course => {
                       return [
                         course.name,
   											course.level.name,
-                        course.max_students,
+                        course.occupants,
                         course.seats,
   											course.teacher.first_name + ' ' + course.teacher.last_name,
                         <div>

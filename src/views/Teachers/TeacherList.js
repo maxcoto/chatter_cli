@@ -17,33 +17,39 @@ import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Button from "components/CustomButtons/Button.js";
 
-const styles = {
-  cardCategoryWhite: {
-    "&,& a,& a:hover,& a:focus": {
-      color: "rgba(255,255,255,.62)",
-      margin: "0",
-      fontSize: "14px",
-      marginTop: "0",
-      marginBottom: "0"
-    },
-    "& a,& a:hover,& a:focus": {
-      color: "#FFFFFF"
-    }
+import CardIcon from "components/Card/CardIcon.js";
+import Icon from "@material-ui/core/Icon";
+import CardFooter from "components/Card/CardFooter.js";
+import DateRange from "@material-ui/icons/DateRange";
+
+
+import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
+
+styles["cardCategoryWhite"] = {
+  "&,& a,& a:hover,& a:focus": {
+    color: "rgba(255,255,255,.62)",
+    margin: "0",
+    fontSize: "14px",
+    marginTop: "0",
+    marginBottom: "0"
   },
-  cardTitleWhite: {
-    color: "#FFFFFF",
-    marginTop: "0px",
-    minHeight: "auto",
-    fontWeight: "300",
-    fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
-    marginBottom: "3px",
-    textDecoration: "none",
-    "& small": {
-      color: "#777",
-      fontSize: "65%",
-      fontWeight: "400",
-      lineHeight: "1"
-    }
+  "& a,& a:hover,& a:focus": {
+    color: "#FFFFFF"
+  }
+}
+styles["cardTitleWhite"] = {
+  color: "#FFFFFF",
+  marginTop: "0px",
+  minHeight: "auto",
+  fontWeight: "300",
+  fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
+  marginBottom: "3px",
+  textDecoration: "none",
+  "& small": {
+    color: "#777",
+    fontSize: "65%",
+    fontWeight: "400",
+    lineHeight: "1"
   }
 };
 
@@ -116,8 +122,26 @@ class TeacherList extends React.Component {
     const { classes } = this.props
     const { teachers } = this.state
 
+    const activeTeachersCount = teachers.filter(function(t){ return t.active === true }).length
+
     return (
       <GridContainer>
+        <GridItem xs={12} sm={6} md={4}>
+          <Card>
+            <CardHeader color="primary" stats icon>
+              <CardIcon color="primary">
+                <Icon>school</Icon>
+              </CardIcon>
+              <p className={classes.cardCategory}>Active Teachers</p>
+              <h3 className={classes.cardTitle}>{activeTeachersCount}</h3>
+            </CardHeader>
+            <CardFooter stats>
+              <div className={classes.stats}>
+                <DateRange /> Current
+              </div>
+            </CardFooter>
+          </Card>
+        </GridItem>
         <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardHeader color="primary">
@@ -140,26 +164,32 @@ class TeacherList extends React.Component {
               </Button>
               <Table
                 tableHeaderColor="primary"
-                tableHead={['Name', 'Email', 'Active', 'Actions']}
+                tableHead={['Name', '# Groups', '# Inviduals', 'Total Students', 'Monthly Hours', 'Pay Due', 'Active', 'Actions']}
                 tableData={
                   teachers.map(teacher => {
+                    const courses = this.props.courses.filter(function(c){ return c.teacher_id === teacher.id });
+                    const individualCount = courses.filter(function(c){ return c.max_students === 1 }).length;
+                    const groupCount = courses.length - individualCount;
+                    const totalStudents = courses.reduce(function(count, c) { return (count + c.occupants) }, 0);
+
                     return [
                       teacher.first_name + " " + teacher.last_name,
-											teacher.email,
+                      groupCount,
+                      individualCount,
+                      totalStudents,
+                      "??? hs",
+                      "$ ???",
 											teacher.active.toString(),
                       <div>
-                        <Button color="info" aria-label="show" justIcon round
-                                onClick={ this.show.bind(this, teacher)} >
+                        <Button color="info" aria-label="show" justIcon round onClick={ this.show.bind(this, teacher)} >
                           <ShowIcon />
                         </Button>
                         &nbsp;&nbsp;
-                        <Button color="primary" aria-label="edit" justIcon round
-                                onClick={ this.edit.bind(this, teacher)} >
+                        <Button color="primary" aria-label="edit" justIcon round onClick={ this.edit.bind(this, teacher)} >
                           <EditIcon />
                         </Button>
                         &nbsp;&nbsp;
-                        <Button color="danger" aria-label="delete" justIcon round
-                                onClick={ this.delete.bind(this, teacher)} >
+                        <Button color="danger" aria-label="delete" justIcon round onClick={ this.delete.bind(this, teacher)} >
                           <DeleteIcon />
                         </Button>
                       </div>

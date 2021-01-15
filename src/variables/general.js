@@ -40,8 +40,8 @@ const _lead_sources = [
   "Instagram",
   "Google",
   "MercadoLibre",
-  "Referral (text)",
-  "Other (text)",
+  "Referral",
+  "Other",
 ]
 
 const _statuses = [
@@ -50,9 +50,7 @@ const _statuses = [
   "scheduled trial class",
   "attended trial class",
   "signed up",
-  "not signed up",
-  "active",
-  "inactive",
+  "not signed up"
 ]
 
 const _status = [

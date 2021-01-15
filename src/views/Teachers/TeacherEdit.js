@@ -12,6 +12,7 @@ import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 import TeacherForm from './TeacherForm.js'
 import TeacherFields from './TeacherFields.js'
+import Table from "components/Table/Table.js";
 
 import { withStyles } from "@material-ui/core/styles";
 import avatar from "assets/img/faces/marc.jpg";
@@ -51,7 +52,7 @@ class TeacherEdit extends React.Component {
     this.state = this.props.location.state || { teacher: null }
 
     API.configure(props.token)
-  
+
     if(!this.state.teacher){
       const id = this.props.location.pathname.split("/")[2]
       API.get('teachers', id,
@@ -70,21 +71,21 @@ class TeacherEdit extends React.Component {
     this.props.history.push('/teachers/' + id, this.state);
     this.props.notifySuccess("Teacher updated successfully")
   }
-  
+
   onFailure(error){
     console.log(error);
     this.props.notifyError(error)
   }
-  
+
   onClick(){
     API.update('teachers', this.state.teacher.id, this.state, this.onSuccess, this.onFailure)
   }
-  
+
   onChange(event){
     const { name, value } = event.target
     this.setState({ teacher: {...this.state.teacher, [name]: value } });
   }
-  
+
   show(teacher){
     this.props.history.push('/teachers/' + teacher.id, { teacher });
   }
@@ -93,10 +94,15 @@ class TeacherEdit extends React.Component {
     const { classes } = this.props
     const { teacher } = this.state
     if(!teacher) return null
- 
+
+    const courses = this.props.courses.filter(function(c){ return c.teacher_id === teacher.id });
+
+    const individuals = courses.filter(function(c) { return c.max_students === 1 });
+    const groups      = courses.filter(function(c) { return c.max_students > 1 });
+
     return(
       <GridContainer>
-        <GridItem xs={12} sm={12} md={8}>
+        <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardHeader color="primary">
               <h4 className={classes.cardTitleWhite}>Edit Teacher {teacher.id}</h4>
@@ -110,26 +116,62 @@ class TeacherEdit extends React.Component {
             </CardFooter>
           </Card>
         </GridItem>
-        <GridItem xs={12} sm={12} md={4}>
-          <Card profile>
-            <CardAvatar profile>
-              <a href="#pablo" onClick={e => e.preventDefault()}>
-                <img src={avatar} alt="..." />
-              </a>
-            </CardAvatar>
-            <CardBody profile>
-              <TeacherFields teacher={teacher} />
-              <Button color="primary" onClick={this.show.bind(this, teacher)} >
-                Show
-              </Button>
+
+        <GridItem xs={12} sm={12} md={6}>
+          <Card>
+            <CardHeader color="primary">
+              <h4 className={classes.cardTitleWhite}>Groups</h4>
+            </CardHeader>
+            <CardBody>
+              <Table
+                tableHeaderColor="primary"
+                tableHead={['Name', 'Level', 'Capacity', 'Occupants', 'Seats']}
+                tableData={
+                  groups.map(course => {
+                    return [
+                      course.name,
+                      course.level.name,
+                      course.max_students,
+                      course.occupants,
+                      course.seats
+                    ]}
+                  )
+                }
+              />
             </CardBody>
           </Card>
         </GridItem>
+
+
+        <GridItem xs={12} sm={12} md={6}>
+          <Card>
+            <CardHeader color="primary">
+              <h4 className={classes.cardTitleWhite}>Individuals</h4>
+            </CardHeader>
+            <CardBody>
+              <Table
+                tableHeaderColor="primary"
+                tableHead={['Name', 'Level', 'Capacity', 'Occupants', 'Seats']}
+                tableData={
+                  individuals.map(course => {
+                    return [
+                      course.name,
+                      course.level.name,
+                      course.max_students,
+                      course.occupants,
+                      course.seats
+                    ]}
+                  )
+                }
+              />
+            </CardBody>
+          </Card>
+        </GridItem>
+
+
       </GridContainer>
     )
   }
 }
 
 export default withStyles(styles, { withTheme: true })(TeacherEdit);
-
-

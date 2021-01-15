@@ -265,6 +265,11 @@ class Dashboard extends React.Component {
             </Card>
           </GridItem>
         </GridContainer>
+        <GridContainer>
+          <GridItem xs={12} sm={12} md={12}>
+            <iframe src="https://kanbanflow.com/board/of1J5Yo" style={{ width: "100%", height: "800px" }} />
+          </GridItem>
+        </GridContainer>
       </div>
     )
   }
