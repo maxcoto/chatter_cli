@@ -74,7 +74,8 @@ class HistoryList extends React.Component {
     if(lookup !== ''){
       list = list.filter(function(item){
         return (
-          item.teacher.toLowerCase().includes(lookup)
+          item.teacher.first_name.toLowerCase().includes(lookup) ||
+          item.teacher.last_name.toLowerCase().includes(lookup)
         )
       }) || []
     }
@@ -137,15 +138,15 @@ class HistoryList extends React.Component {
               </Button>
               <Table
                 tableHeaderColor="primary"
-                tableHead={['Teacher', 'Calendar Id', 'Event Id', 'Duration', 'Started At', 'Actions']}
+                tableHead={['Teacher', 'Course', 'Event Id', 'Duration', 'Started At', 'Actions']}
                 tableData={
                   histories.map(history => {
                     return [
-                      history.teacher,
-											history.calendar_id,
+                      history.teacher.first_name + " " + history.teacher.last_name,
+                      history.summary,
 											history.event_id,
 											history.duration,
-											history.started_at,
+											history.created_at,
                       <div>
                         <Button color="info" aria-label="show" justIcon round
                                 onClick={ this.show.bind(this, history)} >
