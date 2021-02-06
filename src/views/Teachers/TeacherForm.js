@@ -85,6 +85,21 @@ export default class TeacherForm extends React.Component {
           </GridItem>
         </GridContainer>
 
+        <GridContainer>
+          <GridItem xs={12} sm={12} md={12}>
+            <CustomInput
+              labelText='Hourly Rate'
+              id='hourly_rate'
+              formControlProps={{ fullWidth: true }}
+              inputProps={{
+                onChange,
+                name: 'hourly_rate',
+                value: teacher.hourly_rate
+              }}
+            />
+          </GridItem>
+        </GridContainer>
+
       </CardBody>
     )
   }

@@ -177,8 +177,8 @@ class TeacherList extends React.Component {
                       groupCount,
                       individualCount,
                       totalStudents,
-                      "??? hs",
-                      "$ ???",
+                      teacher.monthly_hours,
+                      "$ " + (teacher.monthly_hours * teacher.hourly_rate),
 											teacher.active.toString(),
                       <div>
                         <Button color="info" aria-label="show" justIcon round onClick={ this.show.bind(this, teacher)} >
