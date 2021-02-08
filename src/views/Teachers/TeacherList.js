@@ -24,6 +24,7 @@ import DateRange from "@material-ui/icons/DateRange";
 
 
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
+import { defaultStats } from 'variables/general'
 
 styles["cardCategoryWhite"] = {
   "&,& a,& a:hover,& a:focus": {
@@ -121,86 +122,123 @@ class TeacherList extends React.Component {
   render() {
     const { classes } = this.props
     const { teachers } = this.state
+    const stats = this.props.stats || defaultStats;
 
     const activeTeachersCount = teachers.filter(function(t){ return t.active === true }).length
 
     return (
-      <GridContainer>
-        <GridItem xs={12} sm={6} md={4}>
-          <Card>
-            <CardHeader color="primary" stats icon>
-              <CardIcon color="primary">
-                <Icon>school</Icon>
-              </CardIcon>
-              <p className={classes.cardCategory}>Active Teachers</p>
-              <h3 className={classes.cardTitle}>{activeTeachersCount}</h3>
-            </CardHeader>
-            <CardFooter stats>
-              <div className={classes.stats}>
-                <DateRange /> Current
-              </div>
-            </CardFooter>
-          </Card>
-        </GridItem>
-        <GridItem xs={12} sm={12} md={12}>
-          <Card>
-            <CardHeader color="primary">
-              <div style={{ float: "left" }}>
-                <h4 className={classes.cardTitleWhite}>Teachers</h4>
-                <p className={classes.cardCategoryWhite}>All</p>
-              </div>
+      <div>
+        <GridContainer>
+          <GridItem xs={12} sm={6} md={4}>
+            <Card>
+              <CardHeader color="primary" stats icon>
+                <CardIcon color="primary">
+                  <Icon>school</Icon>
+                </CardIcon>
+                <p className={classes.cardCategory}>Active Teachers</p>
+                <h3 className={classes.cardTitle}>{activeTeachersCount}</h3>
+              </CardHeader>
+              <CardFooter stats>
+                <div className={classes.stats}>
+                  <DateRange /> Current
+                </div>
+              </CardFooter>
+            </Card>
+          </GridItem>
+          <GridItem xs={12} sm={6} md={4}>
+            <Card>
+              <CardHeader color="info" stats icon>
+                <CardIcon color="info">
+                  <Icon>schedule</Icon>
+                </CardIcon>
+                <p className={classes.cardCategory}>Hours of Class</p>
+                <h3 className={classes.cardTitle}>{stats.hours_of_class_this_month}</h3>
+              </CardHeader>
+              <CardFooter stats>
+                <div className={classes.stats}>
+                  <DateRange /> This Month
+                </div>
+              </CardFooter>
+            </Card>
+          </GridItem>
+          <GridItem xs={12} sm={6} md={4}>
+            <Card>
+              <CardHeader color="warning" stats icon>
+                <CardIcon color="warning">
+                  <Icon>account_balance</Icon>
+                </CardIcon>
+                <p className={classes.cardCategory}>Teacher Pay Due</p>
+                <h3 className={classes.cardTitle}><small>$</small> {stats.teacher_pay_due_this_month}</h3>
+              </CardHeader>
+              <CardFooter stats>
+                <div className={classes.stats}>
+                  <DateRange /> This Month
+                </div>
+              </CardFooter>
+            </Card>
+          </GridItem>
+        </GridContainer>
+        <GridContainer>
+          <GridItem xs={12} sm={12} md={12}>
+            <Card>
+              <CardHeader color="primary">
+                <div style={{ float: "left" }}>
+                  <h4 className={classes.cardTitleWhite}>Teachers</h4>
+                  <p className={classes.cardCategoryWhite}>All</p>
+                </div>
 
-              <div style={{ float: "right" }}>
-                <CustomInput
-                  labelText="Search"
-                  inputProps={{ onChange: this.search.bind(this) }}
-                  formControlProps={{ style: { margin: 0 }, fullWidth: true }}
+                <div style={{ float: "right" }}>
+                  <CustomInput
+                    labelText="Search"
+                    inputProps={{ onChange: this.search.bind(this) }}
+                    formControlProps={{ style: { margin: 0 }, fullWidth: true }}
+                  />
+                </div>
+              </CardHeader>
+              <CardBody>
+                <Button color="warning" aria-label="add" justIcon round onClick={ this.new.bind(this)} >
+                  <AddIcon />
+                </Button>
+                <Table
+                  tableHeaderColor="primary"
+                  tableHead={['Name', '# Groups', '# Inviduals', 'Total Students', 'Monthly Hours', 'Pay Due', 'Active', 'Actions']}
+                  tableData={
+                    teachers.map(teacher => {
+                      const courses = this.props.courses.filter(function(c){ return c.teacher_id === teacher.id });
+                      const individualCount = courses.filter(function(c){ return c.max_students === 1 }).length;
+                      const groupCount = courses.length - individualCount;
+                      const totalStudents = courses.reduce(function(count, c) { return (count + c.occupants) }, 0);
+
+                      return [
+                        teacher.first_name + " " + teacher.last_name,
+                        groupCount,
+                        individualCount,
+                        totalStudents,
+                        teacher.monthly_hours,
+                        "$ " + (teacher.monthly_hours * teacher.hourly_rate),
+  											teacher.active.toString(),
+                        <div>
+                          <Button color="info" aria-label="show" justIcon round onClick={ this.show.bind(this, teacher)} >
+                            <ShowIcon />
+                          </Button>
+                          &nbsp;&nbsp;
+                          <Button color="primary" aria-label="edit" justIcon round onClick={ this.edit.bind(this, teacher)} >
+                            <EditIcon />
+                          </Button>
+                          &nbsp;&nbsp;
+                          <Button color="danger" aria-label="delete" justIcon round onClick={ this.delete.bind(this, teacher)} >
+                            <DeleteIcon />
+                          </Button>
+                        </div>
+                      ]}
+                    )
+                  }
                 />
-              </div>
-            </CardHeader>
-            <CardBody>
-              <Button color="warning" aria-label="add" justIcon round onClick={ this.new.bind(this)} >
-                <AddIcon />
-              </Button>
-              <Table
-                tableHeaderColor="primary"
-                tableHead={['Name', '# Groups', '# Inviduals', 'Total Students', 'Monthly Hours', 'Pay Due', 'Active', 'Actions']}
-                tableData={
-                  teachers.map(teacher => {
-                    const courses = this.props.courses.filter(function(c){ return c.teacher_id === teacher.id });
-                    const individualCount = courses.filter(function(c){ return c.max_students === 1 }).length;
-                    const groupCount = courses.length - individualCount;
-                    const totalStudents = courses.reduce(function(count, c) { return (count + c.occupants) }, 0);
-
-                    return [
-                      teacher.first_name + " " + teacher.last_name,
-                      groupCount,
-                      individualCount,
-                      totalStudents,
-                      teacher.monthly_hours,
-                      "$ " + (teacher.monthly_hours * teacher.hourly_rate),
-											teacher.active.toString(),
-                      <div>
-                        <Button color="info" aria-label="show" justIcon round onClick={ this.show.bind(this, teacher)} >
-                          <ShowIcon />
-                        </Button>
-                        &nbsp;&nbsp;
-                        <Button color="primary" aria-label="edit" justIcon round onClick={ this.edit.bind(this, teacher)} >
-                          <EditIcon />
-                        </Button>
-                        &nbsp;&nbsp;
-                        <Button color="danger" aria-label="delete" justIcon round onClick={ this.delete.bind(this, teacher)} >
-                          <DeleteIcon />
-                        </Button>
-                      </div>
-                    ]}
-                  )
-                }
-              />
-            </CardBody>
-          </Card>
-        </GridItem>
-      </GridContainer>
+              </CardBody>
+            </Card>
+          </GridItem>
+        </GridContainer>
+      </div>
     );
   }
 }
