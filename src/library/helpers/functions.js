@@ -1,5 +1,7 @@
 
 const scheduleTime = function(datetime){
+  if( !datetime ) return "";
+
   const dt = datetime.split("T")
   const d = dt[0]
   const t = dt[1].split(":")

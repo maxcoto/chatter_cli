@@ -6,7 +6,6 @@ import UserProfile from "views/UserProfile/UserProfile.js";
 // students includes
 import NewStudent  from "views/Students/NewStudent.js";
 import EditStudent from "views/Students/EditStudent.js";
-import ShowStudent from "views/Students/ShowStudent.js";
 import StudentList from "views/Students/StudentList.js";
 
 // teachers imports
@@ -41,39 +40,38 @@ import PriceShow from 'views/Prices/PriceShow.js'
 const routes = [
   { path: "/dashboard", component: DashboardPage, layout: "", name: "Dashboard" },
   { path: "/user",      component: UserProfile,   layout: "", name: "Profile",   bottom: true },
-  
+
   // students routes
   { path: "/students/new",      component: NewStudent,  layout: "", hidden: true },
-  { path: "/students/:id/edit", component: EditStudent, layout: "", hidden: true },
-  { path: "/students/:id",      component: ShowStudent, layout: "", hidden: true },
+  { path: "/students/:id",      component: EditStudent, layout: "", hidden: true },
   { path: "/students",          component: StudentList, layout: "", name: "Students" },
 
-  
+
   // teachers routes
   { path: '/teachers/new',      component: TeacherNew,  layout: '', hidden: true },
   { path: '/teachers/:id/edit', component: TeacherEdit, layout: '', hidden: true },
   { path: '/teachers/:id',      component: TeacherShow, layout: '', hidden: true },
   { path: '/teachers',          component: TeacherList, layout: '', name: 'Teachers' },
-  
+
   // courses routes
   { path: '/courses/new',      component: CourseNew,  layout: '', hidden: true },
   { path: '/courses/:id/edit', component: CourseEdit, layout: '', hidden: true },
   { path: '/courses/:id',      component: CourseShow, layout: '', hidden: true },
   { path: '/courses',          component: CourseList, layout: '', name: 'Courses' },
-  
+
   // levels routes
   { path: '/levels/new',      component: LevelNew,  layout: '', hidden: true },
   { path: '/levels/:id/edit', component: LevelEdit, layout: '', hidden: true },
   { path: '/levels/:id',      component: LevelShow, layout: '', hidden: true },
   { path: '/levels',          component: LevelList, layout: '', hidden: true },
-  
-  
+
+
   // histories routes
   { path: '/histories/new',      component: HistoryNew,  layout: '', hidden: true },
   { path: '/histories/:id/edit', component: HistoryEdit, layout: '', hidden: true },
   { path: '/histories/:id',      component: HistoryShow, layout: '', hidden: true },
   { path: '/histories',          component: HistoryList, layout: '', hidden: true },
-  
+
   // prices routes
   { path: '/prices/new',      component: PriceNew,  layout: '', hidden: true },
   { path: '/prices/:id/edit', component: PriceEdit, layout: '', hidden: true },

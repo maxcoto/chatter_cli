@@ -55,8 +55,8 @@ const _statuses = [
 ]
 
 const _status = [
-  "active",
-  "inactive",
+  { id: true, name: "active" },
+  { id: false, name: "dropped" },
 ]
 
 const _kind = [
@@ -176,9 +176,9 @@ module.exports = {
   server,
   _contact_methods: toSelect(_contact_methods),
   _lead_sources: toSelect(_lead_sources),
-  _status: toSelect(_status),
   _statuses: toSelect(_statuses),
   _kind: toSelect(_kind),
+  _status,
   _group_periods,
   _individual_periods,
   defaultStats,
