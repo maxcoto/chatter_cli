@@ -80,7 +80,9 @@ const _individual_periods = [
 const defaultStats = {
   current_active_students: 0,
   new_students_this_week: 0,
+  new_students_this_month: 0,
   dropped_students_this_week: 0,
+  dropped_students_this_month: 0,
   hours_of_class_this_month: 0,
   teacher_pay_due_this_month: 0,
   overdue_subscriptions: []
