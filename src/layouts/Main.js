@@ -86,6 +86,17 @@ class Main extends React.Component {
       }.bind(this)
     )
 
+    API.all('trials',
+      function(result){
+        this.props.setTrials(result)
+        console.log(result)
+      }.bind(this),
+      function(error){
+        console.log(error)
+        this.props.notifyError('Trials could not be loaded')
+      }.bind(this)
+    )
+
     //[++]
     // directly from reducers preloads
   }

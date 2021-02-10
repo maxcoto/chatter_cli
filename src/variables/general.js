@@ -82,7 +82,8 @@ const defaultStats = {
   new_students_this_week: 0,
   dropped_students_this_week: 0,
   hours_of_class_this_month: 0,
-  teacher_pay_due_this_month: 0
+  teacher_pay_due_this_month: 0,
+  overdue_subscriptions: []
 }
 
 
@@ -157,6 +158,13 @@ const defaultSubscription = {
   price: '',
   hours_left: 0,
 }
+// default trial export
+const defaultTrial = {
+  student_id: 0,
+  course_id: 0,
+  class_date: ''
+}
+
 //[+add_default+]
 
 module.exports = {
@@ -179,5 +187,6 @@ module.exports = {
   defaultPrice,
   defaultSchedule,
   defaultSubscription,
+  defaultTrial,
 //[+export_default+]
 };

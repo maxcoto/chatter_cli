@@ -8,6 +8,7 @@ import teachers from './teachers'
 import courses from './courses'
 import students from './students'
 import stats from './stats'
+import trials from './trials'
 //[+add_import+]
  
 const rootReducer = (history) => combineReducers({
@@ -19,6 +20,7 @@ const rootReducer = (history) => combineReducers({
 	courses,
 	students,
 	stats,
+	trials,
 	//[+add_reducer+]
 })
 export default rootReducer

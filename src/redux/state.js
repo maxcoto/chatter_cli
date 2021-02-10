@@ -10,6 +10,7 @@ const state = {
 	courses: [],
 	students: [],
 	stats: null,
+	trials: [],
 	//[+add_state+]
 }
 

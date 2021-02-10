@@ -10,6 +10,7 @@ import CardHeader from "components/Card/CardHeader.js";
 import CardFooter from "components/Card/CardFooter.js";
 import StudentForm from './StudentForm.js'
 import SubscriptionEdit from '../Subscriptions/SubscriptionEdit.js'
+import TrialEdit from '../Trials/TrialEdit.js'
 
 import { withStyles } from "@material-ui/core/styles";
 
@@ -99,11 +100,21 @@ class EditStudent extends React.Component {
           </Card>
         </GridItem>
 
-        <SubscriptionEdit
-          student={student}
-          courses={courses}
-          {...rest}
-        />
+        { !student.active &&
+          <TrialEdit
+            student={student}
+            courses={courses}
+            {...rest}
+          />
+        }
+
+        { student.active &&
+          <SubscriptionEdit
+            student={student}
+            courses={courses}
+            {...rest}
+          />
+        }
 
       </GridContainer>
     )
