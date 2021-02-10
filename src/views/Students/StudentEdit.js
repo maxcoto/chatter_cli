@@ -15,7 +15,7 @@ import TrialEdit from '../Trials/TrialEdit.js'
 import { withStyles } from "@material-ui/core/styles";
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
 
-class EditStudent extends React.Component {
+class StudentEdit extends React.Component {
 
   constructor(props) {
     super(props)
@@ -110,4 +110,4 @@ class EditStudent extends React.Component {
   }
 }
 
-export default withStyles(styles, { withTheme: true })(EditStudent);
+export default withStyles(styles, { withTheme: true })(StudentEdit);

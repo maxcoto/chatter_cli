@@ -1,12 +1,10 @@
 import React from "react";
-import API from '../../library/API'
+//import API from '../../library/API'
 // core components
 import CustomInput from "components/CustomInput/CustomInput.js";
 
 import AddIcon from "@material-ui/icons/Add";
-import ShowIcon from "@material-ui/icons/Visibility";
 import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
 import Button from "components/CustomButtons/Button.js";
 
 // core components
@@ -77,7 +75,7 @@ class StudentList extends React.Component {
           item.first_name.toLowerCase().includes(lookup) ||
           item.last_name.toLowerCase().includes(lookup) ||
           item.email.toLowerCase().includes(lookup) ||
-          item.status && item.status.toLowerCase().includes(lookup)
+          (item.status && item.status.toLowerCase().includes(lookup))
         )
       }) || []
     }
@@ -271,6 +269,8 @@ export default withStyles(styles, { withTheme: true })(StudentList);
 
 // DELETE FUCTIONALITY
 
+// import ShowIcon from "@material-ui/icons/Visibility";
+// import DeleteIcon from "@material-ui/icons/Delete";
 
 // delete(student){
 //   const self = this

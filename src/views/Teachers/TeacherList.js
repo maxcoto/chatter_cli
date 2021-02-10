@@ -1,5 +1,5 @@
 import React from "react";
-import API from '../../library/API'
+//import API from '../../library/API'
 
 // core components
 import GridItem from "components/Grid/GridItem.js";
@@ -11,16 +11,10 @@ import CardBody from "components/Card/CardBody.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
 
 import AddIcon from "@material-ui/icons/Add";
-import ShowIcon from "@material-ui/icons/Visibility";
 import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
 import Button from "components/CustomButtons/Button.js";
 
-import CardIcon from "components/Card/CardIcon.js";
-import Icon from "@material-ui/core/Icon";
-import CardFooter from "components/Card/CardFooter.js";
-import DateRange from "@material-ui/icons/DateRange";
-
+import CustomSwitch from "components/CustomSwitch/CustomSwitch.js";
 import Stat from "../Stats/Stat.js"
 
 import { withStyles } from "@material-ui/core/styles";
@@ -69,28 +63,16 @@ class TeacherList extends React.Component {
     this.props.history.push('/teachers/new');
   }
 
-  show(teacher){
+  edit(teacher){
     this.props.history.push('/teachers/' + teacher.id, { teacher });
   }
 
-  edit(teacher){
-    this.props.history.push('/teachers/' + teacher.id + '/edit', { teacher });
+  toggle(teacher, event){
+    console.log(teacher);
+    console.log(event);
   }
 
-  delete(teacher){
-    const self = this
-    API.delete(
-      'teachers',
-      teacher.id,
-      function(result){
-        self.props.notifySuccess("Teacher has been deleted succesfully")
-        window.location.reload()
-      },
-      function(error){
-        console.log(error);
-      }
-    )
-  }
+
 
   render() {
     const { classes } = this.props
@@ -166,18 +148,15 @@ class TeacherList extends React.Component {
                         totalStudents,
                         teacher.monthly_hours,
                         "$ " + (teacher.monthly_hours * teacher.hourly_rate),
-  											teacher.active.toString(),
+                        <CustomSwitch
+                          name="active"
+                          checked={teacher.active}
+                          onChange={this.toggle.bind(this, teacher)}
+                          disabled={true}
+                        />,
                         <div>
-                          <Button color="info" aria-label="show" justIcon round onClick={ this.show.bind(this, teacher)} >
-                            <ShowIcon />
-                          </Button>
-                          &nbsp;&nbsp;
                           <Button color="primary" aria-label="edit" justIcon round onClick={ this.edit.bind(this, teacher)} >
                             <EditIcon />
-                          </Button>
-                          &nbsp;&nbsp;
-                          <Button color="danger" aria-label="delete" justIcon round onClick={ this.delete.bind(this, teacher)} >
-                            <DeleteIcon />
                           </Button>
                         </div>
                       ]}
@@ -194,3 +173,28 @@ class TeacherList extends React.Component {
 }
 
 export default withStyles(styles, { withTheme: true })(TeacherList);
+
+
+// DELETE FUNCTIONALITY
+
+// import ShowIcon from "@material-ui/icons/Visibility";
+// import DeleteIcon from "@material-ui/icons/Delete";
+
+// delete(teacher){
+//   const self = this
+//   API.delete(
+//     'teachers',
+//     teacher.id,
+//     function(result){
+//       self.props.notifySuccess("Teacher has been deleted succesfully")
+//       window.location.reload()
+//     },
+//     function(error){
+//       console.log(error);
+//     }
+//   )
+// }
+//
+// <Button color="danger" aria-label="delete" justIcon round onClick={ this.delete.bind(this, teacher)} >
+//   <DeleteIcon />
+// </Button>

@@ -4,15 +4,13 @@ import DashboardPage from "views/Dashboard/Dashboard.js";
 import UserProfile from "views/UserProfile/UserProfile.js";
 
 // students includes
-import NewStudent  from "views/Students/NewStudent.js";
-import EditStudent from "views/Students/EditStudent.js";
+import StudentNew  from "views/Students/StudentNew.js";
+import StudentEdit from "views/Students/StudentEdit.js";
 import StudentList from "views/Students/StudentList.js";
-
 // teachers imports
 import TeacherEdit from 'views/Teachers/TeacherEdit.js'
 import TeacherList from 'views/Teachers/TeacherList.js'
 import TeacherNew from 'views/Teachers/TeacherNew.js'
-import TeacherShow from 'views/Teachers/TeacherShow.js'
 // courses imports
 import CourseEdit from 'views/Courses/CourseEdit.js'
 import CourseList from 'views/Courses/CourseList.js'
@@ -42,15 +40,14 @@ const routes = [
   { path: "/user",      component: UserProfile,   layout: "", name: "Profile",   bottom: true },
 
   // students routes
-  { path: "/students/new",      component: NewStudent,  layout: "", hidden: true },
-  { path: "/students/:id",      component: EditStudent, layout: "", hidden: true },
+  { path: "/students/new",      component: StudentNew,  layout: "", hidden: true },
+  { path: "/students/:id",      component: StudentEdit, layout: "", hidden: true },
   { path: "/students",          component: StudentList, layout: "", name: "Students" },
 
 
   // teachers routes
   { path: '/teachers/new',      component: TeacherNew,  layout: '', hidden: true },
-  { path: '/teachers/:id/edit', component: TeacherEdit, layout: '', hidden: true },
-  { path: '/teachers/:id',      component: TeacherShow, layout: '', hidden: true },
+  { path: '/teachers/:id',      component: TeacherEdit, layout: '', hidden: true },
   { path: '/teachers',          component: TeacherList, layout: '', name: 'Teachers' },
 
   // courses routes

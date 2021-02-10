@@ -15,7 +15,7 @@ import { defaultStudent } from 'variables/general'
 import { withStyles } from "@material-ui/core/styles";
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
 
-class NewStudent extends React.Component {
+class StudentNew extends React.Component {
 
   constructor(props) {
     super(props)
@@ -77,4 +77,4 @@ class NewStudent extends React.Component {
   }
 }
 
-export default withStyles(styles, { withTheme: true })(NewStudent);
+export default withStyles(styles, { withTheme: true })(StudentNew);
