@@ -21,6 +21,7 @@ import Icon from "@material-ui/core/Icon";
 import CardFooter from "components/Card/CardFooter.js";
 import DateRange from "@material-ui/icons/DateRange";
 
+import Stat from "../Stats/Stat.js"
 
 import { withStyles } from "@material-ui/core/styles";
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
@@ -101,54 +102,31 @@ class TeacherList extends React.Component {
     return (
       <div>
         <GridContainer>
-          <GridItem xs={12} sm={6} md={4}>
-            <Card>
-              <CardHeader color="primary" stats icon>
-                <CardIcon color="primary">
-                  <Icon>school</Icon>
-                </CardIcon>
-                <p className={classes.cardCategory}>Active Teachers</p>
-                <h3 className={classes.cardTitle}>{activeTeachersCount}</h3>
-              </CardHeader>
-              <CardFooter stats>
-                <div className={classes.stats}>
-                  <DateRange /> Current
-                </div>
-              </CardFooter>
-            </Card>
-          </GridItem>
-          <GridItem xs={12} sm={6} md={4}>
-            <Card>
-              <CardHeader color="info" stats icon>
-                <CardIcon color="info">
-                  <Icon>schedule</Icon>
-                </CardIcon>
-                <p className={classes.cardCategory}>Hours of Class</p>
-                <h3 className={classes.cardTitle}>{stats.hours_of_class_this_month}</h3>
-              </CardHeader>
-              <CardFooter stats>
-                <div className={classes.stats}>
-                  <DateRange /> This Month
-                </div>
-              </CardFooter>
-            </Card>
-          </GridItem>
-          <GridItem xs={12} sm={6} md={4}>
-            <Card>
-              <CardHeader color="warning" stats icon>
-                <CardIcon color="warning">
-                  <Icon>account_balance</Icon>
-                </CardIcon>
-                <p className={classes.cardCategory}>Teacher Pay Due</p>
-                <h3 className={classes.cardTitle}><small>$</small> {stats.teacher_pay_due_this_month}</h3>
-              </CardHeader>
-              <CardFooter stats>
-                <div className={classes.stats}>
-                  <DateRange /> This Month
-                </div>
-              </CardFooter>
-            </Card>
-          </GridItem>
+          <Stat
+            title={"Active Teachers"}
+            value={activeTeachersCount}
+            icon={"school"}
+            width={4}
+          />
+
+          <Stat
+            title={"Hours of Class"}
+            value={stats.hours_of_class_this_month}
+            range={"This Month"}
+            color={"info"}
+            icon={"schedule"}
+            width={4}
+          />
+
+          <Stat
+            title={"Teacher Pay Due"}
+            value={"$ " + stats.teacher_pay_due_this_month}
+            range={"This Month"}
+            color={"warning"}
+            width={4}
+            icon={"account_balance"}
+          />
+
         </GridContainer>
         <GridContainer>
           <GridItem xs={12} sm={12} md={12}>
