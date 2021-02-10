@@ -7,11 +7,8 @@ import GridContainer from "components/Grid/GridContainer.js";
 import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
-import CardAvatar from "components/Card/CardAvatar.js";
-import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 import LevelForm from './LevelForm.js'
-import LevelFields from './LevelFields.js'
 
 import { defaultLevel } from 'variables/general'
 

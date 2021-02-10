@@ -55,7 +55,7 @@ class TrialEdit extends React.Component {
   }
 
   render() {
-    const { classes, student, courses, teachers } = this.props
+    const { classes, student, courses } = this.props
     const { trial } = this.state
 
     return(

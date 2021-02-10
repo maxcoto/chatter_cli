@@ -12,7 +12,6 @@ import CardIcon from "components/Card/CardIcon.js";
 import CardFooter from "components/Card/CardFooter.js";
 
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
-import { defaultStats } from 'variables/general'
 
 class Stat extends React.Component {
 

@@ -3,12 +3,9 @@ import React from 'react'
 // core components
 import GridItem from "components/Grid/GridItem.js"
 import GridContainer from "components/Grid/GridContainer.js"
-import CustomInput from "components/CustomInput/CustomInput.js"
 import CustomSelect from "components/CustomSelect/CustomSelect.js"
 import CardBody from "components/Card/CardBody.js"
 import DatePicker from "components/DateTime/DatePicker.js"
-
-import { _kind, _group_periods, _individual_periods, } from 'variables/general'
 
 export default class TrialForm extends React.Component {
 
@@ -16,10 +13,8 @@ export default class TrialForm extends React.Component {
     const { trial, onChange, courses, student } = this.props
     if(!trial) return null
 
-    var periods = []
     var filteredCourses = []
 
-    periods = _group_periods;
     filteredCourses = courses.filter(function(c){
       return c.max_students > 1 && c.level_id === student.level_id
     })
