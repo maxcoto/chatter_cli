@@ -17,18 +17,20 @@ import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
 
+import CustomSelect from "components/CustomSelect/CustomSelect.js"
+
 import Stat from "../Stats/Stat.js"
 
 import { withStyles } from "@material-ui/core/styles";
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
-import { defaultStats } from 'variables/general'
+import { defaultStats, _statuses } from 'variables/general'
 import { scheduleTime } from 'library/helpers/functions.js'
 
 class StudentList extends React.Component {
 
   constructor(props) {
     super(props)
-    this.state = { students: [], all: [] }
+    this.state = { students: [], all: [], filters: {} }
   }
 
   componentDidMount(){
@@ -42,6 +44,23 @@ class StudentList extends React.Component {
     if(this.props.students !== this.state.all){
       const { students } = this.props
       this.setState({ students, all: students })
+    }
+  }
+
+  filter(key){
+    return function(event){
+      const value = event.target.value.trim();
+      var list = this.state.all
+      if(value !== ''){
+        list = list.filter(function(item){
+          return item[key] === value
+        }) || []
+      }
+
+      const filters = {}
+      filters[key] = value
+
+      this.setState({ ...this.state, students: list, filters })
     }
   }
 
@@ -150,6 +169,22 @@ class StudentList extends React.Component {
                 <Button color="warning" aria-label="add" justIcon round onClick={ this.new.bind(this)} >
                   <AddIcon />
                 </Button>
+
+                <GridItem xs={12} sm={12} md={3}>
+                  <CustomSelect
+                    labelText='Status'
+                    id='status'
+                    formControlProps={{ fullWidth: true }}
+                    values={ _statuses }
+                    onChange={this.filter("status").bind(this)}
+                    inputProps={{
+                      name: 'status',
+                      value: this.state.filters["status"]
+                    }}
+                  />
+                </GridItem>
+
+
                 <Table
                   tableHeaderColor="primary"
                   tableHead={["Name", "Course", "Level", "Trial Date", "Status", "Notes", "Actions"]}
