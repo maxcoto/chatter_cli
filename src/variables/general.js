@@ -50,6 +50,7 @@ const _statuses = [
   "scheduled trial class",
   "attended trial class",
   "signed up",
+  "no response",
   "not signed up"
 ]
 

@@ -53,7 +53,8 @@ class StudentList extends React.Component {
         return (
           item.first_name.toLowerCase().includes(lookup) ||
           item.last_name.toLowerCase().includes(lookup) ||
-          item.email.toLowerCase().includes(lookup)
+          item.email.toLowerCase().includes(lookup) ||
+          item.status && item.status.toLowerCase().includes(lookup)
         )
       }) || []
     }
