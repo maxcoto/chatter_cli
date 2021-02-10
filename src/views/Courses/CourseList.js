@@ -96,7 +96,8 @@ class CourseList extends React.Component {
     const groupCount = groups.reduce(function(count, group){ return count + group.occupants }, 0)
     const individualCount = individuals.reduce(function(count, individual){ return count + individual.occupants }, 0)
 
-    const totalCount = groupCount + individualCount
+    let totalCount = groupCount + individualCount
+    if(totalCount === 0) totalCount = 1 // border case (when sum is zero)
 
     return (
       <React.Fragment>
