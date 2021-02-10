@@ -9,7 +9,7 @@ import CardBody from "components/Card/CardBody.js";
 
 import { withStyles } from "@material-ui/core/styles";
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
-
+import { scheduleTime } from 'library/helpers/functions.js'
 
 class TrialList extends React.Component {
 
@@ -34,14 +34,9 @@ class TrialList extends React.Component {
               tableHead={["Potential", "Class Date", "Group"]}
               tableData={
                 trials.map(trial => {
-                  const datetime = trial.class_date.split("T")
-                  const date = datetime[0]
-                  const times = datetime[1].split(":")
-                  const hour = times[0]
-                  const minutes = times[1]
                   return [
                     trial.student.first_name + " " + trial.student.last_name,
-                    date + " @ " + hour + ":" + minutes,
+                    scheduleTime(trial.class_date),
                     trial.course.name
                   ]
                 })

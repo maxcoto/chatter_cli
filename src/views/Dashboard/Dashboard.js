@@ -19,6 +19,7 @@ import TrialList from "../Trials/TrialList.js"
 
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
 import { defaultStats } from 'variables/general'
+import { scheduleTime } from 'library/helpers/functions.js'
 
 class Dashboard extends React.Component {
 
@@ -74,14 +75,9 @@ class Dashboard extends React.Component {
                   tableHead={["Student", "Renewal Date", "Price", "Group"]}
                   tableData={
                     stats.overdue_subscriptions.map(subscription => {
-                      const datetime = subscription.renewal_date.split("T")
-                      const date = datetime[0]
-                      const times = datetime[1].split(":")
-                      const hour = times[0]
-                      const minutes = times[1]
                       return [
                         subscription.student.first_name + " " + subscription.student.last_name,
-                        date + " @ " + hour + ":" + minutes,
+                        scheduleTime(subscription.renewal_date),
                         "$ " + subscription.price,
                         subscription.course.name
                       ]

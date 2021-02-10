@@ -22,6 +22,7 @@ import Stat from "../Stats/Stat.js"
 import { withStyles } from "@material-ui/core/styles";
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
 import { defaultStats } from 'variables/general'
+import { scheduleTime } from 'library/helpers/functions.js'
 
 class StudentList extends React.Component {
 
@@ -150,28 +151,20 @@ class StudentList extends React.Component {
                 </Button>
                 <Table
                   tableHeaderColor="primary"
-                  tableHead={["Name", "Email", "Level", "Status", "Actions"]}
+                  tableHead={["Name", "Course", "Level", "Trial Date", "Status", "Notes", "Actions"]}
                   tableData={
                     potentials.map(student => {
                       return [
                         student.first_name + " " + student.last_name,
-                        student.email,
+                        student.trial_course ? student.trial_course.name : "", //.name,
                         student.level.name,
+                        scheduleTime(student.trial.class_date || ""),
                         student.status,
+                        student.notes,
                         <div>
-                          <Button color="info" aria-label="show" justIcon round
-                                  onClick={ this.show.bind(this, student)} >
-                            <ShowIcon />
-                          </Button>
-                          &nbsp;&nbsp;
                           <Button color="primary" aria-label="edit" justIcon round
                                   onClick={ this.edit.bind(this, student)} >
                             <EditIcon />
-                          </Button>
-                          &nbsp;&nbsp;
-                          <Button color="danger" aria-label="delete" justIcon round
-                                  onClick={ this.delete.bind(this, student)} >
-                            <DeleteIcon />
                           </Button>
                         </div>
                       ]}
