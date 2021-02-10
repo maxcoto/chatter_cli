@@ -12,18 +12,7 @@ import CourseForm from './CourseForm.js'
 import ScheduleEdit from "../Schedules/ScheduleEdit.js"
 
 import { withStyles } from "@material-ui/core/styles";
-
-const styles = {
-  cardTitleWhite: {
-    color: "#FFFFFF",
-    marginTop: "0px",
-    minHeight: "auto",
-    fontWeight: "300",
-    fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
-    marginBottom: "3px",
-    textDecoration: "none"
-  }
-};
+import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
 
 class CourseEdit extends React.Component {
 

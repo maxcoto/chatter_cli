@@ -13,22 +13,11 @@ import CardFooter from "components/Card/CardFooter.js";
 import TeacherForm from './TeacherForm.js'
 import TeacherFields from './TeacherFields.js'
 
-import { withStyles } from "@material-ui/core/styles";
 import { defaultTeacher } from 'variables/general'
 import avatar from "assets/img/faces/marc.jpg";
 
-const styles = {
-  cardTitleWhite: {
-    color: "#FFFFFF",
-    marginTop: "0px",
-    minHeight: "auto",
-    fontWeight: "300",
-    fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
-    marginBottom: "3px",
-    textDecoration: "none"
-  }
-};
-
+import { withStyles } from "@material-ui/core/styles";
+import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
 
 class TeacherNew extends React.Component {
 
@@ -51,11 +40,11 @@ class TeacherNew extends React.Component {
     this.props.history.push('/teachers/' + id, { teacher: response} );
     this.props.notifySuccess("Teacher created succesfully")
   }
-  
+
   onFailure(error){
     this.props.notifyError(error)
   }
-  
+
   onClick(){
     API.create('teachers', this.state, this.onSuccess, this.onFailure)
   }
@@ -69,7 +58,7 @@ class TeacherNew extends React.Component {
     const { classes } = this.props
     const { teacher } = this.state
     if(!teacher) return null
- 
+
     return(
       <GridContainer>
         <GridItem xs={12} sm={12} md={8}>
@@ -105,4 +94,3 @@ class TeacherNew extends React.Component {
 }
 
 export default withStyles(styles, { withTheme: true })(TeacherNew);
-

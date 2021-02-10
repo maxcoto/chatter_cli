@@ -1,7 +1,5 @@
 import React from "react";
 import API from '../../library/API'
-// @material-ui/core components
-import { withStyles } from "@material-ui/core/styles";
 // core components
 import CustomInput from "components/CustomInput/CustomInput.js";
 
@@ -32,38 +30,8 @@ import CardIcon from "components/Card/CardIcon.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 
-
+import { withStyles } from "@material-ui/core/styles";
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
-
-styles['cardCategoryWhite'] = {
-  "&,& a,& a:hover,& a:focus": {
-    color: "rgba(255,255,255,.62)",
-    margin: "0",
-    fontSize: "14px",
-    marginTop: "0",
-    marginBottom: "0"
-  },
-  "& a,& a:hover,& a:focus": {
-    color: "#FFFFFF"
-  }
-};
-
-styles['cardTitleWhite'] = {
-  color: "#FFFFFF",
-  marginTop: "0px",
-  minHeight: "auto",
-  fontWeight: "300",
-  fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
-  marginBottom: "3px",
-  textDecoration: "none",
-  "& small": {
-    color: "#777",
-    fontSize: "65%",
-    fontWeight: "400",
-    lineHeight: "1"
-  }
-};
-
 
 class StudentList extends React.Component {
 

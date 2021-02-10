@@ -13,29 +13,10 @@ import CardFooter from "components/Card/CardFooter.js";
 import HistoryForm from './HistoryForm.js'
 import HistoryFields from './HistoryFields.js'
 
-import { withStyles } from "@material-ui/core/styles";
 import avatar from "assets/img/faces/marc.jpg";
 
-
-
-const styles = {
-  cardCategoryWhite: {
-    color: "rgba(255,255,255,.62)",
-    margin: "0",
-    fontSize: "14px",
-    marginTop: "0",
-    marginBottom: "0"
-  },
-  cardTitleWhite: {
-    color: "#FFFFFF",
-    marginTop: "0px",
-    minHeight: "auto",
-    fontWeight: "300",
-    fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
-    marginBottom: "3px",
-    textDecoration: "none"
-  }
-};
+import { withStyles } from "@material-ui/core/styles";
+import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
 
 class HistoryEdit extends React.Component {
 
@@ -51,7 +32,7 @@ class HistoryEdit extends React.Component {
     this.state = this.props.location.state || { history: null }
 
     API.configure(props.token)
-  
+
     if(!this.state.history){
       const id = this.props.location.pathname.split("/")[2]
       API.get('histories', id,
@@ -70,21 +51,21 @@ class HistoryEdit extends React.Component {
     this.props.history.push('/histories/' + id, this.state);
     this.props.notifySuccess("History updated successfully")
   }
-  
+
   onFailure(error){
     console.log(error);
     this.props.notifyError(error)
   }
-  
+
   onClick(){
     API.update('histories', this.state.history.id, this.state, this.onSuccess, this.onFailure)
   }
-  
+
   onChange(event){
     const { name, value } = event.target
     this.setState({ history: {...this.state.history, [name]: value } });
   }
-  
+
   show(history){
     this.props.history.push('/histories/' + history.id, { history });
   }
@@ -93,7 +74,7 @@ class HistoryEdit extends React.Component {
     const { classes, teachers } = this.props
     const { history } = this.state
     if(!history) return null
- 
+
     return(
       <GridContainer>
         <GridItem xs={12} sm={12} md={8}>
@@ -131,5 +112,3 @@ class HistoryEdit extends React.Component {
 }
 
 export default withStyles(styles, { withTheme: true })(HistoryEdit);
-
-

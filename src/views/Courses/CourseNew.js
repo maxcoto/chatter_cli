@@ -11,20 +11,11 @@ import CardFooter from "components/Card/CardFooter.js";
 import CourseForm from './CourseForm.js'
 import ScheduleNew from "../Schedules/ScheduleNew.js"
 
-import { withStyles } from "@material-ui/core/styles";
+
 import { defaultCourse } from 'variables/general'
 
-const styles = {
-  cardTitleWhite: {
-    color: "#FFFFFF",
-    marginTop: "0px",
-    minHeight: "auto",
-    fontWeight: "300",
-    fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
-    marginBottom: "3px",
-    textDecoration: "none"
-  }
-};
+import { withStyles } from "@material-ui/core/styles";
+import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
 
 
 class CourseNew extends React.Component {
@@ -48,11 +39,11 @@ class CourseNew extends React.Component {
     this.props.history.push('/courses/' + id + '/edit', { course: response } );
     this.props.notifySuccess("Course created succesfully")
   }
-  
+
   onFailure(error){
     this.props.notifyError(error)
   }
-  
+
   onClick(){
     API.create('courses', this.state, this.onSuccess, this.onFailure)
   }
@@ -66,7 +57,7 @@ class CourseNew extends React.Component {
     const { classes, levels, teachers } = this.props
     //[++]
     const { course } = this.state
- 
+
     return(
       <GridContainer>
         <GridItem xs={12} sm={12} md={6}>
@@ -89,13 +80,12 @@ class CourseNew extends React.Component {
             </CardFooter>
           </Card>
         </GridItem>
-        
+
         <ScheduleNew course={course} onChange={this.onChange} />
-        
+
       </GridContainer>
     )
   }
 }
 
 export default withStyles(styles, { withTheme: true })(CourseNew);
-

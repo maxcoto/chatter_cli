@@ -10,20 +10,10 @@ import ScheduleForm from './ScheduleForm.js'
 // icons
 import AddIcon from "@material-ui/icons/Add";
 
-import { withStyles } from "@material-ui/core/styles";
 import { defaultSchedule } from 'variables/general'
 
-const styles = {
-  cardTitleWhite: {
-    color: "#FFFFFF",
-    marginTop: "0px",
-    minHeight: "auto",
-    fontWeight: "300",
-    fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
-    marginBottom: "3px",
-    textDecoration: "none"
-  }
-};
+import { withStyles } from "@material-ui/core/styles";
+import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
 
 class ScheduleNew extends React.Component {
   constructor(props) {
@@ -84,4 +74,3 @@ class ScheduleNew extends React.Component {
 }
 
 export default withStyles(styles, { withTheme: true })(ScheduleNew);
-

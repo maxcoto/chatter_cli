@@ -47,7 +47,17 @@ const dashboardStyle = {
     margin: "0",
     fontSize: "14px",
     marginTop: "0",
-    marginBottom: "0"
+    marginBottom: "0",
+    "&,& a,& a:hover,& a:focus": {
+      color: "rgba(255,255,255,.62)",
+      margin: "0",
+      fontSize: "14px",
+      marginTop: "0",
+      marginBottom: "0"
+    },
+    "& a,& a:hover,& a:focus": {
+      color: "#FFFFFF"
+    }
   },
   cardTitle: {
     color: grayColor[2],
@@ -64,7 +74,7 @@ const dashboardStyle = {
     }
   },
   cardTitleWhite: {
-    color: whiteColor,
+    color: "#FFFFFF",
     marginTop: "0px",
     minHeight: "auto",
     fontWeight: "300",
@@ -72,7 +82,8 @@ const dashboardStyle = {
     marginBottom: "3px",
     textDecoration: "none",
     "& small": {
-      color: grayColor[1],
+      color: "#777",
+      fontSize: "65%",
       fontWeight: "400",
       lineHeight: "1"
     }

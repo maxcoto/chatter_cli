@@ -9,28 +9,11 @@ import CardHeader from "components/Card/CardHeader.js";
 import CardFooter from "components/Card/CardFooter.js";
 import SubscriptionForm from './SubscriptionForm.js'
 
-import { withStyles } from "@material-ui/core/styles";
 
 import { defaultSubscription } from 'variables/general'
 
-const styles = {
-  cardCategoryWhite: {
-    color: "rgba(255,255,255,.62)",
-    margin: "0",
-    fontSize: "14px",
-    marginTop: "0",
-    marginBottom: "0"
-  },
-  cardTitleWhite: {
-    color: "#FFFFFF",
-    marginTop: "0px",
-    minHeight: "auto",
-    fontWeight: "300",
-    fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
-    marginBottom: "3px",
-    textDecoration: "none"
-  }
-};
+import { withStyles } from "@material-ui/core/styles";
+import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
 
 class SubscriptionEdit extends React.Component {
 
@@ -52,21 +35,21 @@ class SubscriptionEdit extends React.Component {
     this.setState({ subscription: response });
     this.props.notifySuccess("Subscription saved successfully")
   }
-  
+
   onFailure(error){
     console.log(error);
     this.props.notifyError(error)
   }
-  
+
   onClick(){
     if(this.state.subscription.id){
-      API.update('subscriptions', this.state.subscription.id, this.state, this.onSuccess, this.onFailure)  
+      API.update('subscriptions', this.state.subscription.id, this.state, this.onSuccess, this.onFailure)
     } else {
       API.create('subscriptions', this.state, this.onSuccess, this.onFailure)
     }
-    
+
   }
-  
+
   onChange(event){
     const { name, value } = event.target
     this.setState({ subscription: {...this.state.subscription, [name]: value } });
@@ -76,7 +59,7 @@ class SubscriptionEdit extends React.Component {
     const { classes, student, courses, teachers } = this.props
     const { subscription } = this.state
     //if(!subscription) return null
- 
+
     return(
       <GridItem xs={12} sm={12} md={6}>
         <Card>
@@ -102,5 +85,3 @@ class SubscriptionEdit extends React.Component {
 }
 
 export default withStyles(styles, { withTheme: true })(SubscriptionEdit);
-
-

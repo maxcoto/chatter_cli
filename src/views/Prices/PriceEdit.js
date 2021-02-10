@@ -13,29 +13,10 @@ import CardFooter from "components/Card/CardFooter.js";
 import PriceForm from './PriceForm.js'
 import PriceFields from './PriceFields.js'
 
-import { withStyles } from "@material-ui/core/styles";
 import avatar from "assets/img/faces/marc.jpg";
 
-
-
-const styles = {
-  cardCategoryWhite: {
-    color: "rgba(255,255,255,.62)",
-    margin: "0",
-    fontSize: "14px",
-    marginTop: "0",
-    marginBottom: "0"
-  },
-  cardTitleWhite: {
-    color: "#FFFFFF",
-    marginTop: "0px",
-    minHeight: "auto",
-    fontWeight: "300",
-    fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
-    marginBottom: "3px",
-    textDecoration: "none"
-  }
-};
+import { withStyles } from "@material-ui/core/styles";
+import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
 
 class PriceEdit extends React.Component {
 
@@ -51,7 +32,7 @@ class PriceEdit extends React.Component {
     this.state = this.props.location.state || { price: null }
 
     API.configure(props.token)
-  
+
     if(!this.state.price){
       const id = this.props.location.pathname.split("/")[2]
       API.get('prices', id,
@@ -70,21 +51,21 @@ class PriceEdit extends React.Component {
     this.props.history.push('/prices/' + id, this.state);
     this.props.notifySuccess("Price updated successfully")
   }
-  
+
   onFailure(error){
     console.log(error);
     this.props.notifyError(error)
   }
-  
+
   onClick(){
     API.update('prices', this.state.price.id, this.state, this.onSuccess, this.onFailure)
   }
-  
+
   onChange(event){
     const { name, value } = event.target
     this.setState({ price: {...this.state.price, [name]: value } });
   }
-  
+
   show(price){
     this.props.history.push('/prices/' + price.id, { price });
   }
@@ -93,7 +74,7 @@ class PriceEdit extends React.Component {
     const { classes, levels } = this.props
     const { price } = this.state
     if(!price) return null
- 
+
     return(
       <GridContainer>
         <GridItem xs={12} sm={12} md={8}>
@@ -131,5 +112,3 @@ class PriceEdit extends React.Component {
 }
 
 export default withStyles(styles, { withTheme: true })(PriceEdit);
-
-

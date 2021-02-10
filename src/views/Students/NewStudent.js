@@ -13,22 +13,10 @@ import CardFooter from "components/Card/CardFooter.js";
 import StudentForm from './StudentForm.js'
 import StudentFields from './StudentFields.js'
 
-import { withStyles } from "@material-ui/core/styles";
 import { defaultStudent } from 'variables/general'
-import avatar from "assets/img/faces/marc.jpg";
 
-const styles = {
-  cardTitleWhite: {
-    color: "#FFFFFF",
-    marginTop: "0px",
-    minHeight: "auto",
-    fontWeight: "300",
-    fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
-    marginBottom: "3px",
-    textDecoration: "none"
-  }
-};
-
+import { withStyles } from "@material-ui/core/styles";
+import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
 
 class NewStudent extends React.Component {
 
@@ -51,11 +39,11 @@ class NewStudent extends React.Component {
     this.props.history.push('/students/' + id, { student: response} );
     this.props.notifySuccess("Student created succesfully")
   }
-  
+
   onFailure(error){
     this.props.notifyError(error)
   }
-  
+
   onClick(){
     API.create('students', this.state, this.onSuccess, this.onFailure)
   }
@@ -69,7 +57,7 @@ class NewStudent extends React.Component {
     const { classes, levels } = this.props
     const { student } = this.state
     if(!student) return null
- 
+
     return(
       <GridContainer>
         <GridItem xs={12} sm={12} md={8}>
@@ -87,22 +75,9 @@ class NewStudent extends React.Component {
             </CardFooter>
           </Card>
         </GridItem>
-        <GridItem xs={12} sm={12} md={4}>
-          <Card profile>
-            <CardAvatar profile>
-              <a href="#pablo" onClick={e => e.preventDefault()}>
-                <img src={avatar} alt="..." />
-              </a>
-            </CardAvatar>
-            <CardBody profile>
-              <StudentFields student={student} />
-            </CardBody>
-          </Card>
-        </GridItem>
       </GridContainer>
     )
   }
 }
 
 export default withStyles(styles, { withTheme: true })(NewStudent);
-

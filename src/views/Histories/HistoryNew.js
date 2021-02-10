@@ -13,21 +13,11 @@ import CardFooter from "components/Card/CardFooter.js";
 import HistoryForm from './HistoryForm.js'
 import HistoryFields from './HistoryFields.js'
 
-import { withStyles } from "@material-ui/core/styles";
 import { defaultHistory } from 'variables/general'
 import avatar from "assets/img/faces/marc.jpg";
 
-const styles = {
-  cardTitleWhite: {
-    color: "#FFFFFF",
-    marginTop: "0px",
-    minHeight: "auto",
-    fontWeight: "300",
-    fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
-    marginBottom: "3px",
-    textDecoration: "none"
-  }
-};
+import { withStyles } from "@material-ui/core/styles";
+import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
 
 
 class HistoryNew extends React.Component {
@@ -51,11 +41,11 @@ class HistoryNew extends React.Component {
     this.props.history.push('/histories/' + id, { history: response} );
     this.props.notifySuccess("History created succesfully")
   }
-  
+
   onFailure(error){
     this.props.notifyError(error)
   }
-  
+
   onClick(){
     API.create('histories', this.state, this.onSuccess, this.onFailure)
   }
@@ -69,7 +59,7 @@ class HistoryNew extends React.Component {
     const { classes, teachers } = this.props
     const { history } = this.state
     if(!history) return null
- 
+
     return(
       <GridContainer>
         <GridItem xs={12} sm={12} md={8}>
@@ -105,4 +95,3 @@ class HistoryNew extends React.Component {
 }
 
 export default withStyles(styles, { withTheme: true })(HistoryNew);
-

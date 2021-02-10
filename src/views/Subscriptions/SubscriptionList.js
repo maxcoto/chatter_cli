@@ -1,7 +1,6 @@
 import React from "react";
 import API from '../../library/API'
-// @material-ui/core components
-import { withStyles } from "@material-ui/core/styles";
+
 // core components
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
@@ -17,43 +16,15 @@ import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Button from "components/CustomButtons/Button.js";
 
-const styles = {
-  cardCategoryWhite: {
-    "&,& a,& a:hover,& a:focus": {
-      color: "rgba(255,255,255,.62)",
-      margin: "0",
-      fontSize: "14px",
-      marginTop: "0",
-      marginBottom: "0"
-    },
-    "& a,& a:hover,& a:focus": {
-      color: "#FFFFFF"
-    }
-  },
-  cardTitleWhite: {
-    color: "#FFFFFF",
-    marginTop: "0px",
-    minHeight: "auto",
-    fontWeight: "300",
-    fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
-    marginBottom: "3px",
-    textDecoration: "none",
-    "& small": {
-      color: "#777",
-      fontSize: "65%",
-      fontWeight: "400",
-      lineHeight: "1"
-    }
-  }
-};
-
+import { withStyles } from "@material-ui/core/styles";
+import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
 
 class SubscriptionList extends React.Component {
 
   constructor(props) {
     super(props)
     this.state = { subscriptions: [], all: [] }
-    
+
     API.configure(props.token)
     API.all(
       'subscriptions',
@@ -67,36 +38,36 @@ class SubscriptionList extends React.Component {
       }.bind(this)
     )
   }
-  
+
   search(event){
     const lookup = event.target.value.trim().toLowerCase();
     var list = this.state.all
     if(lookup !== ''){
       list = list.filter(function(item){
         return (
-          item.student.first_name.toLowerCase().includes(lookup) || 
+          item.student.first_name.toLowerCase().includes(lookup) ||
           item.student.last_name.toLowerCase().includes(lookup) ||
           item.course.name.toLowerCase().includes(lookup) ||
           item.kind.toLowerCase().includes(lookup)
         )
       }) || []
     }
-    
+
     this.setState({ ...this.state, subscriptions: list })
   }
-  
+
   new(){
     this.props.history.push('/subscriptions/new');
   }
-  
+
   show(subscription){
     this.props.history.push('/subscriptions/' + subscription.id, { subscription });
   }
-  
+
   edit(subscription){
     this.props.history.push('/subscriptions/' + subscription.id + '/edit', { subscription });
   }
-  
+
   delete(subscription){
     const self = this
     API.delete(
@@ -125,7 +96,7 @@ class SubscriptionList extends React.Component {
                 <h4 className={classes.cardTitleWhite}>Subscriptions</h4>
                 <p className={classes.cardCategoryWhite}>All</p>
               </div>
-              
+
               <div style={{ float: "right" }}>
                 <CustomInput
                   labelText="Search"

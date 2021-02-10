@@ -23,6 +23,7 @@ import CardIcon from "components/Card/CardIcon.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 
+import Stat from "../Stats/Stat.js"
 import TrialList from "../Trials/TrialList.js"
 
 import { bugs, website, server } from "variables/general.js";
@@ -45,73 +46,37 @@ class Dashboard extends React.Component {
     return (
       <div>
         <GridContainer>
-          <GridItem xs={12} sm={6} md={3}>
-            <Card>
-              <CardHeader color="primary" stats icon>
-                <CardIcon color="primary">
-                  <Icon>school</Icon>
-                </CardIcon>
-                <p className={classes.cardCategory}>Active Students</p>
-                <h3 className={classes.cardTitle}>{stats.current_active_students}</h3>
-              </CardHeader>
-              <CardFooter stats>
-                <div className={classes.stats}>
-                  <DateRange /> Current
-                </div>
-              </CardFooter>
-            </Card>
-          </GridItem>
-          <GridItem xs={12} sm={6} md={3}>
-            <Card>
-              <CardHeader color="success" stats icon>
-                <CardIcon color="success">
-                  <Icon>thumb_up</Icon>
-                </CardIcon>
-                <p className={classes.cardCategory}>New Students</p>
-                <h3 className={classes.cardTitle}>{stats.new_students_this_week}</h3>
-              </CardHeader>
-              <CardFooter stats>
-                <div className={classes.stats}>
-                  <DateRange /> This Week
-                </div>
-              </CardFooter>
-            </Card>
-          </GridItem>
-          <GridItem xs={12} sm={6} md={3}>
-            <Card>
-              <CardHeader color="danger" stats icon>
-                <CardIcon color="danger">
-                  <Icon>thumb_down</Icon>
-                </CardIcon>
-                <p className={classes.cardCategory}>Dropped Students</p>
-                <h3 className={classes.cardTitle}>{stats.dropped_students_this_week}</h3>
-              </CardHeader>
-              <CardFooter stats>
-                <div className={classes.stats}>
-                  <DateRange /> This Week
-                </div>
-              </CardFooter>
-            </Card>
-          </GridItem>
-          <GridItem xs={12} sm={6} md={3}>
-            <Card>
-              <CardHeader color="info" stats icon>
-                <CardIcon color="info">
-                  <Icon>schedule</Icon>
-                </CardIcon>
-                <p className={classes.cardCategory}>Hours of Class</p>
-                <h3 className={classes.cardTitle}>{stats.hours_of_class_this_month}</h3>
-              </CardHeader>
-              <CardFooter stats>
-                <div className={classes.stats}>
-                  <DateRange /> This Month
-                </div>
-              </CardFooter>
-            </Card>
-          </GridItem>
-        </GridContainer>
-        <GridContainer>
+          <Stat
+            title={"Active Students"}
+            value={stats.current_active_students}
+            icon={"school"}
+          />
 
+          <Stat
+            title={"New Students"}
+            value={stats.new_students_this_week}
+            range={"This Week"}
+            color={"success"}
+          />
+
+          <Stat
+            title={"Dropped Students"}
+            value={stats.dropped_students_this_week}
+            range={"This Week"}
+            color={"danger"}
+            icon={"thumb_down"}
+          />
+
+          <Stat
+            title={"Hours of Class"}
+            value={stats.hours_of_class_this_month}
+            range={"This Month"}
+            color={"info"}
+            icon={"schedule"}
+          />
+        </GridContainer>
+
+        <GridContainer>
           <TrialList trials={this.props.trials} />
 
           <GridItem xs={12} sm={12} md={6}>

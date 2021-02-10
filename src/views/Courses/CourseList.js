@@ -1,7 +1,5 @@
 import React from "react";
 import API from '../../library/API'
-// @material-ui/core components
-import { withStyles } from "@material-ui/core/styles";
 // core components
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
@@ -21,23 +19,8 @@ import CardFooter from "components/Card/CardFooter.js";
 import Icon from "@material-ui/core/Icon";
 import CardIcon from "components/Card/CardIcon.js";
 
+import { withStyles } from "@material-ui/core/styles";
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
-
-styles["cardTitleWhite"] = {
-  color: "#FFFFFF",
-  marginTop: "0px",
-  minHeight: "auto",
-  fontWeight: "300",
-  fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
-  marginBottom: "3px",
-  textDecoration: "none",
-  "& small": {
-    color: "#777",
-    fontSize: "65%",
-    fontWeight: "400",
-    lineHeight: "1"
-  }
-};
 
 
 class CourseList extends React.Component {

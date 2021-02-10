@@ -13,21 +13,10 @@ import CardFooter from "components/Card/CardFooter.js";
 import SubscriptionForm from './SubscriptionForm.js'
 import SubscriptionFields from './SubscriptionFields.js'
 
-import { withStyles } from "@material-ui/core/styles";
 import { defaultSubscription } from 'variables/general'
-import avatar from "assets/img/faces/marc.jpg";
 
-const styles = {
-  cardTitleWhite: {
-    color: "#FFFFFF",
-    marginTop: "0px",
-    minHeight: "auto",
-    fontWeight: "300",
-    fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
-    marginBottom: "3px",
-    textDecoration: "none"
-  }
-};
+import { withStyles } from "@material-ui/core/styles";
+import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
 
 
 class SubscriptionNew extends React.Component {
@@ -51,11 +40,11 @@ class SubscriptionNew extends React.Component {
     this.props.history.push('/subscriptions/' + id, { subscription: response} );
     this.props.notifySuccess("Subscription created succesfully")
   }
-  
+
   onFailure(error){
     this.props.notifyError(error)
   }
-  
+
   onClick(){
     API.create('subscriptions', this.state, this.onSuccess, this.onFailure)
   }
@@ -69,7 +58,7 @@ class SubscriptionNew extends React.Component {
     const { classes } = this.props
     const { subscription } = this.state
     if(!subscription) return null
- 
+
     return(
       <GridContainer>
         <GridItem xs={12} sm={12} md={8}>
@@ -93,22 +82,9 @@ class SubscriptionNew extends React.Component {
             </CardFooter>
           </Card>
         </GridItem>
-        <GridItem xs={12} sm={12} md={4}>
-          <Card profile>
-            <CardAvatar profile>
-              <a href="#pablo" onClick={e => e.preventDefault()}>
-                <img src={avatar} alt="..." />
-              </a>
-            </CardAvatar>
-            <CardBody profile>
-              <SubscriptionFields subscription={subscription} />
-            </CardBody>
-          </Card>
-        </GridItem>
       </GridContainer>
     )
   }
 }
 
 export default withStyles(styles, { withTheme: true })(SubscriptionNew);
-

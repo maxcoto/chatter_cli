@@ -1,7 +1,6 @@
 import React from "react";
 import API from '../../library/API'
-// @material-ui/core components
-import { withStyles } from "@material-ui/core/styles";
+
 // core components
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
@@ -23,36 +22,9 @@ import CardFooter from "components/Card/CardFooter.js";
 import DateRange from "@material-ui/icons/DateRange";
 
 
+import { withStyles } from "@material-ui/core/styles";
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
 import { defaultStats } from 'variables/general'
-
-styles["cardCategoryWhite"] = {
-  "&,& a,& a:hover,& a:focus": {
-    color: "rgba(255,255,255,.62)",
-    margin: "0",
-    fontSize: "14px",
-    marginTop: "0",
-    marginBottom: "0"
-  },
-  "& a,& a:hover,& a:focus": {
-    color: "#FFFFFF"
-  }
-}
-styles["cardTitleWhite"] = {
-  color: "#FFFFFF",
-  marginTop: "0px",
-  minHeight: "auto",
-  fontWeight: "300",
-  fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
-  marginBottom: "3px",
-  textDecoration: "none",
-  "& small": {
-    color: "#777",
-    fontSize: "65%",
-    fontWeight: "400",
-    lineHeight: "1"
-  }
-};
 
 
 class TeacherList extends React.Component {
