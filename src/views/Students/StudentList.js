@@ -185,8 +185,7 @@ class StudentList extends React.Component {
                         student.status,
                         student.notes,
                         <div>
-                          <Button color="primary" aria-label="edit" justIcon round
-                                  onClick={ this.edit.bind(this, student)} >
+                          <Button color="primary" aria-label="edit" justIcon round onClick={ this.edit.bind(this, student)} >
                             <EditIcon />
                           </Button>
                         </div>
@@ -247,6 +246,7 @@ class StudentList extends React.Component {
                           name="active"
                           checked={student.active}
                           onChange={this.toggle.bind(this, student)}
+                          disabled={true}
                         />,
                         <Button color="primary" aria-label="edit" justIcon round
                                 onClick={ this.edit.bind(this, student)} >

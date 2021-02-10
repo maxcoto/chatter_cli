@@ -23,6 +23,7 @@ export default function CustomSwitch(props) {
             onChange={handleChange}
             name={props.name}
             color="primary"
+            disabled={props.disabled}
           />
         }
         label={props.label}
