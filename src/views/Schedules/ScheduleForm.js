@@ -41,7 +41,6 @@ export default class ScheduleForm extends React.Component {
       value = datetime.toString()
     }
 
-    console.log(name, value);
     this.props.onChange(this.props.index, { target: { name, value } })
   }
 

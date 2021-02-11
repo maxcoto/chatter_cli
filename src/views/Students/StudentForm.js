@@ -24,6 +24,8 @@ export default class StudentForm extends React.Component {
     //[++]
     if(!student) return null
 
+    console.log(student);
+
     return(
       <CardBody>
         <GridContainer>
@@ -175,6 +177,31 @@ export default class StudentForm extends React.Component {
                 rows: 5,
                 name: "notes",
                 value: student.notes || ""
+              }}
+            />
+          </GridItem>
+        </GridContainer>
+
+        <GridContainer>
+          <GridItem xs={12} sm={12} md={6}>
+            <CustomInput
+              labelText='Start Date'
+              formControlProps={{ fullWidth: true }}
+              inputProps={{
+                name: 'started_at',
+                value: student.started_at ? student.started_at : "not started",
+                disabled: true
+              }}
+            />
+          </GridItem>
+          <GridItem xs={12} sm={12} md={6}>
+            <CustomInput
+              labelText='Longevity'
+              formControlProps={{ fullWidth: true }}
+              inputProps={{
+                name: 'longevity',
+                value: student.longevity + " Months",
+                disabled: true
               }}
             />
           </GridItem>

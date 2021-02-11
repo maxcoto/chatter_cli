@@ -92,8 +92,8 @@ class StudentList extends React.Component {
   }
 
   toggle(student, event){
-    console.log(student);
-    console.log(event);
+    // console.log(student);
+    // console.log(event);
   }
 
   render() {

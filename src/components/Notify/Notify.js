@@ -10,11 +10,11 @@ class Notify extends React.Component {
   constructor(props) {
     super(props)
     this.state = { display: false }
-    
+
     this.show = this.show.bind(this)
     this.hide = this.hide.bind(this)
   }
-  
+
   componentDidUpdate(prevProps) {
     if (this.props !== prevProps) {
       if( this.props.open === true ){
@@ -22,14 +22,14 @@ class Notify extends React.Component {
       }
     }
   }
-  
+
   hide(){
     if(this.state.display === true){
       this.setState({ display: false })
       this.props.onClose()
     }
   }
-  
+
   show(){
     const self = this
     this.setState({ display: true })
@@ -44,8 +44,6 @@ class Notify extends React.Component {
 
     const color = type === "error" ? "danger" : "success"
     const icon = type === "error" ? ErrorIcon : SuccessIcon
-
-    //console.log(display);
 
     return (
       <Snackbar

@@ -68,11 +68,9 @@ class TeacherList extends React.Component {
   }
 
   toggle(teacher, event){
-    console.log(teacher);
-    console.log(event);
+    // console.log(teacher);
+    // console.log(event);
   }
-
-
 
   render() {
     const { classes } = this.props

@@ -42,8 +42,6 @@ export default class SubscriptionForm extends React.Component {
     const filteredCoursesIds = filteredCourses.map(function(f){ return f.id })
     const course_id = filteredCoursesIds.includes(subscription.course_id) ? subscription.course_id : ''
 
-    console.log("form:", subscription);
-
     return(
       <CardBody>
         <GridContainer>

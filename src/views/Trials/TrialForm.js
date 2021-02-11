@@ -26,7 +26,6 @@ export default class TrialForm extends React.Component {
     const filteredCoursesIds = filteredCourses.map(function(f){ return f.id })
     const course_id = filteredCoursesIds.includes(trial.course_id) ? trial.course_id : ''
 
-    console.log("form:", trial);
 
     // TODO - RESOLVE CLASS DATETIME FROM AVAILABILITY
 

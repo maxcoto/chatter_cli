@@ -60,7 +60,6 @@ class StudentEdit extends React.Component {
 
   onChange(event){
     const { name, value } = event.target
-    console.log(name, value);
     this.setState({ student: {...this.state.student, [name]: value } });
   }
 
@@ -69,12 +68,14 @@ class StudentEdit extends React.Component {
     const { student } = this.state
     if(!student) return null
 
+    const potential = student.activated_at === null
+
     return(
       <GridContainer>
         <GridItem xs={12} sm={12} md={6}>
           <Card>
             <CardHeader color="primary">
-              <h4 className={classes.cardTitleWhite}>Edit Student</h4>
+              <h4 className={classes.cardTitleWhite}>{ potential ? "Potential" : "Student" }</h4>
             </CardHeader>
 
             <StudentForm

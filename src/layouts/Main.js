@@ -44,6 +44,7 @@ class Main extends React.Component {
         this.props.setLevels(result)
       }.bind(this),
       function(error){
+        console.log(error)
         this.props.notifyError('Levels could not be loaded')
       }.bind(this)
     )
@@ -53,6 +54,7 @@ class Main extends React.Component {
         this.props.setTeachers(result)
       }.bind(this),
       function(error){
+        console.log(error)
         this.props.notifyError('Teachers could not be loaded')
       }.bind(this)
     )
@@ -62,6 +64,7 @@ class Main extends React.Component {
         this.props.setCourses(result)
       }.bind(this),
       function(error){
+        console.log(error)
         this.props.notifyError('Courses could not be loaded')
       }.bind(this)
     )
@@ -71,6 +74,7 @@ class Main extends React.Component {
         this.props.setStudents(result)
       }.bind(this),
       function(error){
+        console.log(error)
         this.props.notifyError('Students could not be loaded')
       }.bind(this)
     )
@@ -78,7 +82,6 @@ class Main extends React.Component {
     API.all('stats',
       function(result){
         this.props.setStats(result)
-        console.log(result)
       }.bind(this),
       function(error){
         console.log(error)
@@ -89,7 +92,6 @@ class Main extends React.Component {
     API.all('trials',
       function(result){
         this.props.setTrials(result)
-        console.log(result)
       }.bind(this),
       function(error){
         console.log(error)
