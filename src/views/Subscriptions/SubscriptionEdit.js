@@ -2,7 +2,6 @@ import React from "react";
 import API from '../../library/API'
 
 // core components
-import GridItem from "components/Grid/GridItem.js";
 import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
