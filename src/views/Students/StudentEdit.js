@@ -73,8 +73,6 @@ class StudentEdit extends React.Component {
 
     const potential = student.activated_at === null
 
-    console.log(rest);
-
     return(
       <GridContainer>
         <GridItem xs={12} sm={12} md={6}>

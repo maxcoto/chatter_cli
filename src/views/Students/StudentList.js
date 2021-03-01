@@ -19,6 +19,7 @@ import CustomSelect from "components/CustomSelect/CustomSelect.js"
 import CustomSwitch from "components/CustomSwitch/CustomSwitch.js";
 
 import Stat from "../Stats/Stat.js"
+import StudentGraphs from "./StudentGraphs"
 
 import { withStyles } from "@material-ui/core/styles";
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
@@ -107,6 +108,8 @@ class StudentList extends React.Component {
 
     return (
       <React.Fragment>
+
+        <StudentGraphs classes={classes} stats={stats} />
 
         <GridContainer>
           <Stat

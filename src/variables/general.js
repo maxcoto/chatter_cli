@@ -89,6 +89,26 @@ const defaultStats = {
   overdue_subscriptions: []
 }
 
+// default users per month
+const defaultStudentsPerMonth = {
+  labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+  series: [
+    [5, 4, 3, 7, 5, 10, 3, 4, 8, 10, 6, 8],
+    [3, 2, 9, 5, 4, 6, 4, 6, 7, 8, 7, 4]
+  ]
+}
+
+// default levels
+const defaultLevels = {
+  labels: ["B", "E", "P", "I", "U", "A"],
+  series: [10, 20, 20, 10, 20, 20]
+}
+
+// default levels
+const defaultTime = {
+  labels: ["1 month", "1-3 months", "3-6 months", "6-12 months", "12+ months"],
+  series: [10, 20, 20, 40, 10]
+}
 
 // default student export
 const defaultStudent = {
@@ -182,6 +202,9 @@ module.exports = {
   _group_periods,
   _individual_periods,
   defaultStats,
+  defaultStudentsPerMonth,
+  defaultLevels,
+  defaultTime,
   defaultStudent,
   defaultTeacher,
   defaultCourse,
