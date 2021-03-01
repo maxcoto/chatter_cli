@@ -51,7 +51,8 @@ class CourseList extends React.Component {
       list = list.filter(function(item){
         return (
           item.name.toLowerCase().includes(lookup) ||
-					item.level.name.toLowerCase().includes(lookup)
+					item.level.name.toLowerCase().includes(lookup) ||
+          (item.teacher.first_name + ' ' + item.teacher.last_name).toLowerCase().includes(lookup)
         )
       }) || []
     }

@@ -9,7 +9,7 @@ import CardBody from "components/Card/CardBody.js";
 
 import { withStyles } from "@material-ui/core/styles";
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
-import { scheduleTime } from 'library/helpers/functions.js'
+import { formatDateTime } from 'library/helpers/functions.js'
 
 class TrialList extends React.Component {
 
@@ -36,7 +36,7 @@ class TrialList extends React.Component {
                 trials.map(trial => {
                   return [
                     trial.student.first_name + " " + trial.student.last_name,
-                    scheduleTime(trial.class_date),
+                    formatDateTime(trial.class_date),
                     trial.course.name
                   ]
                 })

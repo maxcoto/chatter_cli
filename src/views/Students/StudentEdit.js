@@ -73,7 +73,7 @@ class StudentEdit extends React.Component {
 
     const potential = student.activated_at === null
 
-    console.log(rest);
+    console.log(student);
 
     return(
       <GridContainer>
@@ -117,7 +117,6 @@ class StudentEdit extends React.Component {
           { student.active &&
             <ScheduleList
               student={student}
-              schedules={[]}
               {...rest}
             />
           }

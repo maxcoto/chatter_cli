@@ -19,7 +19,7 @@ import TrialList from "../Trials/TrialList.js"
 
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
 import { defaultStats } from 'variables/general'
-import { scheduleTime } from 'library/helpers/functions.js'
+import { formatDateTime } from 'library/helpers/functions.js'
 
 class Dashboard extends React.Component {
 
@@ -77,7 +77,7 @@ class Dashboard extends React.Component {
                     stats.overdue_subscriptions.map(subscription => {
                       return [
                         subscription.student.first_name + " " + subscription.student.last_name,
-                        scheduleTime(subscription.renewal_date),
+                        formatDateTime(subscription.renewal_date),
                         "$ " + subscription.price,
                         subscription.course.name
                       ]
