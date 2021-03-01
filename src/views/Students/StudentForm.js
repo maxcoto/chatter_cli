@@ -24,8 +24,6 @@ export default class StudentForm extends React.Component {
     //[++]
     if(!student) return null
 
-    console.log(student);
-
     return(
       <CardBody>
         <GridContainer>

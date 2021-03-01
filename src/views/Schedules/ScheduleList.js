@@ -25,123 +25,51 @@ class ScheduleList extends React.Component {
 
   constructor(props) {
     super(props)
-    this.state = { schedules: [], all: [] }
-
-    API.configure(props.token)
-    API.all(
-      'schedules',
-      function(data){
-        this.setState({ schedules: data, all: data })
-        this.props.notifySuccess("Schedules loaded !!")
-      }.bind(this),
-      function(error){
-        console.log(error)
-        this.props.notifyError("Schedules not loaded :( => " + error)
-      }.bind(this)
-    )
-  }
-
-  search(event){
-    const lookup = event.target.value.trim().toLowerCase();
-    var list = this.state.all
-    if(lookup !== ''){
-      list = list.filter(function(item){
-        return (
-          item.course.toLowerCase().includes(lookup)
-        )
-      }) || []
-    }
-
-    this.setState({ ...this.state, schedules: list })
-  }
-
-  new(){
-    this.props.history.push('/schedules/new');
-  }
-
-  show(schedule){
-    this.props.history.push('/schedules/' + schedule.id, { schedule });
-  }
-
-  edit(schedule){
-    this.props.history.push('/schedules/' + schedule.id + '/edit', { schedule });
-  }
-
-  delete(schedule){
-    const self = this
-    API.delete(
-      'schedules',
-      schedule.id,
-      function(result){
-        self.props.notifySuccess("Schedule has been deleted succesfully")
-        window.location.reload()
-      },
-      function(error){
-        console.log(error);
-      }
-    )
   }
 
   render() {
     const { classes } = this.props
-    const { schedules } = this.state
+    const { schedules, student } = this.props
+
+    var instances = []
+    var remainingHours = student.hours_remaining
+    var week = 0;
+    var stop = false;
+
+    if(schedules.length > 0){
+      //while(stop === false) {
+        schedules.forEach(schedule => {
+          if(remainingHours > schedule.duration){
+            instances.push(schedule)
+            remainingHours -= schedule.duration
+          } else {
+            stop = true
+          }
+        });
+      //}
+    }
 
     return (
-      <GridContainer>
-        <GridItem xs={12} sm={12} md={12}>
-          <Card>
-            <CardHeader color="primary">
-              <div style={{ float: "left" }}>
-                <h4 className={classes.cardTitleWhite}>Schedules</h4>
-                <p className={classes.cardCategoryWhite}>All</p>
-              </div>
-
-              <div style={{ float: "right" }}>
-                <CustomInput
-                  labelText="Search"
-                  inputProps={{ onChange: this.search.bind(this) }}
-                  formControlProps={{ style: { margin: 0 }, fullWidth: true }}
-                />
-              </div>
-            </CardHeader>
-            <CardBody>
-              <Button color="warning" aria-label="add" justIcon round onClick={ this.new.bind(this)} >
-                <AddIcon />
-              </Button>
-              <Table
-                tableHeaderColor="primary"
-                tableHead={['Course', 'Recurrent At', 'Duration', 'Actions']}
-                tableData={
-                  schedules.map(schedule => {
-                    return [
-                      //[++] refs
-                      schedule.course.name,
-											schedule.recurrent_at,
-											schedule.duration,
-                      <div>
-                        <Button color="info" aria-label="show" justIcon round
-                                onClick={ this.show.bind(this, schedule)} >
-                          <ShowIcon />
-                        </Button>
-                        &nbsp;&nbsp;
-                        <Button color="primary" aria-label="edit" justIcon round
-                                onClick={ this.edit.bind(this, schedule)} >
-                          <EditIcon />
-                        </Button>
-                        &nbsp;&nbsp;
-                        <Button color="danger" aria-label="delete" justIcon round
-                                onClick={ this.delete.bind(this, schedule)} >
-                          <DeleteIcon />
-                        </Button>
-                      </div>
-                    ]}
-                  )
-                }
-              />
-            </CardBody>
-          </Card>
-        </GridItem>
-      </GridContainer>
+      <Card>
+        <CardHeader color="primary">
+          <h4 className={classes.cardTitleWhite}>Schedules</h4>
+        </CardHeader>
+        <CardBody>
+          <Table
+            tableHeaderColor="primary"
+            tableHead={['Day', 'At', 'Duration']}
+            tableData={
+              instances.map(schedule => {
+                return [
+                  schedule.day,
+                  schedule.recurrent_at,
+									schedule.duration
+                ]
+              })
+            }
+          />
+        </CardBody>
+      </Card>
     );
   }
 }

@@ -99,24 +99,6 @@ export default class ScheduleForm extends React.Component {
           </GridItem>
         </GridContainer>
 
-        { schedule.meet_link &&
-          <GridContainer>
-            <GridItem xs={12} sm={12} md={12}>
-              <CustomInput
-                labelText='Meeting Link'
-                id='meeting_link'
-                disabled='true'
-                formControlProps={{ fullWidth: true }}
-                inputProps={{
-                  onChange: this.onChange,
-                  name: 'meeting_link',
-                  value: schedule.meet_link,
-                  disabled: true
-                }}
-              />
-            </GridItem>
-          </GridContainer>
-        }
       </CardBody>
     )
   }

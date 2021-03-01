@@ -47,7 +47,6 @@ class SubscriptionEdit extends React.Component {
     } else {
       API.create('subscriptions', this.state, this.onSuccess, this.onFailure)
     }
-
   }
 
   onChange(event){
@@ -61,25 +60,23 @@ class SubscriptionEdit extends React.Component {
     //if(!subscription) return null
 
     return(
-      <GridItem xs={12} sm={12} md={6}>
-        <Card>
-          <CardHeader color="primary">
-            <h4 className={classes.cardTitleWhite}>Subscription</h4>
-          </CardHeader>
+      <Card>
+        <CardHeader color="primary">
+          <h4 className={classes.cardTitleWhite}>Subscription</h4>
+        </CardHeader>
 
-          <SubscriptionForm
-            subscription={subscription}
-            student={student}
-            courses={courses}
-            teachers={teachers}
-            onChange={this.onChange}
-          />
+        <SubscriptionForm
+          subscription={subscription}
+          student={student}
+          courses={courses}
+          teachers={teachers}
+          onChange={this.onChange}
+        />
 
-          <CardFooter>
-            <Button color="primary" onClick={this.onClick}>Save</Button>
-          </CardFooter>
-        </Card>
-      </GridItem>
+        <CardFooter>
+          <Button color="primary" onClick={this.onClick}>Save</Button>
+        </CardFooter>
+      </Card>
     )
   }
 }

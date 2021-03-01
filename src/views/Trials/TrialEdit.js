@@ -59,24 +59,22 @@ class TrialEdit extends React.Component {
     const { trial } = this.state
 
     return(
-      <GridItem xs={12} sm={12} md={6}>
-        <Card>
-          <CardHeader color="primary">
-            <h4 className={classes.cardTitleWhite}>Trial</h4>
-          </CardHeader>
+      <Card>
+        <CardHeader color="primary">
+          <h4 className={classes.cardTitleWhite}>Trial</h4>
+        </CardHeader>
 
-          <TrialForm
-            trial={trial}
-            student={student}
-            courses={courses}
-            onChange={this.onChange}
-          />
+        <TrialForm
+          trial={trial}
+          student={student}
+          courses={courses}
+          onChange={this.onChange}
+        />
 
-          <CardFooter>
-            <Button color="primary" onClick={this.onClick}>Save</Button>
-          </CardFooter>
-        </Card>
-      </GridItem>
+        <CardFooter>
+          <Button color="primary" onClick={this.onClick}>Save</Button>
+        </CardFooter>
+      </Card>
     )
   }
 }

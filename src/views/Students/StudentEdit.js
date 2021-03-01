@@ -11,6 +11,9 @@ import CardFooter from "components/Card/CardFooter.js";
 import StudentForm from './StudentForm.js'
 import SubscriptionEdit from '../Subscriptions/SubscriptionEdit.js'
 import TrialEdit from '../Trials/TrialEdit.js'
+import ScheduleList from '../Schedules/ScheduleList.js'
+import StudentHistory from '../Students/StudentHistory.js'
+
 
 import { withStyles } from "@material-ui/core/styles";
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
@@ -70,6 +73,8 @@ class StudentEdit extends React.Component {
 
     const potential = student.activated_at === null
 
+    console.log(rest);
+
     return(
       <GridContainer>
         <GridItem xs={12} sm={12} md={6}>
@@ -90,21 +95,37 @@ class StudentEdit extends React.Component {
           </Card>
         </GridItem>
 
-        { !student.active &&
-          <TrialEdit
-            student={student}
-            courses={courses}
-            {...rest}
-          />
-        }
+        <GridItem xs={12} sm={12} md={6}>
+          { !student.active &&
+            <TrialEdit
+              student={student}
+              courses={courses}
+              {...rest}
+            />
+          }
 
-        { student.active &&
-          <SubscriptionEdit
-            student={student}
-            courses={courses}
-            {...rest}
-          />
-        }
+          { student.active &&
+            <SubscriptionEdit
+              student={student}
+              courses={courses}
+              {...rest}
+            />
+          }
+
+          <br />
+
+          { student.active &&
+            <ScheduleList
+              student={student}
+              schedules={[]}
+              {...rest}
+            />
+          }
+        </GridItem>
+
+        <StudentHistory
+          {...rest}
+        />
 
       </GridContainer>
     )
