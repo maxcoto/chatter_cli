@@ -67,13 +67,11 @@ class StudentEdit extends React.Component {
   }
 
   render() {
-    const { classes, levels, courses, ...rest } = this.props
+    const { classes, levels, courses, teachers, ...rest } = this.props
     const { student } = this.state
     if(!student) return null
 
     const potential = student.activated_at === null
-
-    console.log(student);
 
     return(
       <GridContainer>
@@ -123,7 +121,8 @@ class StudentEdit extends React.Component {
         </GridItem>
 
         <StudentHistory
-          {...rest}
+          histories={student.history}
+          teachers={teachers}
         />
 
       </GridContainer>
