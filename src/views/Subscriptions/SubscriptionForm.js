@@ -13,7 +13,7 @@ import { _kind, _group_periods, _individual_periods, } from 'variables/general'
 export default class SubscriptionForm extends React.Component {
 
   render() {
-    const { subscription, onChange, courses, student } = this.props
+    const { subscription, onChange, courses, student, hoursLeft } = this.props
     if(!subscription) return null
 
     const isGroup = subscription.kind === "Group"
@@ -141,7 +141,7 @@ export default class SubscriptionForm extends React.Component {
           </GridContainer>
         }
 
-        { subscription.hours_left > 0 && isIndividual &&
+        { hoursLeft > 0 && isIndividual &&
           <GridContainer>
             <GridItem xs={12} sm={12} md={6} />
             <GridItem xs={12} sm={12} md={6}>
@@ -152,7 +152,7 @@ export default class SubscriptionForm extends React.Component {
                 inputProps={{
                   onChange,
                   name: 'hours_left',
-                  value: subscription.hours_left,
+                  value: hoursLeft,
                   type: 'number',
                   disabled: true
                 }}

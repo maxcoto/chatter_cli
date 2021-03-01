@@ -13,16 +13,13 @@ import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js"
 
 class ScheduleList extends React.Component {
   render() {
-    const { classes } = this.props
-    const { student } = this.props
+    const { classes, student } = this.props
     const { schedules } = student
-
+    var { hoursLeft } = this.props
     var instances = []
-    var hoursLeft = student.subscription.hours_left
-    //var week = 0;
     var stop = false;
 
-    if(schedules.length > 0){
+    if(schedules && schedules.length > 0){
       while(stop === false) {
         schedules.forEach(schedule => {
           if(hoursLeft > schedule.duration){
@@ -34,6 +31,8 @@ class ScheduleList extends React.Component {
         });
       }
     }
+
+    if(instances.length === 0) return null;
 
     return (
       <Card>
