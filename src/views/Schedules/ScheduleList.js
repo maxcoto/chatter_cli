@@ -6,26 +6,25 @@ import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
 
+import { formatTime } from 'library/helpers/functions.js'
 import { withStyles } from "@material-ui/core/styles";
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
 
 
 class ScheduleList extends React.Component {
   render() {
-    const { classes } = this.props
-    const { schedules, student } = this.props
-
+    const { classes, student } = this.props
+    const { schedules } = student
+    var { hoursLeft } = this.props
     var instances = []
-    var remainingHours = student.hours_remaining
-    //var week = 0;
     var stop = false;
 
-    if(schedules.length > 0){
+    if(schedules && schedules.length > 0){
       while(stop === false) {
         schedules.forEach(schedule => {
-          if(remainingHours > schedule.duration){
+          if(hoursLeft > schedule.duration){
             instances.push(schedule)
-            remainingHours -= schedule.duration
+            hoursLeft -= schedule.duration
           } else {
             stop = true
           }
@@ -33,10 +32,12 @@ class ScheduleList extends React.Component {
       }
     }
 
+    if(instances.length === 0) return null;
+
     return (
       <Card>
         <CardHeader color="primary">
-          <h4 className={classes.cardTitleWhite}>Schedules</h4>
+          <h4 className={classes.cardTitleWhite}>Next Classes</h4>
         </CardHeader>
         <CardBody>
           <Table
@@ -46,7 +47,7 @@ class ScheduleList extends React.Component {
               instances.map(schedule => {
                 return [
                   schedule.day,
-                  schedule.recurrent_at,
+                  formatTime(schedule.recurrent_at),
 									schedule.duration
                 ]
               })

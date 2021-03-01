@@ -123,7 +123,9 @@ const defaultStudent = {
   level_id: 0,
   level: {},
   status: "",
-  active: false
+  active: false,
+  history: [],
+  schedules: []
 }
 
 // default teacher export

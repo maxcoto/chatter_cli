@@ -67,11 +67,14 @@ class StudentEdit extends React.Component {
   }
 
   render() {
-    const { classes, levels, courses, ...rest } = this.props
+    const { classes, levels, courses, teachers, ...rest } = this.props
     const { student } = this.state
     if(!student) return null
 
     const potential = student.activated_at === null
+
+    const hoursTaken = student.history ? student.history.reduce(function(sum, history) { return (sum + history.duration) }, 0) : 0
+    const hoursLeft = student.subscription ? student.subscription.hours_left - hoursTaken : 0;
 
     return(
       <GridContainer>
@@ -104,6 +107,7 @@ class StudentEdit extends React.Component {
 
           { student.active &&
             <SubscriptionEdit
+              hoursLeft={hoursLeft}
               student={student}
               courses={courses}
               {...rest}
@@ -114,15 +118,15 @@ class StudentEdit extends React.Component {
 
           { student.active &&
             <ScheduleList
+              hoursLeft={hoursLeft}
               student={student}
-              schedules={[]}
-              {...rest}
             />
           }
         </GridItem>
 
         <StudentHistory
-          {...rest}
+          histories={student.history}
+          teachers={teachers}
         />
 
       </GridContainer>

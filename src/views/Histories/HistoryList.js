@@ -16,6 +16,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Button from "components/CustomButtons/Button.js";
 
+import { formatDateTime } from 'library/helpers/functions.js'
 import { withStyles } from "@material-ui/core/styles";
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
 
@@ -109,7 +110,7 @@ class HistoryList extends React.Component {
               </Button>
               <Table
                 tableHeaderColor="primary"
-                tableHead={['Teacher', 'Course', 'Event Id', 'Duration', 'Started At', 'Actions']}
+                tableHead={['Teacher', 'Course', 'Event Id', 'Duration', 'Attended At', 'Actions']}
                 tableData={
                   histories.map(history => {
                     return [
@@ -117,7 +118,7 @@ class HistoryList extends React.Component {
                       history.summary,
 											history.event_id,
 											history.duration,
-											history.created_at,
+											formatDateTime(history.created_at),
                       <div>
                         <Button color="info" aria-label="show" justIcon round
                                 onClick={ this.show.bind(this, history)} >

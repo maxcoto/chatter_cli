@@ -54,7 +54,7 @@ class SubscriptionEdit extends React.Component {
   }
 
   render() {
-    const { classes, student, courses, teachers } = this.props
+    const { classes, student, courses, teachers, hoursLeft } = this.props
     const { subscription } = this.state
     //if(!subscription) return null
 
@@ -65,6 +65,7 @@ class SubscriptionEdit extends React.Component {
         </CardHeader>
 
         <SubscriptionForm
+          hoursLeft={hoursLeft}
           subscription={subscription}
           student={student}
           courses={courses}

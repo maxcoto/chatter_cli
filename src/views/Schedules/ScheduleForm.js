@@ -55,7 +55,18 @@ export default class ScheduleForm extends React.Component {
     return(
       <CardBody>
         <GridContainer>
-          <GridItem xs={12} sm={12} md={4}>
+          <GridItem xs={12} sm={12} md={2}>
+            <CustomInput
+              labelText='Day'
+              id='day'
+              formControlProps={{ fullWidth: true }}
+              inputProps={{
+                value: schedule.day,
+                disabled: true
+              }}
+            />
+          </GridItem>
+          <GridItem xs={12} sm={12} md={3}>
             <DatePicker
               labelText='Date'
               id='schedule_date'
@@ -67,7 +78,7 @@ export default class ScheduleForm extends React.Component {
               }}
             />
           </GridItem>
-          <GridItem xs={12} sm={12} md={4}>
+          <GridItem xs={12} sm={12} md={3}>
             <TimePicker
               labelText='Time'
               id='schedule_time'

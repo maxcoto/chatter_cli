@@ -7,16 +7,15 @@ import Table from "components/Table/Table.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 
+import { formatDateTime } from 'library/helpers/functions.js'
 import { withStyles } from "@material-ui/core/styles";
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
 
 class StudentHistory extends React.Component {
 
   render() {
-    const { histories, classes } = this.props
+    const { histories, classes, teachers } = this.props
     if(!histories) return null
-
-    console.log(histories);
 
     return(
       <GridItem xs={12} sm={12} md={12}>
@@ -28,15 +27,16 @@ class StudentHistory extends React.Component {
           <CardBody>
             <Table
               tableHeaderColor="primary"
-              tableHead={['Teacher', 'Course', 'Event Id', 'Duration', 'Started At']}
+              tableHead={['Teacher', 'Course', 'Event Id', 'Duration', 'Attended At']}
               tableData={
                 histories.map(history => {
+                  const teacher = teachers.find(t => t.id === history.teacher_id);
                   return [
-                    history.teacher.first_name + " " + history.teacher.last_name,
+                    teacher ? teacher.first_name + " " + teacher.last_name : "",
                     history.summary,
                     history.event_id,
                     history.duration,
-                    history.created_at
+                    formatDateTime(history.created_at)
                   ]}
                 )
               }
