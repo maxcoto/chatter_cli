@@ -11,6 +11,9 @@ import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
+import Button from "components/CustomButtons/Button.js";
+
+import URI from 'library/api/service.js'
 
 import { makeStyles } from "@material-ui/core/styles";
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
@@ -19,6 +22,11 @@ const useStyles = makeStyles(styles);
 
 export default function UserProfile() {
   const classes = useStyles();
+
+  const onClick = () => {
+    window.location = URI + '/redirect'
+  }
+
   return (
     <div>
       <GridContainer>
@@ -43,6 +51,7 @@ export default function UserProfile() {
               </GridContainer>
             </CardBody>
             <CardFooter>
+              <Button color="primary" onClick={onClick}>Connect with Google Calendar</Button>
             </CardFooter>
           </Card>
         </GridItem>
