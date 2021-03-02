@@ -49,7 +49,6 @@ class LectureList extends React.Component {
                     name="taken"
                     checked={lecture.taken}
                     onChange={this.toggle.bind(this, lecture)}
-                    disabled={true}
                   />
                 ]
               })
