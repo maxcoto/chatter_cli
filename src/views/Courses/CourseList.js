@@ -15,6 +15,8 @@ import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Button from "components/CustomButtons/Button.js";
 
+import CustomSelect from "components/CustomSelect/CustomSelect.js"
+
 import CardFooter from "components/Card/CardFooter.js";
 import Icon from "@material-ui/core/Icon";
 import CardIcon from "components/Card/CardIcon.js";
@@ -64,28 +66,16 @@ class CourseList extends React.Component {
     this.props.history.push('/courses/new');
   }
 
-  show(course){
+  edit(course){
     this.props.history.push('/courses/' + course.id, { course });
   }
 
-  edit(course){
-    this.props.history.push('/courses/' + course.id + '/edit', { course });
+  studentToSelect(list) {
+    return list.map(function(l, i){
+      return { id: i, name: l, disabled: true }
+    })
   }
 
-  delete(course){
-    const self = this
-    API.delete(
-      'courses',
-      course.id,
-      function(result){
-        self.props.notifySuccess("Course has been deleted succesfully")
-        window.location.reload()
-      },
-      function(error){
-        console.log(error);
-      }
-    )
-  }
 
   render() {
     const { classes } = this.props
@@ -177,29 +167,25 @@ class CourseList extends React.Component {
                 </Button>
                 <Table
                   tableHeaderColor="primary"
-                  tableHead={['Name', 'Level', 'Occupants', 'Seats', 'Teacher', 'Actions']}
+                  tableHead={['Name', 'Level', 'Occupants', 'Seats', 'Teacher', 'Edit']}
                   tableData={
                     groups.map(course => {
                       return [
                         course.name,
                         course.level.name,
-                        course.occupants,
+                        <CustomSelect
+                          labelText={course.occupants}
+                          id='students'
+                          values={ this.studentToSelect(course.student_names) }
+                          onChange={()=> {}}
+                          inputProps={{ }}
+                          styles={ { marginTop: 0 } }
+                        />,
                         course.seats,
   											course.teacher_name,
                         <div>
-                          <Button color="info" aria-label="show" justIcon round
-                                  onClick={ this.show.bind(this, course)} >
-                            <ShowIcon />
-                          </Button>
-                          &nbsp;&nbsp;
-                          <Button color="primary" aria-label="edit" justIcon round
-                                  onClick={ this.edit.bind(this, course)} >
+                          <Button color="primary" aria-label="edit" justIcon round onClick={ this.edit.bind(this, course)} >
                             <EditIcon />
-                          </Button>
-                          &nbsp;&nbsp;
-                          <Button color="danger" aria-label="delete" justIcon round
-                                  onClick={ this.delete.bind(this, course)} >
-                            <DeleteIcon />
                           </Button>
                         </div>
                       ]}
@@ -233,29 +219,17 @@ class CourseList extends React.Component {
                 </Button>
                 <Table
                   tableHeaderColor="primary"
-                  tableHead={['Name', 'Level', 'Occupants', 'Seats', 'Teacher', 'Actions']}
+                  tableHead={['Name', 'Level', 'Seats', 'Teacher', 'Edit']}
                   tableData={
                     individuals.map(course => {
                       return [
                         course.name,
   											course.level.name,
-                        course.occupants,
                         course.seats,
   											course.teacher_name,
                         <div>
-                          <Button color="info" aria-label="show" justIcon round
-                                  onClick={ this.show.bind(this, course)} >
-                            <ShowIcon />
-                          </Button>
-                          &nbsp;&nbsp;
-                          <Button color="primary" aria-label="edit" justIcon round
-                                  onClick={ this.edit.bind(this, course)} >
+                          <Button color="primary" aria-label="edit" justIcon round onClick={ this.edit.bind(this, course)} >
                             <EditIcon />
-                          </Button>
-                          &nbsp;&nbsp;
-                          <Button color="danger" aria-label="delete" justIcon round
-                                  onClick={ this.delete.bind(this, course)} >
-                            <DeleteIcon />
                           </Button>
                         </div>
                       ]}

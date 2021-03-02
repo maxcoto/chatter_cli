@@ -15,7 +15,6 @@ import TeacherNew from 'views/Teachers/TeacherNew.js'
 import CourseEdit from 'views/Courses/CourseEdit.js'
 import CourseList from 'views/Courses/CourseList.js'
 import CourseNew from 'views/Courses/CourseNew.js'
-import CourseShow from 'views/Courses/CourseShow.js'
 // levels imports
 import LevelEdit from 'views/Levels/LevelEdit.js'
 import LevelList from 'views/Levels/LevelList.js'
@@ -52,8 +51,7 @@ const routes = [
 
   // courses routes
   { path: '/courses/new',      component: CourseNew,  layout: '', hidden: true },
-  { path: '/courses/:id/edit', component: CourseEdit, layout: '', hidden: true },
-  { path: '/courses/:id',      component: CourseShow, layout: '', hidden: true },
+  { path: '/courses/:id',      component: CourseEdit, layout: '', hidden: true },
   { path: '/courses',          component: CourseList, layout: '', name: 'Courses' },
 
   // levels routes

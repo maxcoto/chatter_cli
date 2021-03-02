@@ -101,3 +101,25 @@ class CourseEdit extends React.Component {
 }
 
 export default withStyles(styles, { withTheme: true })(CourseEdit);
+
+
+
+// delete(course){
+//   const self = this
+//   API.delete(
+//     'courses',
+//     course.id,
+//     function(result){
+//       self.props.notifySuccess("Course has been deleted succesfully")
+//       window.location.reload()
+//     },
+//     function(error){
+//       console.log(error);
+//     }
+//   )
+// }
+
+// &nbsp;&nbsp;
+// <Button color="danger" aria-label="delete" justIcon round onClick={ this.delete.bind(this, course)} >
+//   <DeleteIcon />
+// </Button>

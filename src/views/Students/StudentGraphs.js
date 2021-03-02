@@ -13,7 +13,7 @@ import { studentsForMonthChart, studentByLevel, studentForTime } from "variables
 class StudentGraphs extends React.Component {
 
   render() {
-    const { classes, stats } = this.props
+    const { classes, stats, levels } = this.props
     const students_by_months = stats.students_by_months || defaultStudentsPerMonth
     const students_by_levels = stats.students_by_levels || defaultLevels
     const students_by_categories = stats.students_by_categories || defaultTime
@@ -53,8 +53,16 @@ class StudentGraphs extends React.Component {
                 />
               </CardHeader>
               <CardBody>
-                <h4 className={classes.cardTitle}>Students per level</h4>
-                <p className={classes.cardCategory}>All students</p>
+                <h4 className={classes.cardTitle}>Students Per Level</h4>
+                {
+                  levels.map((l) => {
+                    return (
+                      <p className={classes.cardCategory}>
+                        { l.name[0].toUpperCase() + ": " + l.name }
+                      </p>
+                    )
+                  })
+                }
               </CardBody>
             </Card>
           </GridItem>
@@ -70,8 +78,8 @@ class StudentGraphs extends React.Component {
                 />
               </CardHeader>
               <CardBody>
-                <h4 className={classes.cardTitle}>Students by categories</h4>
-                <p className={classes.cardCategory}>Categories by duration</p>
+                <h4 className={classes.cardTitle}>Students by Longevity</h4>
+                <p className={classes.cardCategory}></p>
               </CardBody>
             </Card>
           </GridItem>

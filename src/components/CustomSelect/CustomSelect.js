@@ -36,7 +36,7 @@ export default function CustomSelect(props){
   };
   const classes = useStyles();
   return (
-    <FormControl fullWidth className={classes.selectFormControl}>
+    <FormControl fullWidth className={classes.selectFormControl} style={ props.styles }>
       <InputLabel
         htmlFor={props.id}
         className={classes.selectLabel}

@@ -98,7 +98,7 @@ class StudentList extends React.Component {
   }
 
   render() {
-    const { classes } = this.props
+    const { classes, levels } = this.props
     const { students } = this.state
 
     const stats = this.props.stats || defaultStats;
@@ -109,7 +109,7 @@ class StudentList extends React.Component {
     return (
       <React.Fragment>
 
-        <StudentGraphs classes={classes} stats={stats} />
+        <StudentGraphs classes={classes} stats={stats} levels={levels} />
 
         <GridContainer>
           <Stat
