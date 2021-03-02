@@ -17,6 +17,8 @@ import Button from "components/CustomButtons/Button.js";
 import CustomSwitch from "components/CustomSwitch/CustomSwitch.js";
 import Stat from "../Stats/Stat.js"
 
+import TeachersGraphs from "./TeachersGraphs"
+
 import { withStyles } from "@material-ui/core/styles";
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
 import { defaultStats } from 'variables/general'
@@ -80,7 +82,8 @@ class TeacherList extends React.Component {
     const activeTeachersCount = teachers.filter(function(t){ return t.active === true }).length
 
     return (
-      <div>
+      <React.Fragment>
+        <TeachersGraphs classes={classes} stats={stats} teachers={teachers} />
         <GridContainer>
           <Stat
             title={"Active Teachers"}
@@ -165,7 +168,7 @@ class TeacherList extends React.Component {
             </Card>
           </GridItem>
         </GridContainer>
-      </div>
+      </React.Fragment>
     );
   }
 }

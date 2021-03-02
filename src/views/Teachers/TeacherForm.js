@@ -7,10 +7,10 @@ import CustomInput from "components/CustomInput/CustomInput.js";
 import CustomSwitch from "components/CustomSwitch/CustomSwitch.js";
 import CardBody from "components/Card/CardBody.js";
 
-
 export default class TeacherForm extends React.Component {
   render() {
-    const { teacher, onChange } = this.props
+    const { teacher, onChange, classes } = this.props
+
     if(!teacher) return null
 
     return(

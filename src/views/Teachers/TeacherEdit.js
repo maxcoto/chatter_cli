@@ -11,6 +11,7 @@ import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 import TeacherForm from './TeacherForm.js'
 import Table from "components/Table/Table.js";
+import TeacherGraphs from "./TeacherGraphs.js"
 
 import { withStyles } from "@material-ui/core/styles";
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
@@ -79,6 +80,9 @@ class TeacherEdit extends React.Component {
 
     return(
       <GridContainer>
+
+        <TeacherGraphs classes={classes} teacher={teacher} />
+
         <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardHeader color="primary">
