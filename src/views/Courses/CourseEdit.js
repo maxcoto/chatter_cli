@@ -1,6 +1,6 @@
 import React from "react";
 import API from '../../library/API'
-
+import DeleteIcon from "@material-ui/icons/Delete";
 // core components
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
@@ -42,6 +42,21 @@ class CourseEdit extends React.Component {
     }
   }
 
+  delete(course){
+    const self = this
+    API.delete(
+      'courses',
+      course.id,
+      function(result){
+        self.props.notifySuccess("Course has been deleted succesfully")
+        window.location.reload()
+      },
+      function(error){
+        console.log(error);
+      }
+    )
+  }
+
   onSuccess(response){
     const { id } = response
     this.props.history.push('/courses/' + id, this.state);
@@ -68,7 +83,6 @@ class CourseEdit extends React.Component {
 
   render() {
     const { classes, levels, teachers } = this.props
-    //[++]
     const { course } = this.state
     if(!course) return null
 
@@ -89,6 +103,10 @@ class CourseEdit extends React.Component {
 
             <CardFooter>
               <Button color="primary" onClick={this.onClick}>Update</Button>
+              &nbsp;&nbsp;
+              <Button color="danger" aria-label="delete" justIcon round onClick={ this.delete.bind(this, course)} >
+                <DeleteIcon />
+              </Button>
             </CardFooter>
           </Card>
         </GridItem>
@@ -101,25 +119,3 @@ class CourseEdit extends React.Component {
 }
 
 export default withStyles(styles, { withTheme: true })(CourseEdit);
-
-
-
-// delete(course){
-//   const self = this
-//   API.delete(
-//     'courses',
-//     course.id,
-//     function(result){
-//       self.props.notifySuccess("Course has been deleted succesfully")
-//       window.location.reload()
-//     },
-//     function(error){
-//       console.log(error);
-//     }
-//   )
-// }
-
-// &nbsp;&nbsp;
-// <Button color="danger" aria-label="delete" justIcon round onClick={ this.delete.bind(this, course)} >
-//   <DeleteIcon />
-// </Button>
