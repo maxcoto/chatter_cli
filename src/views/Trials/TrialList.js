@@ -35,7 +35,7 @@ class TrialList extends React.Component {
               tableData={
                 trials.map(trial => {
                   return [
-                    trial.student.first_name + " " + trial.student.last_name,
+                    trial.student.full_name,
                     formatDateTime(trial.class_date),
                     trial.course.name
                   ]

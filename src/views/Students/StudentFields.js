@@ -12,7 +12,7 @@ class StudentFields extends React.Component {
     return (
       <React.Fragment>
         <h6 className={classes.cardCategory}>ID: {student.id}</h6>
-        <h4 className={classes.cardTitle}>Name: {student.first_name + " " + student.last_name}</h4>
+        <h4 className={classes.cardTitle}>Name: {student.full_name}</h4>
         <h4 className={classes.cardTitle}>Email: {student.email}</h4>
         <h4 className={classes.cardTitle}>Phone: {student.phone}</h4>
         <h4 className={classes.cardTitle}>Contact Method: {student.contact_method}</h4>

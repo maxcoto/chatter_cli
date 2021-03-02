@@ -18,7 +18,7 @@ class CourseFields extends React.Component {
 				<h4 className={classes.cardTitle}>Capacity: {course.max_students}</h4>
         <h4 className={classes.cardTitle}>Seats: {course.seats}</h4>
 				<h4 className={classes.cardTitle}>Level: {course.level.name}</h4>
-				<h4 className={classes.cardTitle}>Teacher: {course.teacher.first_name + " " + course.teacher.last_name}</h4>
+				<h4 className={classes.cardTitle}>Teacher: {course.teacher.full_name}</h4>
       </React.Fragment>
 
     )

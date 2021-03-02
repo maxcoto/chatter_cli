@@ -9,7 +9,7 @@ import CustomSelect from "components/CustomSelect/CustomSelect.js";
 import CardBody from "components/Card/CardBody.js";
 
 import { _statuses, _lead_sources, _contact_methods } from 'variables/general'
-
+import { formatDateTime } from 'library/helpers/functions.js'
 
 export default class StudentForm extends React.Component {
 
@@ -187,7 +187,7 @@ export default class StudentForm extends React.Component {
               formControlProps={{ fullWidth: true }}
               inputProps={{
                 name: 'started_at',
-                value: student.started_at ? student.started_at : "not started",
+                value: student.started_at ? formatDateTime(student.started_at) : "not started",
                 disabled: true
               }}
             />

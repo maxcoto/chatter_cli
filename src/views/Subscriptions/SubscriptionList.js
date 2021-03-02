@@ -115,7 +115,7 @@ class SubscriptionList extends React.Component {
                 tableData={
                   subscriptions.map(subscription => {
                     return [
-                      subscription.student.first_name + '' + subscription.student.last_name,
+                      subscription.student.full_name,
 											subscription.course.name,
 											subscription.kind,
 											subscription.start_date,

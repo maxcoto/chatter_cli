@@ -179,7 +179,7 @@ class StudentList extends React.Component {
                   tableData={
                     potentials.map(student => {
                       return [
-                        student.first_name + " " + student.last_name,
+                        student.full_name,
                         student.trial_course ? student.trial_course.name : "", //.name,
                         student.level.name,
                         formatDateTime((student.trial && student.trial.class_date)),
@@ -239,7 +239,7 @@ class StudentList extends React.Component {
                   tableData={
                     active.map(student => {
                       return [
-                        student.first_name + " " + student.last_name,
+                        student.full_name,
                         student.subscription_course ? student.subscription_course.name : "",
                         student.level.name,
                         student.longevity,

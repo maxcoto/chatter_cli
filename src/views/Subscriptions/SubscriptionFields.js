@@ -4,14 +4,14 @@ import { withStyles } from "@material-ui/core/styles";
 
 const styles = {};
 
-class SubscriptionFields extends React.Component {  
+class SubscriptionFields extends React.Component {
   render() {
     const { classes, subscription } = this.props
     if(!subscription) return null
 
     return (
       <React.Fragment>
-        <h4 className={classes.cardTitle}>Student: {subscription.student.first_name + " " + subscription.student.last_name}</h4>
+        <h4 className={classes.cardTitle}>Student: {subscription.student.full_name}</h4>
 				<h4 className={classes.cardTitle}>Course: {subscription.course.name}</h4>
 				<h4 className={classes.cardTitle}>Kind: {subscription.kind}</h4>
 				<h4 className={classes.cardTitle}>Start Date: {subscription.start_date}</h4>
@@ -20,7 +20,7 @@ class SubscriptionFields extends React.Component {
 				<h4 className={classes.cardTitle}>Price: {subscription.price}</h4>
 				<h4 className={classes.cardTitle}>Hours Left: {subscription.hours_left}</h4>
       </React.Fragment>
-      
+
     )
   }
 }

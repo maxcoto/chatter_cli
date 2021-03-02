@@ -140,7 +140,7 @@ class TeacherList extends React.Component {
                       const totalStudents = courses.reduce(function(count, c) { return (count + c.occupants) }, 0);
 
                       return [
-                        teacher.first_name + " " + teacher.last_name,
+                        teacher.full_name,
                         groupCount,
                         individualCount,
                         totalStudents,

@@ -32,7 +32,7 @@ class StudentHistory extends React.Component {
                 histories.map(history => {
                   const teacher = teachers.find(t => t.id === history.teacher_id);
                   return [
-                    teacher ? teacher.first_name + " " + teacher.last_name : "",
+                    teacher ? teacher.full_name : "",
                     history.summary,
                     history.event_id,
                     history.duration,

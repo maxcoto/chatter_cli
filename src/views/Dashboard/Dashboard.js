@@ -76,7 +76,7 @@ class Dashboard extends React.Component {
                   tableData={
                     stats.overdue_subscriptions.map(subscription => {
                       return [
-                        subscription.student.first_name + " " + subscription.student.last_name,
+                        subscription.student.full_name,
                         formatDateTime(subscription.renewal_date),
                         "$ " + subscription.price,
                         subscription.course.name

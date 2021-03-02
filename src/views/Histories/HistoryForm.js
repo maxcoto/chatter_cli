@@ -11,16 +11,16 @@ import CardBody from "components/Card/CardBody.js"
 
 export default class HistoryForm extends React.Component {
   teacherToSelect(list){
-    return list.map(function(item){ return { id: item.id, name: item.first_name + ' ' + item.last_name } })
+    return list.map(function(item){ return { id: item.id, name: item.full_name } })
   }
-  
+
   render() {
     const { history, onChange, teachers } = this.props
     if(!history) return null
- 
+
     return(
       <CardBody>
-        
+
         <GridContainer>
           <GridItem xs={12} sm={12} md={4}>
             <CustomSelect
@@ -35,7 +35,7 @@ export default class HistoryForm extends React.Component {
             />
           </GridItem>
         </GridContainer>
-      
+
 
         <GridContainer>
           <GridItem xs={12} sm={12} md={4}>
@@ -51,7 +51,7 @@ export default class HistoryForm extends React.Component {
             />
           </GridItem>
         </GridContainer>
-      
+
 
         <GridContainer>
           <GridItem xs={12} sm={12} md={4}>
@@ -83,7 +83,7 @@ export default class HistoryForm extends React.Component {
             />
           </GridItem>
         </GridContainer>
-        
+
         <GridContainer>
           <GridItem xs={12} sm={12} md={4}>
             <DatePicker
@@ -98,10 +98,8 @@ export default class HistoryForm extends React.Component {
             />
           </GridItem>
         </GridContainer>
-      
+
       </CardBody>
     )
   }
 }
-
-

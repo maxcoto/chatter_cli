@@ -51,8 +51,8 @@ class CourseList extends React.Component {
       list = list.filter(function(item){
         return (
           item.name.toLowerCase().includes(lookup) ||
-					item.level.name.toLowerCase().includes(lookup) ||
-          (item.teacher.first_name + ' ' + item.teacher.last_name).toLowerCase().includes(lookup)
+          item.level.name.toLowerCase().includes(lookup) ||
+          item.teacher_name.toLowerCase().includes(lookup)
         )
       }) || []
     }
@@ -185,7 +185,7 @@ class CourseList extends React.Component {
                         course.level.name,
                         course.occupants,
                         course.seats,
-  											course.teacher.first_name + ' ' + course.teacher.last_name,
+  											course.teacher_name,
                         <div>
                           <Button color="info" aria-label="show" justIcon round
                                   onClick={ this.show.bind(this, course)} >
@@ -241,7 +241,7 @@ class CourseList extends React.Component {
   											course.level.name,
                         course.occupants,
                         course.seats,
-  											course.teacher.first_name + ' ' + course.teacher.last_name,
+  											course.teacher_name,
                         <div>
                           <Button color="info" aria-label="show" justIcon round
                                   onClick={ this.show.bind(this, course)} >

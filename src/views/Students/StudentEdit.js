@@ -11,9 +11,7 @@ import CardFooter from "components/Card/CardFooter.js";
 import StudentForm from './StudentForm.js'
 import SubscriptionEdit from '../Subscriptions/SubscriptionEdit.js'
 import TrialEdit from '../Trials/TrialEdit.js'
-import ScheduleList from '../Schedules/ScheduleList.js'
-import StudentHistory from '../Students/StudentHistory.js'
-
+import LectureList from '../Subscriptions/LectureList.js'
 
 import { withStyles } from "@material-ui/core/styles";
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
@@ -73,9 +71,6 @@ class StudentEdit extends React.Component {
 
     const potential = student.activated_at === null
 
-    const hoursTaken = student.history ? student.history.reduce(function(sum, history) { return (sum + history.duration) }, 0) : 0
-    const hoursLeft = student.subscription ? student.subscription.hours_left - hoursTaken : 0;
-
     return(
       <GridContainer>
         <GridItem xs={12} sm={12} md={6}>
@@ -107,7 +102,6 @@ class StudentEdit extends React.Component {
 
           { student.active &&
             <SubscriptionEdit
-              hoursLeft={hoursLeft}
               student={student}
               courses={courses}
               {...rest}
@@ -117,17 +111,11 @@ class StudentEdit extends React.Component {
           <br />
 
           { student.active &&
-            <ScheduleList
-              hoursLeft={hoursLeft}
+            <LectureList
               student={student}
             />
           }
         </GridItem>
-
-        <StudentHistory
-          histories={student.history}
-          teachers={teachers}
-        />
 
       </GridContainer>
     )
