@@ -114,7 +114,7 @@ class HistoryList extends React.Component {
                 tableData={
                   histories.map(history => {
                     return [
-                      history.teacher.full_name,
+                      history.teacher_name,
                       history.summary,
 											history.event_id,
 											history.duration,

@@ -82,8 +82,7 @@ class TeacherEdit extends React.Component {
         <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardHeader color="primary">
-              <h4 className={classes.cardTitleWhite}>Edit Teacher {teacher.id}</h4>
-              <p className={classes.cardCategoryWhite}>what should go here ?</p>
+              <h4 className={classes.cardTitleWhite}>{teacher.full_name}</h4>
             </CardHeader>
 
             <TeacherForm teacher={teacher} onChange={this.onChange} />

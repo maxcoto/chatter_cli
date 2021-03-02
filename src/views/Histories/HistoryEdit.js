@@ -81,7 +81,6 @@ class HistoryEdit extends React.Component {
           <Card>
             <CardHeader color="primary">
               <h4 className={classes.cardTitleWhite}>Edit History {history.id}</h4>
-              <p className={classes.cardCategoryWhite}>what should go here ?</p>
             </CardHeader>
 
             <HistoryForm history={history} onChange={this.onChange} teachers={teachers} />

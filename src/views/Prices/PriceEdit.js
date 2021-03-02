@@ -81,7 +81,6 @@ class PriceEdit extends React.Component {
           <Card>
             <CardHeader color="primary">
               <h4 className={classes.cardTitleWhite}>Edit Price {price.id}</h4>
-              <p className={classes.cardCategoryWhite}>what should go here ?</p>
             </CardHeader>
 
             <PriceForm price={price} onChange={this.onChange} levels={levels} />

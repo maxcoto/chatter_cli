@@ -82,7 +82,6 @@ class LevelEdit extends React.Component {
           <Card>
             <CardHeader color="primary">
               <h4 className={classes.cardTitleWhite}>Edit Level {level.id}</h4>
-              <p className={classes.cardCategoryWhite}>what should go here ?</p>
             </CardHeader>
 
             <LevelForm level={level} onChange={this.onChange} />
