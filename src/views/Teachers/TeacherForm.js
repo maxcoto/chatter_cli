@@ -1,5 +1,4 @@
 import React from 'react'
-
 // core components
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
@@ -9,7 +8,7 @@ import CardBody from "components/Card/CardBody.js";
 
 export default class TeacherForm extends React.Component {
   render() {
-    const { teacher, onChange, classes } = this.props
+    const { teacher, onChange } = this.props
 
     if(!teacher) return null
 

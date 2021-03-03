@@ -1,7 +1,6 @@
 import React from "react";
 import ChartistGraph from "react-chartist";
 import GridItem from "components/Grid/GridItem.js";
-import GridContainer from "components/Grid/GridContainer.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
@@ -15,10 +14,6 @@ class TeacherGraphs extends React.Component {
     const { classes, teacher } = this.props
 
     if(!teacher) return null
-
-    console.log(teacher);
-
-    const obj = { series: ["un", "dos", "tre"], labels: [10, 20, 30] }
 
     return (
       <React.Fragment>
