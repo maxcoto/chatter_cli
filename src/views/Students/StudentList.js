@@ -24,7 +24,7 @@ import StudentGraphs from "./StudentGraphs"
 import { withStyles } from "@material-ui/core/styles";
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
 import { defaultStats, _statuses, _status } from 'variables/general'
-import { formatDateTime } from 'library/helpers/functions.js'
+import { formatDate } from 'library/helpers/functions.js'
 
 _statuses.push({ id: null, name: 'all' })
 _status.push({ id: null, name: 'all' })
@@ -182,7 +182,7 @@ class StudentList extends React.Component {
                         student.full_name,
                         student.trial_course ? student.trial_course.name : "", //.name,
                         student.level.name,
-                        formatDateTime((student.trial && student.trial.class_date)),
+                        formatDate((student.trial && student.trial.class_date)),
                         student.status,
                         student.notes,
                         <div>
