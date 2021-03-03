@@ -6,16 +6,21 @@ import Table from "components/Table/Table.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
+import CustomSwitch from "components/CustomSwitch/CustomSwitch.js";
 
 import { withStyles } from "@material-ui/core/styles";
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
-import { formatDateTime } from 'library/helpers/functions.js'
+import { formatDate } from 'library/helpers/functions.js'
 
 class TrialList extends React.Component {
 
   constructor(props) {
     super(props)
     API.configure(props.token)
+  }
+
+  toggle(trial) {
+    return null;
   }
 
   render() {
@@ -31,13 +36,18 @@ class TrialList extends React.Component {
           <CardBody>
             <Table
               tableHeaderColor="primary"
-              tableHead={["Potential", "Class Date", "Group"]}
+              tableHead={["Potential", "Class Date", "Group", "Taken"]}
               tableData={
                 trials.map(trial => {
                   return [
-                    trial.student.full_name,
-                    formatDateTime(trial.class_date),
-                    trial.course.name
+                    trial.student_name,
+                    formatDate(trial.class_date),
+                    trial.course.name,
+                    <CustomSwitch
+                      name="taken"
+                      checked={trial.taken}
+                      onChange={this.toggle.bind(this, trial)}
+                    />
                   ]
                 })
               }

@@ -20,7 +20,13 @@ const formatTime = function(datetime){
   return h + ":" + m
 }
 
+const formatDate = function(datetime){
+  if( !datetime ) return "";
+  return datetime.split("T")[0]
+}
+
 module.exports = {
   formatDateTime,
-  formatTime
+  formatTime,
+  formatDate
 };
