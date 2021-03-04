@@ -8,6 +8,8 @@ import CardHeader from "components/Card/CardHeader.js";
 import CardFooter from "components/Card/CardFooter.js";
 import TrialForm from './TrialForm.js'
 
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 import { defaultTrial } from 'variables/general'
 
 import { withStyles } from "@material-ui/core/styles";
@@ -30,22 +32,23 @@ class TrialEdit extends React.Component {
   }
 
   onSuccess(response){
-    this.setState({ trial: response });
+    this.setState({ trial: response, progress: false });
     this.props.notifySuccess("Trial saved successfully")
   }
 
   onFailure(error){
     console.log(error);
+    this.setState({ progress: false })
     this.props.notifyError(error)
   }
 
   onClick(){
+    this.setState({ progress: true })
     if(this.state.trial.id){
       API.update('trials', this.state.trial.id, this.state, this.onSuccess, this.onFailure)
     } else {
       API.create('trials', this.state, this.onSuccess, this.onFailure)
     }
-
   }
 
   onChange(event){
@@ -55,7 +58,7 @@ class TrialEdit extends React.Component {
 
   render() {
     const { classes, student, courses } = this.props
-    const { trial } = this.state
+    const { trial, progress } = this.state
 
     return(
       <Card>
@@ -72,6 +75,7 @@ class TrialEdit extends React.Component {
 
         <CardFooter>
           <Button color="primary" onClick={this.onClick}>Save</Button>
+          {progress && <CircularProgress color="inherit" style={{ color: "#9c27b0" }}/>}
         </CardFooter>
       </Card>
     )

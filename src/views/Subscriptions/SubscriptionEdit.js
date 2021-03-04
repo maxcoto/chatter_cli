@@ -7,7 +7,7 @@ import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardFooter from "components/Card/CardFooter.js";
 import SubscriptionForm from './SubscriptionForm.js'
-
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import { defaultSubscription } from 'variables/general'
 
@@ -31,16 +31,18 @@ class SubscriptionEdit extends React.Component {
   }
 
   onSuccess(response){
-    this.setState({ subscription: response });
+    this.setState({ subscription: response, progress: false });
     this.props.notifySuccess("Subscription saved successfully")
   }
 
   onFailure(error){
     console.log(error);
+    this.setState({ progress: false })
     this.props.notifyError(error)
   }
 
   onClick(){
+    this.setState({ progress: true })
     if(this.state.subscription.id){
       API.update('subscriptions', this.state.subscription.id, this.state, this.onSuccess, this.onFailure)
     } else {
@@ -55,7 +57,7 @@ class SubscriptionEdit extends React.Component {
 
   render() {
     const { classes, student, courses, teachers, hoursLeft } = this.props
-    const { subscription } = this.state
+    const { subscription, progress } = this.state
     //if(!subscription) return null
 
     return(
@@ -75,6 +77,7 @@ class SubscriptionEdit extends React.Component {
 
         <CardFooter>
           <Button color="primary" onClick={this.onClick}>Save</Button>
+          {progress && <CircularProgress color="inherit" style={{ color: "#9c27b0" }}/>}
         </CardFooter>
       </Card>
     )
