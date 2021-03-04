@@ -94,7 +94,7 @@ class TeacherList extends React.Component {
 
           <Stat
             title={"Hours of Class"}
-            value={stats.hours_of_class_this_month}
+            value={stats.hours_of_class_this_month.toFixed(2)}
             range={"This Month"}
             color={"info"}
             icon={"schedule"}

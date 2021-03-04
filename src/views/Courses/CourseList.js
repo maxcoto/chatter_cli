@@ -87,6 +87,9 @@ class CourseList extends React.Component {
     let totalCount = groupCount + individualCount
     if(totalCount === 0) totalCount = 1 // border case (when sum is zero)
 
+    const groupPercentage = ((groupCount/totalCount)*100).toFixed(2)
+    const individualPercentage = ((individualCount/totalCount)*100).toFixed(2)
+
     return (
       <React.Fragment>
 
@@ -130,7 +133,7 @@ class CourseList extends React.Component {
                   <Icon>accessibility_new</Icon>
                 </CardIcon>
                 <p className={classes.cardCategory}>Students in Groups vs Individuals</p>
-                <h3 className={classes.cardTitle}>{(groupCount/totalCount)*100}% vs {(individualCount/totalCount)*100}%</h3>
+                <h3 className={classes.cardTitle}>{groupPercentage}% vs {individualPercentage}%</h3>
               </CardHeader>
               <CardFooter stats>
                 <div className={classes.stats}>
