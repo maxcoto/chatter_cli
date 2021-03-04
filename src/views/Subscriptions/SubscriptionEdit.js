@@ -9,6 +9,9 @@ import CardFooter from "components/Card/CardFooter.js";
 import SubscriptionForm from './SubscriptionForm.js'
 import CircularProgress from '@material-ui/core/CircularProgress';
 
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+
 import { defaultSubscription } from 'variables/general'
 
 import { withStyles } from "@material-ui/core/styles";
@@ -25,9 +28,12 @@ class SubscriptionEdit extends React.Component {
     this.onClick = this.onClick.bind(this)
     this.onChange = this.onChange.bind(this)
 
-    var subscription = this.props.student.subscription || defaultSubscription
+    var { subscriptions } = this.props.student
+    subscriptions = subscriptions.length ? subscriptions : [defaultSubscription]
+    var subscription = subscriptions[subscriptions.length-1]
     subscription.student_id = this.props.student.id
-    this.state = { subscription }
+
+    this.state = { subscription, subscriptions }
   }
 
   onSuccess(response){
@@ -43,11 +49,20 @@ class SubscriptionEdit extends React.Component {
 
   onClick(){
     this.setState({ progress: true })
-    if(this.state.subscription.id){
-      API.update('subscriptions', this.state.subscription.id, this.state, this.onSuccess, this.onFailure)
-    } else {
-      API.create('subscriptions', this.state, this.onSuccess, this.onFailure)
-    }
+    API.create('subscriptions', this.state, this.onSuccess, this.onFailure)
+  }
+
+  pay(){
+    const self = this
+    const { subscription } = this.state
+    self.setState( { subscription: { paid: !subscription.paid, ...subscription } }, function(newState){
+      API.update('subscriptions', newState.subscription.id, { paid: newState.subscription.paid }, self.onSuccess, self.onFailure)
+    })
+  }
+
+  move(index, direction){
+    const { subscription, subscriptions } = this.state
+    this.setState( { subscription: subscriptions[index+direction] } )
   }
 
   onChange(event){
@@ -57,13 +72,31 @@ class SubscriptionEdit extends React.Component {
 
   render() {
     const { classes, student, courses, teachers, hoursLeft } = this.props
-    const { subscription, progress } = this.state
-    //if(!subscription) return null
+    const { subscription, progress, subscriptions } = this.state
+    if(!subscription) return null
+
+    const index = subscriptions.indexOf(subscription)
 
     return(
       <Card>
         <CardHeader color="primary">
           <h4 className={classes.cardTitleWhite}>Subscription</h4>
+          <Button
+            justIcon round
+            disabled={index === 0}
+            color="info"
+            onClick={ this.move.bind(this, index, -1) }
+          >
+            <ArrowBackIosIcon />
+          </Button>
+          <Button
+            justIcon round
+            disabled={index === subscriptions.length-1}
+            color="info"
+            onClick={ this.move.bind(this, index, 1) }
+          >
+            <ArrowForwardIosIcon />
+          </Button>
         </CardHeader>
 
         <SubscriptionForm
@@ -76,7 +109,7 @@ class SubscriptionEdit extends React.Component {
         />
 
         <CardFooter>
-          <Button color="primary" onClick={this.onClick}>Save</Button>
+          <Button color="primary" onClick={this.onClick}>{ subscription.id ? "Renew" : "Save" }</Button>
           {progress && <CircularProgress color="inherit" style={{ color: "#9c27b0" }}/>}
         </CardFooter>
       </Card>
