@@ -27,7 +27,7 @@ class TeachersGraphs extends React.Component {
             <Card chart>
               <CardHeader color="primary">
                 <ChartistGraph
-                  className="ct-chart"
+                  className="ct-donut"
                   data={hours_per_teacher}
                   type="Pie"
                   options={studentByLevel.options}

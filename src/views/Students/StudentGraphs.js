@@ -19,7 +19,6 @@ class StudentGraphs extends React.Component {
 
     return (
       <React.Fragment>
-
         <GridContainer>
           {/* active vs new students */}
           <GridItem xs={12} sm={12} md={4}>
@@ -45,7 +44,7 @@ class StudentGraphs extends React.Component {
             <Card chart>
               <CardHeader color="primary">
                 <ChartistGraph
-                  className="ct-chart"
+                  className="ct-donut"
                   data={students_by_levels}
                   type="Pie"
                   options={studentByLevel.options}
