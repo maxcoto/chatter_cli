@@ -36,23 +36,6 @@ export default class HistoryForm extends React.Component {
           </GridItem>
         </GridContainer>
 
-
-        <GridContainer>
-          <GridItem xs={12} sm={12} md={4}>
-            <CustomInput
-              labelText='Calendar Id'
-              id='calendar_id'
-              formControlProps={{ fullWidth: true }}
-              inputProps={{
-                onChange,
-                name: 'calendar_id',
-                value: history.calendar_id
-              }}
-            />
-          </GridItem>
-        </GridContainer>
-
-
         <GridContainer>
           <GridItem xs={12} sm={12} md={4}>
             <CustomInput

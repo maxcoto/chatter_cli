@@ -12,11 +12,10 @@ import CustomInput from "components/CustomInput/CustomInput.js";
 
 import AddIcon from "@material-ui/icons/Add";
 import ShowIcon from "@material-ui/icons/Visibility";
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
+import SyncIcon from "@material-ui/icons/Sync";
 import Button from "components/CustomButtons/Button.js";
 
-import { formatDateTime } from 'library/helpers/functions.js'
+import { formatDate } from 'library/helpers/functions.js'
 import { withStyles } from "@material-ui/core/styles";
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
 
@@ -24,56 +23,29 @@ class HistoryList extends React.Component {
 
   constructor(props) {
     super(props)
-    this.state = { histories: [], all: [] }
+    this.state = { history_lists: [] }
 
-    API.configure(props.token)
+    //API.configure(props.token)
     API.all(
       'histories',
       function(data){
-        this.setState({ histories: data, all: data })
-        this.props.notifySuccess("Histories loaded !!")
+        this.setState({ history_lists: data, all: data })
+        this.props.notifySuccess("History Lists loaded !!")
       }.bind(this),
       function(error){
         console.log(error)
-        this.props.notifyError("Histories not loaded :( => " + error)
+        this.props.notifyError("History Lists not loaded :( => " + error)
       }.bind(this)
     )
   }
 
-  search(event){
-    const lookup = event.target.value.trim().toLowerCase();
-    var list = this.state.all
-    if(lookup !== ''){
-      list = list.filter(function(item){
-        return (
-          item.teacher.first_name.toLowerCase().includes(lookup) ||
-          item.teacher.last_name.toLowerCase().includes(lookup)
-        )
-      }) || []
-    }
-
-    this.setState({ ...this.state, histories: list })
-  }
-
-  new(){
-    this.props.history.push('/histories/new');
-  }
-
-  show(history){
-    this.props.history.push('/histories/' + history.id, { history });
-  }
-
-  edit(history){
-    this.props.history.push('/histories/' + history.id + '/edit', { history });
-  }
-
-  delete(history){
+  pull(created_at){
     const self = this
-    API.delete(
+    API.create(
       'histories',
-      history.id,
+      { created_at },
       function(result){
-        self.props.notifySuccess("History has been deleted succesfully")
+        self.props.notifySuccess("History List has been deleted succesfully")
         window.location.reload()
       },
       function(error){
@@ -82,57 +54,40 @@ class HistoryList extends React.Component {
     )
   }
 
+  show(history_list){
+    this.props.history.push('/histories/' + history_list.id, { history_list });
+  }
+
   render() {
     const { classes } = this.props
-    const { histories } = this.state
+    const { history_lists } = this.state
 
     return (
       <GridContainer>
         <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardHeader color="primary">
-              <div style={{ float: "left" }}>
-                <h4 className={classes.cardTitleWhite}>Histories</h4>
-                <p className={classes.cardCategoryWhite}>All</p>
-              </div>
-
-              <div style={{ float: "right" }}>
-                <CustomInput
-                  labelText="Search"
-                  inputProps={{ onChange: this.search.bind(this) }}
-                  formControlProps={{ style: { margin: 0 }, fullWidth: true }}
-                />
-              </div>
+              <h4 className={classes.cardTitleWhite}>Histories</h4>
             </CardHeader>
             <CardBody>
-              <Button color="warning" aria-label="add" justIcon round onClick={ this.new.bind(this)} >
-                <AddIcon />
+              <Button color="warning" aria-label="add" onClick={ this.pull.bind(this, (new Date()))} >
+                Pull Today
               </Button>
               <Table
                 tableHeaderColor="primary"
-                tableHead={['Teacher', 'Course', 'Event Id', 'Duration', 'Attended At', 'Actions']}
+                tableHead={['Day', 'Status', 'Actions']}
                 tableData={
-                  histories.map(history => {
+                  history_lists.map(history_list => {
                     return [
-                      history.teacher_name,
-                      history.summary,
-											history.event_id,
-											history.duration,
-											formatDateTime(history.created_at),
+                      formatDate(history_list.created_at),
+                      history_list.loaded ? "success" : "error",
                       <div>
-                        <Button color="info" aria-label="show" justIcon round
-                                onClick={ this.show.bind(this, history)} >
+                        <Button color="info" aria-label="show" justIcon round onClick={ this.show.bind(this, history_list)} >
                           <ShowIcon />
                         </Button>
                         &nbsp;&nbsp;
-                        <Button color="primary" aria-label="edit" justIcon round
-                                onClick={ this.edit.bind(this, history)} >
-                          <EditIcon />
-                        </Button>
-                        &nbsp;&nbsp;
-                        <Button color="danger" aria-label="delete" justIcon round
-                                onClick={ this.delete.bind(this, history)} >
-                          <DeleteIcon />
+                        <Button color="primary" aria-label="edit" justIcon round onClick={ this.pull.bind(this, history_list.created_at)} >
+                          <SyncIcon />
                         </Button>
                       </div>
                     ]}
