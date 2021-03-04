@@ -8,9 +8,6 @@ import Table from "components/Table/Table.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
-import CustomInput from "components/CustomInput/CustomInput.js";
-
-import AddIcon from "@material-ui/icons/Add";
 import ShowIcon from "@material-ui/icons/Visibility";
 import SyncIcon from "@material-ui/icons/Sync";
 import Button from "components/CustomButtons/Button.js";
