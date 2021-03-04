@@ -90,21 +90,6 @@ class HistoryEdit extends React.Component {
             </CardFooter>
           </Card>
         </GridItem>
-        <GridItem xs={12} sm={12} md={4}>
-          <Card profile>
-            <CardAvatar profile>
-              <a href="#pablo" onClick={e => e.preventDefault()}>
-                <img src={avatar} alt="..." />
-              </a>
-            </CardAvatar>
-            <CardBody profile>
-              <HistoryFields history={history} />
-              <Button color="primary" onClick={this.show.bind(this, history)} >
-                Show
-              </Button>
-            </CardBody>
-          </Card>
-        </GridItem>
       </GridContainer>
     )
   }
