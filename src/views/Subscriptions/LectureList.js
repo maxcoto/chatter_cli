@@ -20,12 +20,12 @@ class LectureList extends React.Component {
   }
 
   render() {
-    const { classes, student } = this.props
-    const { lectures } = student
+    const { classes, subscription } = this.props
+    const { lectures } = subscription
 
     const hoursTaken = lectures ? lectures.filter((l) => l.taken).reduce(function(sum, lecture) { return (sum + lecture.duration) }, 0) : 0
-    const hoursLeft = student.subscription ? student.subscription.hours_left - hoursTaken : 0;
-    const hoursRemanent = student.subscription ? student.subscription.hours_remanent : 0;
+    const hoursLeft = subscription ? subscription.hours_left - hoursTaken : 0;
+    const hoursRemanent = subscription ? subscription.hours_remanent : 0;
 
     if(!lectures) return null;
 

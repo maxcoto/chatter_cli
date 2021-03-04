@@ -1,6 +1,8 @@
 import React from "react";
 import API from '../../library/API'
 
+import LectureList from '../Subscriptions/LectureList.js'
+
 // core components
 import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
@@ -78,41 +80,49 @@ class SubscriptionEdit extends React.Component {
     const index = subscriptions.indexOf(subscription)
 
     return(
-      <Card>
-        <CardHeader color="primary">
-          <h4 className={classes.cardTitleWhite}>Subscription</h4>
-          <Button
-            justIcon round
-            disabled={index === 0}
-            color="info"
-            onClick={ this.move.bind(this, index, -1) }
-          >
-            <ArrowBackIosIcon />
-          </Button>
-          <Button
-            justIcon round
-            disabled={index === subscriptions.length-1}
-            color="info"
-            onClick={ this.move.bind(this, index, 1) }
-          >
-            <ArrowForwardIosIcon />
-          </Button>
-        </CardHeader>
+      <React.Fragment>
+        <Card>
+          <CardHeader color="primary">
+            <h4 className={classes.cardTitleWhite}>Subscription</h4>
+            <Button
+              justIcon round
+              disabled={index === 0}
+              color="info"
+              onClick={ this.move.bind(this, index, -1) }
+            >
+              <ArrowBackIosIcon />
+            </Button>
+            <Button
+              justIcon round
+              disabled={index === subscriptions.length-1}
+              color="info"
+              onClick={ this.move.bind(this, index, 1) }
+            >
+              <ArrowForwardIosIcon />
+            </Button>
+          </CardHeader>
 
-        <SubscriptionForm
-          hoursLeft={hoursLeft}
+          <SubscriptionForm
+            hoursLeft={hoursLeft}
+            subscription={subscription}
+            student={student}
+            courses={courses}
+            teachers={teachers}
+            onChange={this.onChange}
+          />
+
+          <CardFooter>
+            <Button color="primary" onClick={this.onClick}>{ subscription.id ? "Renew" : "Save" }</Button>
+            {progress && <CircularProgress color="inherit" style={{ color: "#9c27b0" }}/>}
+          </CardFooter>
+        </Card>
+
+        <br />
+
+        <LectureList
           subscription={subscription}
-          student={student}
-          courses={courses}
-          teachers={teachers}
-          onChange={this.onChange}
         />
-
-        <CardFooter>
-          <Button color="primary" onClick={this.onClick}>{ subscription.id ? "Renew" : "Save" }</Button>
-          {progress && <CircularProgress color="inherit" style={{ color: "#9c27b0" }}/>}
-        </CardFooter>
-      </Card>
+      </React.Fragment>
     )
   }
 }

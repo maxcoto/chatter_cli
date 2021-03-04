@@ -19,7 +19,7 @@ export default function CustomSwitch(props) {
       <FormControlLabel
         control={
           <Switch
-            checked={state.checked}
+            checked={state.checked || props.checked}
             onChange={handleChange}
             name={props.name}
             color="primary"

@@ -11,7 +11,6 @@ import CardFooter from "components/Card/CardFooter.js";
 import StudentForm from './StudentForm.js'
 import SubscriptionEdit from '../Subscriptions/SubscriptionEdit.js'
 import TrialEdit from '../Trials/TrialEdit.js'
-import LectureList from '../Subscriptions/LectureList.js'
 
 import { withStyles } from "@material-ui/core/styles";
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
@@ -108,13 +107,6 @@ class StudentEdit extends React.Component {
             />
           }
 
-          <br />
-
-          { student.active &&
-            <LectureList
-              student={student}
-            />
-          }
         </GridItem>
 
       </GridContainer>
