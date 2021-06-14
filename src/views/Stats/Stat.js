@@ -15,28 +15,38 @@ import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js"
 
 class Stat extends React.Component {
 
-  render(){
-    const { classes } = this.props;
-    const {title, value, range, icon, color, width} = this.props;
-
-    return (
-      <GridItem xs={12} sm={6} md={width || 3}>
-        <Card>
-          <CardHeader color={ color || "primary"} stats icon>
-            <CardIcon color={ color || "primary"}>
-              <Icon>{ icon || "thumb_up" }</Icon>
-            </CardIcon>
-            <p className={classes.cardCategory}>{ title || "Untitled" }</p>
-            <h3 className={classes.cardTitle}>{ value || 0 }</h3>
-          </CardHeader>
-          <CardFooter stats>
-            <div className={classes.stats}>
-              <DateRange /> {range || "Current"}
-            </div>
-          </CardFooter>
-        </Card>
-      </GridItem>
+  renderCard(){
+    const {classes, title, value, range, icon, color} = this.props;
+    return(
+      <Card>
+        <CardHeader color={ color || "primary"} stats icon>
+          <CardIcon color={ color || "primary"}>
+            <Icon>{ icon || "thumb_up" }</Icon>
+          </CardIcon>
+          <p className={classes.cardCategory}>{ title || "Untitled" }</p>
+          <h3 className={classes.cardTitle}>{ value || 0 }</h3>
+        </CardHeader>
+        <CardFooter stats>
+          <div className={classes.stats}>
+            <DateRange /> {range || "Current"}
+          </div>
+        </CardFooter>
+      </Card>
     )
+  }
+
+  render(){
+    const { vertical, width } = this.props;
+
+    if(vertical){
+      return this.renderCard()
+    } else {
+      return(
+        <GridItem xs={12} sm={6} md={width || 3}>
+          { this.renderCard() }
+        </GridItem>
+      )
+    }
   }
 }
 

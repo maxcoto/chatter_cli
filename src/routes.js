@@ -7,6 +7,7 @@ import UserProfile from "views/UserProfile/UserProfile.js";
 import StudentNew  from "views/Students/StudentNew.js";
 import StudentEdit from "views/Students/StudentEdit.js";
 import StudentList from "views/Students/StudentList.js";
+import PotentialList from "views/Students/PotentialList.js";
 // teachers imports
 import TeacherEdit from 'views/Teachers/TeacherEdit.js'
 import TeacherList from 'views/Teachers/TeacherList.js'
@@ -39,10 +40,10 @@ const routes = [
   { path: "/user",      component: UserProfile,   layout: "", name: "Profile",   bottom: true },
 
   // students routes
-  { path: "/students/new",      component: StudentNew,  layout: "", hidden: true },
-  { path: "/students/:id",      component: StudentEdit, layout: "", hidden: true },
-  { path: "/students",          component: StudentList, layout: "", name: "Students" },
-
+  { path: "/students/:id",      component: StudentEdit,   layout: "", hidden: true },
+  { path: "/students",          component: StudentList,   layout: "", name: "Students" },
+  { path: "/potentials/new",    component: StudentNew,    layout: "", hidden: true },
+  { path: "/potentials",        component: PotentialList, layout: "", name: "Potentials" },
 
   // teachers routes
   { path: '/teachers/new',      component: TeacherNew,  layout: '', hidden: true },

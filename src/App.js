@@ -12,6 +12,7 @@ const mapStateToProps = state => {
     teachers: state.teachers,
 		courses: state.courses,
 		students: state.students,
+    potentials: state.potentials,
 		stats: state.stats,
 		trials: state.trials,
 		//[+add_reducer+]

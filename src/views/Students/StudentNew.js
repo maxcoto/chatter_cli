@@ -60,7 +60,7 @@ class StudentNew extends React.Component {
         <GridItem xs={12} sm={12} md={8}>
           <Card>
             <CardHeader color="primary">
-              <h4 className={classes.cardTitleWhite}>New Student</h4>
+              <h4 className={classes.cardTitleWhite}>New Potential</h4>
             </CardHeader>
 
             <StudentForm student={student} onChange={this.onChange} levels={levels} />

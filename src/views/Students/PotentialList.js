@@ -1,6 +1,7 @@
 import React from "react";
 import CustomInput from "components/CustomInput/CustomInput.js";
 
+import AddIcon from "@material-ui/icons/Add";
 import EditIcon from "@material-ui/icons/Edit";
 import Button from "components/CustomButtons/Button.js";
 
@@ -13,34 +14,33 @@ import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
 
 import CustomSelect from "components/CustomSelect/CustomSelect.js"
-import CustomSwitch from "components/CustomSwitch/CustomSwitch.js";
-
-import StudentGraphs from "./StudentGraphs"
+//import CustomSwitch from "components/CustomSwitch/CustomSwitch.js";
 
 import { withStyles } from "@material-ui/core/styles";
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
-import { defaultStats, _status } from 'variables/general'
+import { _statuses } from 'variables/general'
+import { formatDate } from 'library/helpers/functions.js'
 
-_status.push({ id: null, name: 'all' })
+_statuses.push({ id: null, name: 'all' })
 
-class StudentList extends React.Component {
+class PotentialList extends React.Component {
 
   constructor(props) {
     super(props)
-    this.state = { students: [], all: [], filters: {} }
+    this.state = { potentials: [], all: [], filters: {} }
   }
 
   componentDidMount(){
-    if(this.props.students !== this.state.all){
-      const { students } = this.props
-      this.setState({ students, all: students })
+    if(this.props.potentials !== this.state.all){
+      const { potentials } = this.props
+      this.setState({ potentials, all: potentials })
     }
   }
 
   componentDidUpdate(){
-    if(this.props.students !== this.state.all){
-      const { students } = this.props
-      this.setState({ students, all: students })
+    if(this.props.potentials !== this.state.all){
+      const { potentials } = this.props
+      this.setState({ potentials, all: potentials })
     }
   }
 
@@ -57,7 +57,7 @@ class StudentList extends React.Component {
       const filters = {}
       filters[key] = value
 
-      this.setState({ ...this.state, students: list, filters })
+      this.setState({ ...this.state, potentials: list, filters })
     }
   }
 
@@ -75,7 +75,11 @@ class StudentList extends React.Component {
       }) || []
     }
 
-    this.setState({ ...this.state, students: list })
+    this.setState({ ...this.state, potentials: list })
+  }
+
+  new(){
+    this.props.history.push('/potentials/new');
   }
 
   edit(student){
@@ -88,27 +92,17 @@ class StudentList extends React.Component {
   }
 
   render() {
-    const { classes, levels } = this.props
-    const { students } = this.state
-
-    const stats = this.props.stats || defaultStats;
+    const { classes } = this.props
+    const { potentials } = this.state
 
     return (
       <React.Fragment>
-
-        <StudentGraphs classes={classes} stats={stats} levels={levels} />
-
-        <GridContainer>
-          
-
-        </GridContainer>
-
         <GridContainer>
           <GridItem xs={12} sm={12} md={12}>
             <Card>
               <CardHeader color="primary">
                 <div style={{ float: "left" }}>
-                  <h4 className={classes.cardTitleWhite}>Students</h4>
+                  <h4 className={classes.cardTitleWhite}>Potentials</h4>
                   <p className={classes.cardCategoryWhite}>All</p>
                 </div>
 
@@ -121,39 +115,40 @@ class StudentList extends React.Component {
                 </div>
               </CardHeader>
               <CardBody>
+                <Button color="warning" aria-label="add" justIcon round onClick={ this.new.bind(this)} >
+                  <AddIcon />
+                </Button>
+
                 <GridItem xs={12} sm={12} md={3}>
                   <CustomSelect
                     labelText='Status'
                     formControlProps={{ fullWidth: true }}
-                    values={ _status }
-                    onChange={this.filter("active").bind(this)}
+                    values={ _statuses }
+                    onChange={this.filter("status").bind(this)}
                     inputProps={{
-                      name: 'active',
-                      value: this.state.filters["active"]
+                      name: 'status',
+                      value: this.state.filters["status"]
                     }}
                   />
                 </GridItem>
 
                 <Table
                   tableHeaderColor="primary"
-                  tableHead={["Name", "Course", "Level", "Months Active", "Status", "Actions"]}
+                  tableHead={["Name", "Course", "Level", "Trial Date", "Status", "Notes", "Actions"]}
                   tableData={
-                    students.map(student => {
+                    potentials.map(potential => {
                       return [
-                        student.full_name,
-                        student.subscription_course ? student.subscription_course.name : "",
-                        student.level.name,
-                        student.longevity,
-                        <CustomSwitch
-                          name="active"
-                          checked={student.active}
-                          onChange={this.toggle.bind(this, student)}
-                          disabled={true}
-                        />,
-                        <Button color="primary" aria-label="edit" justIcon round
-                                onClick={ this.edit.bind(this, student)} >
-                          <EditIcon />
-                        </Button>
+                        potential.full_name,
+                        potential.trial_course ? potential.trial_course.name : "", //.name,
+                        potential.level.name,
+                        formatDate((potential.trial && potential.trial.class_date)),
+                        potential.status,
+                        potential.notes,
+                        <div>
+                          <Button color="primary" aria-label="edit" justIcon round onClick={ this.edit.bind(this, potential)} >
+                            <EditIcon />
+                          </Button>
+                        </div>
                       ]}
                     )
                   }
@@ -167,32 +162,4 @@ class StudentList extends React.Component {
   }
 }
 
-export default withStyles(styles, { withTheme: true })(StudentList);
-
-
-
-// DELETE FUCTIONALITY
-
-// import ShowIcon from "@material-ui/icons/Visibility";
-// import DeleteIcon from "@material-ui/icons/Delete";
-
-// delete(student){
-//   const self = this
-//   API.delete(
-//     'students',
-//     student.id,
-//     function(result){
-//       self.props.notifySuccess("Student has been deleted succesfully")
-//       window.location.reload()
-//     },
-//     function(error){
-//       console.log(error);
-//     }
-//   )
-// }
-
-
-// <Button color="danger" aria-label="delete" justIcon round
-//         onClick={ this.delete.bind(this, student)} >
-//   <DeleteIcon />
-// </Button>
+export default withStyles(styles, { withTheme: true })(PotentialList);

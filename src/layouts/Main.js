@@ -71,7 +71,10 @@ class Main extends React.Component {
 
     API.all('students',
       function(result){
-        this.props.setStudents(result)
+        const potentials = result.filter(function(s) { return s.activated_at === null })
+        const students = result.filter(function(s) { return s.activated_at !== null })
+        this.props.setPotentials(potentials)
+        this.props.setStudents(students)
       }.bind(this),
       function(error){
         console.log(error)

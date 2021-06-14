@@ -67,12 +67,12 @@ class Dashboard extends React.Component {
             <Card>
               <CardHeader color="danger">
                 <h4 className={classes.cardTitleWhite}>Unpaid Subscriptions</h4>
-                <p className={classes.cardCategoryWhite}>2 Weeks Overdue</p>
+                <p className={classes.cardCategoryWhite}>Who Is Overdue?</p>
               </CardHeader>
               <CardBody>
                 <Table
                   tableHeaderColor="danger"
-                  tableHead={["Student", "Renewal Date", "Price", "Group"]}
+                  tableHead={["Student", "Renewal Date", "Price", "Group", "Overdue"]}
                   tableData={
                     stats.overdue_subscriptions.map(subscription => {
                       return [

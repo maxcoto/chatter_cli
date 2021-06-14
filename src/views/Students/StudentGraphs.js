@@ -5,6 +5,8 @@ import GridContainer from "components/Grid/GridContainer.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
+import Stat from "../Stats/Stat.js"
+
 import { withStyles } from "@material-ui/core/styles";
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
 import { studentsForMonthChart, studentByLevel, studentForTime } from "variables/charts.js";
@@ -38,34 +40,6 @@ class StudentGraphs extends React.Component {
                 <p className={classes.cardCategory}>Last 12 months</p>
               </CardBody>
             </Card>
-          </GridItem>
-          {/* students by level */}
-          <GridItem xs={12} sm={12} md={4}>
-            <Card chart>
-              <CardHeader color="primary">
-                <ChartistGraph
-                  className="ct-donut"
-                  data={students_by_levels}
-                  type="Pie"
-                  options={studentByLevel.options}
-                />
-              </CardHeader>
-              <CardBody>
-                <h4 className={classes.cardTitle}>Students Per Level</h4>
-                {
-                  levels.map((l, i) => {
-                    return (
-                      <p className={classes.cardCategory} key={i}>
-                        { l.name[0].toUpperCase() + ": " + l.name }
-                      </p>
-                    )
-                  })
-                }
-              </CardBody>
-            </Card>
-          </GridItem>
-          {/* */}
-          <GridItem xs={12} sm={12} md={4}>
             <Card chart>
               <CardHeader color="primary">
                 <ChartistGraph
@@ -80,6 +54,60 @@ class StudentGraphs extends React.Component {
                 <p className={classes.cardCategory}></p>
               </CardBody>
             </Card>
+          </GridItem>
+          {/* students by level */}
+          <GridItem xs={12} sm={12} md={4}>
+            <Card chart>
+              <CardHeader color="primary">
+                <ChartistGraph
+                  className="ct-donut"
+                  data={students_by_levels}
+                  type="Pie"
+                  options={studentByLevel.options}
+                />
+              </CardHeader>
+              <CardBody>
+                <h4 className={classes.cardTitle}>Students By Level</h4>
+                {
+                  levels.map((l, i) => {
+                    return (
+                      <p className={classes.cardCategory} key={i}>
+                        { l.name[0].toUpperCase() + ": " + l.name }
+                      </p>
+                    )
+                  })
+                }
+              </CardBody>
+            </Card>
+          </GridItem>
+          {/* */}
+          <GridItem xs={12} sm={12} md={4}>
+            <Stat
+              vertical
+              title={"Active Students"}
+              value={stats.current_active_students}
+              icon={"school"}
+              width={4}
+            />
+
+            <Stat
+              vertical
+              title={"New Students"}
+              value={stats.new_students_this_month}
+              range={"This Month"}
+              color={"success"}
+              width={4}
+            />
+
+            <Stat
+              vertical
+              title={"Dropped Students"}
+              value={stats.dropped_students_this_month}
+              range={"This Month"}
+              color={"danger"}
+              width={4}
+              icon={"thumb_down"}
+            />
           </GridItem>
         </GridContainer>
       </React.Fragment>
