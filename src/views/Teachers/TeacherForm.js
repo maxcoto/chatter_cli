@@ -78,7 +78,7 @@ export default class TeacherForm extends React.Component {
               inputProps={{
                 onChange,
                 name: 'calendar_id',
-                value: teacher.calendar_id
+                value: teacher.calendar_id || ""
               }}
             />
           </GridItem>

@@ -1,5 +1,7 @@
 import React from "react";
 import API from '../../library/API'
+import URI from 'library/api/service.js'
+
 import DeleteIcon from "@material-ui/icons/Delete";
 // core components
 import GridItem from "components/Grid/GridItem.js";
@@ -10,9 +12,10 @@ import CardHeader from "components/Card/CardHeader.js";
 import CardFooter from "components/Card/CardFooter.js";
 import CourseForm from './CourseForm.js'
 import ScheduleEdit from "../Schedules/ScheduleEdit.js"
-
 import { withStyles } from "@material-ui/core/styles";
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
+
+
 
 class CourseEdit extends React.Component {
 
@@ -25,21 +28,17 @@ class CourseEdit extends React.Component {
     this.onClick = this.onClick.bind(this)
     this.onChange = this.onChange.bind(this)
 
-    this.state = this.props.location.state || { course: null }
+    this.state = { course: null }
 
-    API.configure(props.token)
-
-    if(!this.state.course){
-      const id = this.props.location.pathname.split("/")[2]
-      API.get('courses', id,
-        function(response){
-          this.setState({ course: response })
-        }.bind(this),
-        function(error){
-          this.props.notifyError(error)
-        }.bind(this)
-      )
-    }
+    const id = this.props.location.pathname.split("/")[2]
+    API.get('courses', id,
+      function(response){
+        this.setState({ course: response })
+      }.bind(this),
+      function(error){
+        this.props.notifyError(error)
+      }.bind(this)
+    )
   }
 
   delete(course){
@@ -49,7 +48,7 @@ class CourseEdit extends React.Component {
       course.id,
       function(result){
         self.props.notifySuccess("Course has been deleted succesfully")
-        window.location.reload()
+        window.location = URI + '/courses'
       },
       function(error){
         console.log(error);

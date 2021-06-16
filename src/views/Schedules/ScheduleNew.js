@@ -23,6 +23,7 @@ class ScheduleNew extends React.Component {
 
     this.add = this.add.bind(this)
     this.onChange = this.onChange.bind(this)
+    this.onDelete = this.onDelete.bind(this)
   }
 
   add(event){
@@ -36,6 +37,13 @@ class ScheduleNew extends React.Component {
     schedules[index] = schedule
     this.setState({ schedules: schedules });
     this.props.onChange({ target: { name: "schedules", value: schedules } })
+  }
+  
+  onDelete(index) {
+    const schedules = this.state.schedules
+    const result = [...schedules.slice(0, index), ...schedules.slice(index + 1)];
+    this.setState({ schedules: result });
+    this.props.onChange({ target: { name: "schedules", value: result } })
   }
 
   render() {
@@ -57,6 +65,7 @@ class ScheduleNew extends React.Component {
                   index={index}
                   schedule={schedule}
                   onChange={this.onChange}
+                  onDelete={this.onDelete}
                 />
               )
             })
