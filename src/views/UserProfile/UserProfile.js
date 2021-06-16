@@ -20,17 +20,20 @@ import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js"
 
 const useStyles = makeStyles(styles);
 
-export default function UserProfile() {
+export default function UserProfile(props) {
   const classes = useStyles();
 
   const onClick = () => {
     window.location = URI + '/redirect'
   }
+  
+  const cron = props.stats?.cron
+  if (!cron) return null
 
   return (
     <div>
       <GridContainer>
-        <GridItem xs={12} sm={12} md={8}>
+        <GridItem xs={12} sm={12} md={6}>
           <Card>
             <CardHeader color="primary">
               <h4 className={classes.cardTitleWhite}>Profile</h4>
@@ -53,6 +56,31 @@ export default function UserProfile() {
             <CardFooter>
               <Button color="primary" onClick={onClick}>Connect with Google Calendar</Button>
             </CardFooter>
+          </Card>
+        </GridItem>
+        
+        <GridItem xs={12} sm={12} md={6}>
+          <Card>
+            <CardHeader color="primary">
+              <h4 className={classes.cardTitleWhite}>Server Status</h4>
+            </CardHeader>
+            <CardBody>
+              <GridContainer>
+                <GridItem xs={12} sm={12} md={5}>
+                  { cron.status && <Button color="success" onClick={onClick}>operational</Button> }
+                  { 
+                    !cron.status && 
+                      <div>
+                        <Button color="danger" onClick={onClick}>crashed</Button>
+                        <br /><br />
+                        <div>
+                          { cron.message }
+                        </div>
+                      </div>
+                  }
+                </GridItem>
+              </GridContainer>
+            </CardBody>
           </Card>
         </GridItem>
       </GridContainer>

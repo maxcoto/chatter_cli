@@ -26,21 +26,17 @@ class StudentEdit extends React.Component {
     this.onClick = this.onClick.bind(this)
     this.onChange = this.onChange.bind(this)
 
-    this.state = this.props.location.state || { student: null }
+    this.state = { student: null }
 
-    API.configure(props.token)
-
-    if(!this.state.student){
-      const id = this.props.location.pathname.split("/")[2]
-      API.get('students', id,
-        function(response){
-          this.setState({ student: response })
-        }.bind(this),
-        function(error){
-          this.props.notifyError(error)
-        }.bind(this)
-      )
-    }
+    const id = this.props.location.pathname.split("/")[2]
+    API.get('students', id,
+      function(response){
+        this.setState({ student: response })
+      }.bind(this),
+      function(error){
+        this.props.notifyError(error)
+      }.bind(this)
+    )
   }
 
   onSuccess(response){

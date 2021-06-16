@@ -67,7 +67,7 @@ class Dashboard extends React.Component {
             <Card>
               <CardHeader color="danger">
                 <h4 className={classes.cardTitleWhite}>Unpaid Subscriptions</h4>
-                <p className={classes.cardCategoryWhite}>Who Is Overdue?</p>
+                <p className={classes.cardCategoryWhite}>2 Weeks Overdue</p>
               </CardHeader>
               <CardBody>
                 <Table
