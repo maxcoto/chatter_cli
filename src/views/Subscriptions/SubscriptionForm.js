@@ -56,6 +56,7 @@ export default class SubscriptionForm extends React.Component {
                 name: 'kind',
                 value: subscription.kind
               }}
+              disabled={!!subscription.id}
             />
           </GridItem>
 
@@ -70,6 +71,7 @@ export default class SubscriptionForm extends React.Component {
                 name: 'course_id',
                 value: course_id
               }}
+              disabled={!!subscription.id}
             />
           </GridItem>
         </GridContainer>
@@ -86,6 +88,7 @@ export default class SubscriptionForm extends React.Component {
                 name: 'period',
                 value: subscription.period || '',
               }}
+              disabled={!!subscription.id}
             />
           </GridItem>
 
@@ -99,6 +102,7 @@ export default class SubscriptionForm extends React.Component {
                 name: 'start_date',
                 value: subscription.start_date
               }}
+              disabled={!!subscription.id}
             />
           </GridItem>
         </GridContainer>

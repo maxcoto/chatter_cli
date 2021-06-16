@@ -24,23 +24,42 @@ class SubscriptionEdit extends React.Component {
   constructor(props) {
     super(props)
 
-    this.onSuccess = this.onSuccess.bind(this)
+    this.onRenewSuccess = this.onRenewSuccess.bind(this)
+    this.onPaySuccess = this.onPaySuccess.bind(this)
     this.onFailure = this.onFailure.bind(this)
 
-    this.onClick = this.onClick.bind(this)
+    this.onRenew = this.onRenew.bind(this)
+    this.onDelete = this.onDelete.bind(this)
+    this.onPay = this.onPay.bind(this)
     this.onChange = this.onChange.bind(this)
 
     var { subscriptions } = this.props.student
-    subscriptions = subscriptions.length ? subscriptions : [defaultSubscription]
-    var subscription = subscriptions[subscriptions.length-1]
-    subscription.student_id = this.props.student.id
+    
+    defaultSubscription.student_id = this.props.student.id
+    subscriptions.push(defaultSubscription)
+
+    const count = subscriptions.length
+    var idx = 1
+    if(count > 1) idx = 2
+    const subscription = subscriptions[count-idx]
 
     this.state = { subscription, subscriptions }
   }
 
-  onSuccess(response){
-    this.setState({ subscription: response, progress: false });
-    this.props.notifySuccess("Subscription saved successfully")
+  onRenewSuccess(response){
+    const { subscriptions } = this.state
+    var index = subscriptions.length-1;
+    this.setState({
+      subscriptions: [
+        ...subscriptions.slice(0, index),
+        response,
+        ...subscriptions.slice(index)
+      ],
+      subscription: subscriptions[subscriptions.length-2],
+      progress: false
+    });
+    
+    this.props.notifySuccess("Subscription created successfully")
   }
 
   onFailure(error){
@@ -49,17 +68,42 @@ class SubscriptionEdit extends React.Component {
     this.props.notifyError(error)
   }
 
-  onClick(){
+  onRenew(){
     this.setState({ progress: true })
-    API.create('subscriptions', this.state, this.onSuccess, this.onFailure)
+    API.create('subscriptions', { subscription: this.state.subscription }, this.onRenewSuccess, this.onFailure)
+  }
+  
+  onDelete(){
+    const { subscription, subscriptions } = this.state
+    
+    API.delete('subscriptions', subscription.id, () => false, this.onFailure)
+
+    var ss = [...subscriptions];
+    ss.splice(ss.indexOf(subscription), 1);
+    this.setState({ subscriptions: ss, subscription: subscriptions[subscriptions.length-1] });
+  }
+  
+  onPaySuccess(response){
+    const { subscriptions, subscription } = this.state
+    const index = subscriptions.indexOf(subscription)
+
+    //update state value.
+    this.setState({
+      subscriptions: [
+        ...subscriptions.slice(0, index),
+        response,
+        ...subscriptions.slice(index + 1)
+      ],
+      subscription: response
+    })
+    
+    this.props.notifySuccess("Subscription saved successfully")
   }
 
-  pay(){
+  onPay(){
     const self = this
     const { subscription } = this.state
-    self.setState( { subscription: { paid: !subscription.paid, ...subscription } }, function(newState){
-      API.update('subscriptions', newState.subscription.id, { paid: newState.subscription.paid }, self.onSuccess, self.onFailure)
-    })
+    API.update('subscriptions', subscription.id, { paid: !subscription.paid }, self.onPaySuccess, self.onFailure)
   }
 
   move(index, direction){
@@ -83,23 +127,29 @@ class SubscriptionEdit extends React.Component {
       <React.Fragment>
         <Card>
           <CardHeader color="primary">
-            <h4 className={classes.cardTitleWhite}>Subscription</h4>
-            <Button
-              justIcon round
-              disabled={index === 0}
-              color="info"
-              onClick={ this.move.bind(this, index, -1) }
-            >
-              <ArrowBackIosIcon />
-            </Button>
-            <Button
-              justIcon round
-              disabled={index === subscriptions.length-1}
-              color="info"
-              onClick={ this.move.bind(this, index, 1) }
-            >
-              <ArrowForwardIosIcon />
-            </Button>
+            <div style={{ float: "left" }}>
+              <h4 className={classes.cardTitleWhite}>Subscriptions</h4>
+              <p className={classes.cardCategoryWhite}>All</p>
+            </div>
+
+            <div style={{ float: "right" }}>
+              <Button
+                justIcon round
+                disabled={index === 0}
+                color="warning"
+                onClick={ this.move.bind(this, index, -1) }
+              >
+                <ArrowBackIosIcon />
+              </Button>
+              <Button
+                justIcon round
+                disabled={index === subscriptions.length-1}
+                color="warning"
+                onClick={ this.move.bind(this, index, 1) }
+              >
+                <ArrowForwardIosIcon />
+              </Button>
+            </div>
           </CardHeader>
 
           <SubscriptionForm
@@ -112,7 +162,10 @@ class SubscriptionEdit extends React.Component {
           />
 
           <CardFooter>
-            <Button color="primary" onClick={this.onClick}>{ subscription.id ? "Renew" : "Save" }</Button>
+            { subscription.id && <Button color="danger" onClick={this.onDelete}>Delete</Button> }
+            { subscription.id && !subscription.paid && <Button color="success" onClick={this.onPay}>Pay</Button> }
+            { subscription.id && subscription.paid && <Button color="warning" onClick={this.onPay}>Un-Pay</Button> }
+            { !subscription.id && <Button color="primary" onClick={this.onRenew}>Renew</Button> }
             {progress && <CircularProgress color="inherit" style={{ color: "#9c27b0" }}/>}
           </CardFooter>
         </Card>

@@ -31,11 +31,17 @@ const request = {
   genFetch: function(path, options, onSuccess, onError){
     options['headers'] = headers.get();
 
+    var ok = true
     fetch(URI + path, options)
-    .then(response => response.json())
+    .then((response) => {
+      ok = !!response.ok
+      return response.json()
+    })
     .then((data) => {
       if (data.error) {
         onError(data.error)
+      } else if(!ok){
+        onError(data)
       } else {
         onSuccess(data)
       }

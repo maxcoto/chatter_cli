@@ -27,7 +27,6 @@ class HistoryList extends React.Component {
       'histories',
       function(data){
         this.setState({ history_lists: data, all: data })
-        this.props.notifySuccess("History Lists loaded !!")
       }.bind(this),
       function(error){
         console.log(error)
@@ -42,10 +41,11 @@ class HistoryList extends React.Component {
       'histories',
       { created_at },
       function(result){
-        self.props.notifySuccess("History List has been deleted succesfully")
+        self.props.notifySuccess("History List has been pulled succesfully")
         window.location.reload()
       },
       function(error){
+        self.props.notifyError(error)
         console.log(error);
       }
     )
