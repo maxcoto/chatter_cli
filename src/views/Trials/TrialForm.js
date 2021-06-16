@@ -27,7 +27,7 @@ export default class TrialForm extends React.Component {
     const course_id = filteredCoursesIds.includes(trial.course_id) ? trial.course_id : ''
 
 
-    // TODO - RESOLVE CLASS DATETIME FROM AVAILABILITY
+    // TODO - RESOLVE DATETIME FROM AVAILABILITY
 
     return(
       <CardBody>
