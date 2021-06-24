@@ -31,7 +31,6 @@ import HistoryShow from 'views/Histories/HistoryShow.js'
 import PriceEdit from 'views/Prices/PriceEdit.js'
 import PriceList from 'views/Prices/PriceList.js'
 import PriceNew from 'views/Prices/PriceNew.js'
-import PriceShow from 'views/Prices/PriceShow.js'
 
 //[+add_includes+]
 
@@ -71,7 +70,6 @@ const routes = [
   // prices routes
   { path: '/prices/new',      component: PriceNew,  layout: '', hidden: true },
   { path: '/prices/:id/edit', component: PriceEdit, layout: '', hidden: true },
-  { path: '/prices/:id',      component: PriceShow, layout: '', hidden: true },
   { path: '/prices',          component: PriceList, layout: '', hidden: true },
 
   //[+add_routes+]

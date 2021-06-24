@@ -87,6 +87,21 @@ export default class PriceForm extends React.Component {
             />
           </GridItem>
         </GridContainer>
+        
+        <GridContainer>
+          <GridItem xs={12} sm={12} md={6}>
+            <CustomInput
+              labelText='MercadoPago'
+              id='mercadopago_link'
+              formControlProps={{ fullWidth: true }}
+              inputProps={{
+                onChange,
+                name: 'mercadopago_link',
+                value: price.mercadopago_link
+              }}
+            />
+          </GridItem>
+        </GridContainer>
       
       </CardBody>
     )

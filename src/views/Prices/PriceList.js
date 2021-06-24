@@ -11,9 +11,7 @@ import CardBody from "components/Card/CardBody.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
 
 import AddIcon from "@material-ui/icons/Add";
-import ShowIcon from "@material-ui/icons/Visibility";
 import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
 import Button from "components/CustomButtons/Button.js";
 
 import { withStyles } from "@material-ui/core/styles";
@@ -58,27 +56,8 @@ class PriceList extends React.Component {
     this.props.history.push('/prices/new');
   }
 
-  show(price){
-    this.props.history.push('/prices/' + price.id, { price });
-  }
-
   edit(price){
     this.props.history.push('/prices/' + price.id + '/edit', { price });
-  }
-
-  delete(price){
-    const self = this
-    API.delete(
-      'prices',
-      price.id,
-      function(result){
-        self.props.notifySuccess("Price has been deleted succesfully")
-        window.location.reload()
-      },
-      function(error){
-        console.log(error);
-      }
-    )
   }
 
   render() {
@@ -111,27 +90,17 @@ class PriceList extends React.Component {
               </Button>
               <Table
                 tableHeaderColor="primary"
-                tableHead={['Level', 'Months', 'Amount', 'Actions']}
+                tableHead={['Level', 'Months', 'Amount', 'MercadoPago', 'Actions']}
                 tableData={
                   groupPrices.map(price => {
                     return [
                       price.level.name,
 											price.period,
 											price.amount,
+                      price.mercadopago_link,
                       <div>
-                        <Button color="info" aria-label="show" justIcon round
-                                onClick={ this.show.bind(this, price)} >
-                          <ShowIcon />
-                        </Button>
-                        &nbsp;&nbsp;
-                        <Button color="primary" aria-label="edit" justIcon round
-                                onClick={ this.edit.bind(this, price)} >
+                        <Button color="primary" aria-label="edit" justIcon round onClick={ this.edit.bind(this, price)} >
                           <EditIcon />
-                        </Button>
-                        &nbsp;&nbsp;
-                        <Button color="danger" aria-label="delete" justIcon round
-                                onClick={ this.delete.bind(this, price)} >
-                          <DeleteIcon />
                         </Button>
                       </div>
                     ]}
@@ -162,26 +131,16 @@ class PriceList extends React.Component {
               </Button>
               <Table
                 tableHeaderColor="primary"
-                tableHead={['Hours', 'Amount', 'Actions']}
+                tableHead={['Hours', 'Amount', 'MercadoPago', 'Actions']}
                 tableData={
                   individualPrices.map(price => {
                     return [
 											price.period,
 											price.amount,
+                      price.mercadopago_link,
                       <div>
-                        <Button color="info" aria-label="show" justIcon round
-                                onClick={ this.show.bind(this, price)} >
-                          <ShowIcon />
-                        </Button>
-                        &nbsp;&nbsp;
-                        <Button color="primary" aria-label="edit" justIcon round
-                                onClick={ this.edit.bind(this, price)} >
+                        <Button color="primary" aria-label="edit" justIcon round onClick={ this.edit.bind(this, price)} >
                           <EditIcon />
-                        </Button>
-                        &nbsp;&nbsp;
-                        <Button color="danger" aria-label="delete" justIcon round
-                                onClick={ this.delete.bind(this, price)} >
-                          <DeleteIcon />
                         </Button>
                       </div>
                     ]}
