@@ -48,7 +48,7 @@ class CourseEdit extends React.Component {
       course.id,
       function(result){
         self.props.notifySuccess("Course has been deleted succesfully")
-        window.location = URI + '/courses'
+        window.location = URI + 'courses'
       },
       function(error){
         console.log(error);
@@ -74,10 +74,6 @@ class CourseEdit extends React.Component {
   onChange(event){
     const { name, value } = event.target
     this.setState({ course: {...this.state.course, [name]: value } });
-  }
-
-  show(course){
-    this.props.history.push('/courses/' + course.id, { course });
   }
 
   render() {
