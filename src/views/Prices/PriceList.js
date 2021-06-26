@@ -97,7 +97,7 @@ class PriceList extends React.Component {
                       price.level.name,
 											price.period,
 											price.amount,
-                      price.mercadopago_link,
+                      <a target="_blank" href={price.mercadopago_link}>{price.mercadopago_link}</a>,
                       <div>
                         <Button color="primary" aria-label="edit" justIcon round onClick={ this.edit.bind(this, price)} >
                           <EditIcon />
@@ -137,7 +137,7 @@ class PriceList extends React.Component {
                     return [
 											price.period,
 											price.amount,
-                      price.mercadopago_link,
+                      <a target="_blank" href={price.mercadopago_link}>{price.mercadopago_link}</a>,
                       <div>
                         <Button color="primary" aria-label="edit" justIcon round onClick={ this.edit.bind(this, price)} >
                           <EditIcon />
