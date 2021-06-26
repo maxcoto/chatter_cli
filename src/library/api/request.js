@@ -3,6 +3,11 @@ import URI from './service'
 
 const request = {
 
+  post: function(path, data, onSuccess, onError) {
+    const options = { method: 'POST', body: JSON.stringify(data) }
+    this.genFetch(path, options, onSuccess, onError)
+  },
+
   update: function(path, id, data, onSuccess, onError) {
     const options = { method: 'PUT', body: JSON.stringify(data) }
     this.genFetch(path + '/' + id, options, onSuccess, onError)

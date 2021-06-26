@@ -24,13 +24,15 @@ class SubscriptionEdit extends React.Component {
   constructor(props) {
     super(props)
 
-    this.onRenewSuccess = this.onRenewSuccess.bind(this)
-    this.onPaySuccess = this.onPaySuccess.bind(this)
+    this.onCreateSuccess = this.onCreateSuccess.bind(this)
     this.onFailure = this.onFailure.bind(this)
 
-    this.onRenew = this.onRenew.bind(this)
-    this.onDelete = this.onDelete.bind(this)
-    this.onPay = this.onPay.bind(this)
+    this.create = this.create.bind(this)
+    this.pay = this.pay.bind(this)
+    this.sendWelcomeEmail = this.sendWelcomeEmail.bind(this)
+    this.syncWithCalendar = this.syncWithCalendar.bind(this)
+    this.delete = this.delete.bind(this)
+
     this.onChange = this.onChange.bind(this)
 
     var { subscriptions } = this.props.student
@@ -46,7 +48,7 @@ class SubscriptionEdit extends React.Component {
     this.state = { subscription, subscriptions }
   }
 
-  onRenewSuccess(response){
+  onCreateSuccess(response){
     const { subscriptions } = this.state
     var index = subscriptions.length-1;
     this.setState({
@@ -62,18 +64,35 @@ class SubscriptionEdit extends React.Component {
     this.props.notifySuccess("Subscription created successfully")
   }
 
+  onUpdateSuccess(message, response) {
+    const { subscriptions, subscription } = this.state
+    const index = subscriptions.indexOf(subscription)
+
+    this.setState({
+      subscriptions: [
+        ...subscriptions.slice(0, index),
+        response,
+        ...subscriptions.slice(index + 1)
+      ],
+      subscription: response,
+      progress: false
+    })
+    
+    this.props.notifySuccess(message)
+  }
+
   onFailure(error){
     console.log(error);
     this.setState({ progress: false })
     this.props.notifyError(error)
   }
 
-  onRenew(){
+  create(){
     this.setState({ progress: true })
-    API.create('subscriptions', { subscription: this.state.subscription }, this.onRenewSuccess, this.onFailure)
+    API.create('subscriptions', { subscription: this.state.subscription }, this.onCreateSuccess, this.onFailure)
   }
-  
-  onDelete(){
+
+  delete(){
     const { subscription, subscriptions } = this.state
     
     API.delete('subscriptions', subscription.id, () => false, this.onFailure)
@@ -82,28 +101,25 @@ class SubscriptionEdit extends React.Component {
     ss.splice(ss.indexOf(subscription), 1);
     this.setState({ subscriptions: ss, subscription: subscriptions[subscriptions.length-1] });
   }
-  
-  onPaySuccess(response){
-    const { subscriptions, subscription } = this.state
-    const index = subscriptions.indexOf(subscription)
 
-    //update state value.
-    this.setState({
-      subscriptions: [
-        ...subscriptions.slice(0, index),
-        response,
-        ...subscriptions.slice(index + 1)
-      ],
-      subscription: response
-    })
-    
-    this.props.notifySuccess("Subscription saved successfully")
-  }
-
-  onPay(){
+  pay(){
     const self = this
     const { subscription } = this.state
-    API.update('subscriptions', subscription.id, { paid: !subscription.paid }, self.onPaySuccess, self.onFailure)
+    API.update('subscriptions', subscription.id, { paid: !subscription.paid }, self.onUpdateSuccess.bind(this, "Subscription updated successfully"), self.onFailure)
+  }
+
+  sendWelcomeEmail(){
+    this.setState({ progress: true })
+    const self = this
+    const { id } = this.state.subscription
+    API.post('subscriptions/' + id + '/welcome', { }, self.onUpdateSuccess.bind(self, "Email sent successfully"), self.onFailure)
+  }
+
+  syncWithCalendar(){
+    this.setState({ progress: true })
+    const self = this
+    const { id } = this.state.subscription
+    API.post('subscriptions/' + id + '/synchronize', {}, self.onUpdateSuccess.bind(self, "Synchronized successfully"), self.onFailure)
   }
 
   move(index, direction){
@@ -162,11 +178,20 @@ class SubscriptionEdit extends React.Component {
           />
 
           <CardFooter>
-            { subscription.id && <Button color="danger" onClick={this.onDelete}>Delete</Button> }
-            { subscription.id && !subscription.paid && <Button color="success" onClick={this.onPay}>Pay</Button> }
-            { subscription.id && subscription.paid && <Button color="warning" onClick={this.onPay}>Un-Pay</Button> }
-            { !subscription.id && <Button color="primary" onClick={this.onRenew}>Renew</Button> }
+            { subscription.id && <Button color="danger" onClick={this.delete}>Delete</Button> }
+            { !subscription.id && <Button color="primary" onClick={this.create}>Create</Button> }
+
             {progress && <CircularProgress color="inherit" style={{ color: "#9c27b0" }}/>}
+
+            { subscription.id && !progress &&
+              <React.Fragment>
+                { !subscription.paid && <Button color="success" onClick={this.pay}>Pay</Button> }
+                { subscription.paid && <Button color="warning" onClick={this.pay}>Set as Unpaid</Button> }
+                
+                { !subscription.welcome_email_sent && <Button color="success" onClick={this.sendWelcomeEmail}>Send Welcome Email</Button> }
+                { !subscription.synced_with_calendar && <Button color="success" onClick={this.syncWithCalendar}>Synchronize with Calendar</Button> }
+              </React.Fragment>
+            }
           </CardFooter>
         </Card>
 

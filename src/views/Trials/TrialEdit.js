@@ -21,9 +21,11 @@ class TrialEdit extends React.Component {
     super(props)
 
     this.onSuccess = this.onSuccess.bind(this)
+    this.onWelcomeSuccess = this.onWelcomeSuccess.bind(this)
     this.onFailure = this.onFailure.bind(this)
 
     this.onClick = this.onClick.bind(this)
+    this.sendWelcomeEmail = this.sendWelcomeEmail.bind(this)
     this.onChange = this.onChange.bind(this)
 
     var trial = this.props.student.trial || defaultTrial
@@ -49,6 +51,17 @@ class TrialEdit extends React.Component {
     } else {
       API.create('trials', this.state, this.onSuccess, this.onFailure)
     }
+  }
+  
+  onWelcomeSuccess(response){
+    this.setState({ trial: response, progress: false });
+    this.props.notifySuccess("Email sent successfully")
+  }
+
+  sendWelcomeEmail(){
+    const { id } = this.state.trial
+    this.setState({ progress: true })
+    API.post('trials/' + id + '/welcome', {}, this.onWelcomeSuccess, this.onFailure)
   }
 
   onChange(event){
@@ -76,6 +89,8 @@ class TrialEdit extends React.Component {
         <CardFooter>
           <Button color="primary" onClick={this.onClick}>Save</Button>
           {progress && <CircularProgress color="inherit" style={{ color: "#9c27b0" }}/>}
+
+          {!progress && trial.id && !trial.welcome_email_sent && <Button color="success" onClick={this.sendWelcomeEmail}>Send Welcome Email</Button> }
         </CardFooter>
       </Card>
     )

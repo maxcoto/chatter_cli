@@ -161,12 +161,16 @@ const defaultSubscription = {
   period: 0,
   price: '',
   hours_left: 0,
+  welcome_email_sent: null,
+  synced_with_calendar: null,
 }
+
 // default trial export
 const defaultTrial = {
   student_id: 0,
   course_id: 0,
-  class_date: ''
+  class_date: '',
+  welcome_email_sent: null,
 }
 
 //[+add_default+]
